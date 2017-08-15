@@ -1,0 +1,6 @@
+framework module Pods_MonitoriaUFV {
+  umbrella header "Pods-MonitoriaUFV-umbrella.h"
+
+  export *
+  module * { export * }
+}
