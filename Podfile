@@ -13,6 +13,7 @@ target 'MonitoriaUFV' do
     pod 'Firebase/Auth'
     pod 'JSQMessagesViewController'
     pod 'SDWebImage'
+    pod 'SVProgressHUD'
 
   target 'MonitoriaUFVTests' do
     inherit! :search_paths

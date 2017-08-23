@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2EACBCFB538AE54B1F8936213B0178C6</key>
+		<key>818BF49993BCFAD3D068069FE0439B02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86BE2A11544F474EEDECF0C4F75FA69B</key>
+		<key>A0FCD86EB83096C38202E51D45C6B9A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -103,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EECCD3FB883A785C1156736B32B16E90</key>
 		<dict>
 			<key>primary</key>
 			<true/>

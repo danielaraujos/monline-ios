@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class LoginVC: UIViewController {
 
@@ -34,16 +35,19 @@ class LoginVC: UIViewController {
     @IBAction func btnLogin(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        SVProgressHUD.show(withStatus: "Carregando")
         
         if checkTrue(email: email, password: password){
             AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
                 
                 if message != nil {
+                    SVProgressHUD.dismiss()
                     self.showAlert(title: "Problema na autentificação", message: message!)
                 }else {
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
                     print("LOGIN COM SUCESSO!")
+                    SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil)
                     
                 }

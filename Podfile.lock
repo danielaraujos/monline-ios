@@ -58,6 +58,7 @@ PODS:
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
   - Firebase
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - JSQMessagesViewController
   - SDWebImage
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
@@ -82,7 +84,8 @@ SPEC CHECKSUMS:
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 58a39bd77b1df5b79759fc6f88533608a7bb47a5
+PODFILE CHECKSUM: 96e2ffeeee09c12d28ea654b93e822f5c9e53e10
 
 COCOAPODS: 1.2.1
