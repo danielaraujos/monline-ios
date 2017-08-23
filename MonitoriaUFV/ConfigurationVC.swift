@@ -17,7 +17,12 @@ class ConfigurationVC: UIViewController {
     }
 
     @IBAction func btnLogout(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        if AuthProvider.Instance.logOut() {
+            print("LOGOUT COM SUCESSO!")
+            dismiss(animated: true, completion: nil)
+
+        }
+        
     }
     
 }

@@ -7,7 +7,12 @@ target 'MonitoriaUFV' do
 
   # Pods for MonitoriaUFV
 
-	pod 'Firebase/Core'
+    pod 'Firebase'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Auth'
+    pod 'JSQMessagesViewController'
+    pod 'SDWebImage'
 
   target 'MonitoriaUFVTests' do
     inherit! :search_paths

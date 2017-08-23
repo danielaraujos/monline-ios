@@ -98,7 +98,7 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4T-fL-0sj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4T-fL-0sj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -106,13 +106,40 @@
                                     <constraint firstAttribute="width" constant="375" id="wVl-ug-oD9"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MonitoringCell" id="7tg-Fq-Htj">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MonitoringCell" rowHeight="70" id="7tg-Fq-Htj" customClass="MonitoringViewCell" customModule="MonitoriaUFV" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7tg-Fq-Htj" id="0fj-Z5-2MZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mI2-ez-4Hg">
+                                                    <rect key="frame" x="25" y="10" width="64" height="51"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIN 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYm-Hy-U2Z">
+                                                    <rect key="frame" x="108" y="13" width="84" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daniel Araújo Silva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-pJ-nxX">
+                                                    <rect key="frame" x="108" y="34" width="174" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="image_table" destination="mI2-ez-4Hg" id="PnI-5y-IcW"/>
+                                            <outlet property="lbl_subtitle" destination="EL0-pJ-nxX" id="I8e-Od-81c"/>
+                                            <outlet property="lbl_title" destination="yYm-Hy-U2Z" id="e8j-X8-sI1"/>
+                                            <segue destination="vpB-gT-lwp" kind="show" id="950-sb-0Wh"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -137,6 +164,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cAJ-z8-imo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2388" y="-81.409295352323838"/>
+        </scene>
+        <!--SIN 100-->
+        <scene sceneID="g7z-Xc-Puf">
+            <objects>
+                <viewController title="SIN 100" id="vpB-gT-lwp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sX5-bd-cQR"/>
+                        <viewControllerLayoutGuide type="bottom" id="9F4-qt-8z9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HsN-pm-s14">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="SIN 100" id="Gxe-ic-Kao"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b4f-4P-ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3110" y="-78"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8Fq-4Q-kXf">
@@ -165,7 +213,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fkJ-JS-6Cp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Monitorias" image="lista" id="aIv-Z5-XVI"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="3g1-dP-4eB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="3g1-dP-4eB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,7 +238,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dlJ-S4-mG0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Conversas" image="favorite_1" id="DMB-KH-r3q"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="rrW-e9-uzg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rrW-e9-uzg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -215,7 +263,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q0n-fl-1AA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Configurações" image="more" id="8VL-vv-W5y"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="2Tb-N4-mWs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2Tb-N4-mWs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

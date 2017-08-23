@@ -11,6 +11,8 @@ import Firebase
 
 class LoginVC: UIViewController {
 
+    private let SUCESS_SEGUE = "SucessLogin"
+    
     @IBOutlet weak var viewUser: UIView!
     @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var btn_login: UIButton!
@@ -22,15 +24,31 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         self.rounding()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if AuthProvider.Instance.isLoggedIn() {
+            performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil);
+        }
+    }
 
     @IBAction func btnLogin(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         
         if checkTrue(email: email, password: password){
-            self.performSegue(withIdentifier: "SucessLogin", sender: nil)
+            AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
+                
+                if message != nil {
+                    self.showAlert(title: "Problema na autentificação", message: message!)
+                }else {
+                    self.emailTextField.text = ""
+                    self.passwordTextField.text = ""
+                    print("LOGIN COM SUCESSO!")
+                    self.performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil)
+                    
+                }
+            })
         }
-        
     }
     
     @IBAction func btnRegister(_ sender: Any) {
