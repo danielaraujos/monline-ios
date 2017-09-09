@@ -53,6 +53,7 @@ class ResetVC: UIViewController {
                 }else {
                     self.showAlert(title: "E-mail enviado!", message: "Um e-mail para redefinição de senha foi encaminhado.")
                     
+                    
                 }
             })
             SVProgressHUD.dismiss()

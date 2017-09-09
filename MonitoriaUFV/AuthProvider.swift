@@ -38,7 +38,6 @@ class AuthProvider {
      */
     
     func login(withEmail: String, password: String, loginHandler: LoginHandler?) {
-        
         Auth.auth().signIn(withEmail: withEmail, password: password) { (user, error) in
             if error != nil {
                self.handleErrors(err: error as! NSError, loginHandler: loginHandler);
@@ -46,7 +45,28 @@ class AuthProvider {
                 loginHandler?(nil);
             }
         }
+    }
+    
+    
+    
+    /*
+     Função responsavel por realizar o cadastro no Firebase
+     */
+    func signUp(withEmail: String, password: String,name: String, course: String, matricula:String, loginHandler: LoginHandler?) {
         
+        Auth.auth().createUser(withEmail: withEmail, password: password, completion: { (user, error) in
+            if error != nil {
+                self.handleErrors(err: error as! NSError, loginHandler: loginHandler);
+            } else {
+                loginHandler?(nil);
+                if user?.uid != nil {
+                    DBProvider.Instance.saveUser(withID: user!.uid, email: withEmail, password: password, name: name, course: course, matricula: matricula);
+                    
+                    // login the user
+                   // self.login(withEmail: withEmail, password: password, loginHandler: loginHandler);
+                }
+            }
+        });
     }
     
     
@@ -65,9 +85,6 @@ class AuthProvider {
                 loginHandler?(nil);
             }
         }
-        
-        
-        
     }
     
     
@@ -89,8 +106,6 @@ class AuthProvider {
     }
     
     
-    
-
     /*
      Função responsavel por verificar se o usuario está logado no sistema ainda.
      */
@@ -103,17 +118,13 @@ class AuthProvider {
         return false;
     }
     
-    
-    
-    
+
     /*
      Função retorna o id do usuario
      */
     func userID() -> String {
         return Auth.auth().currentUser!.uid;
     }
-    
-    
     
     
     /*

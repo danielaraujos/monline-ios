@@ -16,6 +16,7 @@
 		4C27D9411F435F0D00CF8E72 /* MonitoriaUFVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27D9401F435F0D00CF8E72 /* MonitoriaUFVTests.swift */; };
 		4C27D94C1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27D94B1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift */; };
 		4C27D95A1F435F9F00CF8E72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */; };
+		4C6E284F1F6459DE00E1B0E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E284E1F6459DE00E1B0E4 /* Constants.swift */; };
 		4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5DE1F48A60100530E75 /* LoginVC.swift */; };
 		4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */; };
 		4C79B5E31F48B0DF00530E75 /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E21F48B0DF00530E75 /* ResetVC.swift */; };
@@ -64,6 +65,7 @@
 		4C27D94B1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoriaUFVUITests.swift; sourceTree = "<group>"; };
 		4C27D94D1F435F0D00CF8E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4C6E284E1F6459DE00E1B0E4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C79B5DE1F48A60100530E75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		4C79B5E21F48B0DF00530E75 /* ResetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		4C4353AE1F46498400114A76 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4C6E284E1F6459DE00E1B0E4 /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */,
 				4C79B5E51F48B27800530E75 /* MonitoringVC.swift in Sources */,
 				4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */,
+				4C6E284F1F6459DE00E1B0E4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +623,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -665,7 +669,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -682,7 +686,7 @@
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielaraujos.MonitoriaUFV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -698,7 +702,7 @@
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielaraujos.MonitoriaUFV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
