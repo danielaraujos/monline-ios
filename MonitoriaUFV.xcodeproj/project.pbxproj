@@ -24,6 +24,7 @@
 		4C79B5E91F48B93300530E75 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E81F48B93300530E75 /* ChatListVC.swift */; };
 		4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
+		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
 		AE3D99F97C80E9704202BB5C /* Pods_MonitoriaUFV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5E08A8825AC9B56D52CCB2 /* Pods_MonitoriaUFV.framework */; };
 		BC3EAD63BA0F1765182D3DF1 /* Pods_MonitoriaUFVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EC1DCF73F7A1292CAA128D /* Pods_MonitoriaUFVUITests.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		4C79B5E81F48B93300530E75 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
+		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.debug.xcconfig"; sourceTree = "<group>"; };
 		8407CF544D0B76A57A7B2692 /* Pods-MonitoriaUFV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.release.xcconfig"; sourceTree = "<group>"; };
 		BC85B8F1A13FD03D6184C13A /* Pods-MonitoriaUFVTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFVTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFVTests/Pods-MonitoriaUFVTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */,
+				4CC0AACB1F53388300DB6FBA /* DBProvider.swift */,
 			);
 			name = Provider;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */,
 				4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */,
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
+				4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */,
 				4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */,
 				4C79B5E51F48B27800530E75 /* MonitoringVC.swift in Sources */,
 				4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */,
@@ -678,6 +682,7 @@
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielaraujos.MonitoriaUFV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -693,6 +698,7 @@
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielaraujos.MonitoriaUFV;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -15,6 +15,11 @@ class ResetVC: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     @IBAction func btnCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)

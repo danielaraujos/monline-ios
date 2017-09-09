@@ -24,9 +24,22 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.rounding()
+        self.back()
+    }
+    
+    func back(){
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        navigationItem.backBarButtonItem = backItem
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         if AuthProvider.Instance.isLoggedIn() {
             performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil);
         }
@@ -35,9 +48,9 @@ class LoginVC: UIViewController {
     @IBAction func btnLogin(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        SVProgressHUD.show(withStatus: "Carregando")
         
         if checkTrue(email: email, password: password){
+            SVProgressHUD.show(withStatus: "Carregando")
             AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
                 
                 if message != nil {
@@ -52,6 +65,7 @@ class LoginVC: UIViewController {
                     
                 }
             })
+            SVProgressHUD.dismiss()
         }
     }
     
