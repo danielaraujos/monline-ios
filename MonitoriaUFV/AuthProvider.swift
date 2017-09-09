@@ -55,7 +55,7 @@ class AuthProvider {
      Função responsavel por redefinir senha
      */
     
-    func resetPassword(withEmail: String, password: String, loginHandler: LoginHandler?) {
+    func resetPassword(withEmail: String,loginHandler: LoginHandler?) {
         
          Auth.auth().sendPasswordReset(withEmail: withEmail) { (error) in
             if error != nil {
@@ -65,6 +65,8 @@ class AuthProvider {
                 loginHandler?(nil);
             }
         }
+        
+        
         
     }
     

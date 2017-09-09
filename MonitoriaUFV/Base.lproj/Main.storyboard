@@ -725,10 +725,16 @@
                                 <state key="normal" title="Redefinir">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnRecovery:" destination="Vus-yJ-pzE" eventType="touchUpInside" id="Xt9-bU-dGb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="3cx-Qt-3lH" id="QVW-MG-d8I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tae-iF-SbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
