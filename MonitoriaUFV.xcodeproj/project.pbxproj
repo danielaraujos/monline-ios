@@ -17,6 +17,8 @@
 		4C27D94C1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27D94B1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift */; };
 		4C27D95A1F435F9F00CF8E72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */; };
 		4C6E284F1F6459DE00E1B0E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E284E1F6459DE00E1B0E4 /* Constants.swift */; };
+		4C6E28511F646C5700E1B0E4 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28501F646C5700E1B0E4 /* Contact.swift */; };
+		4C6E28531F6471DA00E1B0E4 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28521F6471DA00E1B0E4 /* Course.swift */; };
 		4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5DE1F48A60100530E75 /* LoginVC.swift */; };
 		4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */; };
 		4C79B5E31F48B0DF00530E75 /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E21F48B0DF00530E75 /* ResetVC.swift */; };
@@ -66,6 +68,8 @@
 		4C27D94D1F435F0D00CF8E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C6E284E1F6459DE00E1B0E4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4C6E28501F646C5700E1B0E4 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		4C6E28521F6471DA00E1B0E4 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		4C79B5DE1F48A60100530E75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		4C79B5E21F48B0DF00530E75 /* ResetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				4C6E284E1F6459DE00E1B0E4 /* Constants.swift */,
+				4C6E28501F646C5700E1B0E4 /* Contact.swift */,
+				4C6E28521F6471DA00E1B0E4 /* Course.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6E28511F646C5700E1B0E4 /* Contact.swift in Sources */,
 				4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */,
 				4C79B5E91F48B93300530E75 /* ChatListVC.swift in Sources */,
 				4C79B5E31F48B0DF00530E75 /* ResetVC.swift in Sources */,
@@ -522,6 +529,7 @@
 				4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */,
 				4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */,
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
+				4C6E28531F6471DA00E1B0E4 /* Course.swift in Sources */,
 				4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */,
 				4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */,
 				4C79B5E51F48B27800530E75 /* MonitoringVC.swift in Sources */,

@@ -20,7 +20,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var passwordTextField: UITextField!
     
     
-    var coursesOption = ["Administração", "Sistemas de Informação"]
+    var coursesOption = ["SIN", "NTR"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

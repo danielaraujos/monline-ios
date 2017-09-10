@@ -119,14 +119,14 @@
                                                     <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIN 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYm-Hy-U2Z">
-                                                    <rect key="frame" x="108" y="13" width="84" height="21"/>
+                                                    <rect key="frame" x="108" y="13" width="226" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daniel Araújo Silva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-pJ-nxX">
-                                                    <rect key="frame" x="108" y="34" width="174" height="24"/>
+                                                    <rect key="frame" x="108" y="34" width="226" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -138,7 +138,7 @@
                                             <outlet property="image_table" destination="mI2-ez-4Hg" id="PnI-5y-IcW"/>
                                             <outlet property="lbl_subtitle" destination="EL0-pJ-nxX" id="I8e-Od-81c"/>
                                             <outlet property="lbl_title" destination="yYm-Hy-U2Z" id="e8j-X8-sI1"/>
-                                            <segue destination="vpB-gT-lwp" kind="show" id="950-sb-0Wh"/>
+                                            <segue destination="vpB-gT-lwp" kind="show" identifier="CELL_ID" id="950-sb-0Wh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

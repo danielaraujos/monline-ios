@@ -32,6 +32,7 @@ class AuthProvider {
         return _instance;
     }
     
+    var userName = "";
     
     /*
      Função responsavel por realizar o login ao Firebase
@@ -125,6 +126,8 @@ class AuthProvider {
     func userID() -> String {
         return Auth.auth().currentUser!.uid;
     }
+    
+    
     
     
     /*

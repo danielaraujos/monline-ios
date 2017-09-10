@@ -8,12 +8,23 @@
 
 import UIKit
 
-class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate, FetchData {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    private var contacts = [Contact]();
+    private var monitorias = [Course]();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
+        
+        DBProvider.Instance.delegate = self;
+        DBProvider.Instance.getContacts();
+        //DBProvider.Instance.getUserCourse()
+        DBProvider.Instance.getCourses()
+        
+        
         
     }
     
@@ -23,22 +34,45 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         navigationItem.backBarButtonItem = backItem
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  
+  
+    
+    func dataReceived(contacts: [Contact]) {
+        self.contacts = contacts;
+        
+        // get the name of current user
+        for contact in contacts {
+            if contact.id == AuthProvider.Instance.userID() {
+                AuthProvider.Instance.userName = contact.name;
+            }
+        }
+        
+        tableView.reloadData();
+    }
+    
+    
+    func dataMonitorias(monitorias: [Course]) {
+        self.monitorias = monitorias
+        tableView.reloadData();
+    
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 1;
     }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return contacts.count;
     }
     
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MonitoringCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MonitoringCell", for: indexPath) as! MonitoringViewCell
+        cell.lbl_title.text = monitorias[indexPath.row].course;
+        
+        
         return cell
     }
     
