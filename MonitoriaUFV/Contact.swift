@@ -17,6 +17,10 @@ class Contact {
     private var _password = "";
     
     
+    init(id: String) {
+        _id = id;
+    }
+    
     init(id: String, name: String) {
         _id = id;
         _name = name;

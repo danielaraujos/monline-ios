@@ -13,6 +13,7 @@ class Constants {
     // DBProvider
     static let CONTACTS = "Contacts";
     static let COURSES = "Courses"
+    static let MONITORIAS = "Monitorias";
     static let MESSAGES = "Messages";
     static let MEDIA_MESSAGES = "Media_Messages";
     static let IMAGE_STORAGE = "Image_Storage";
@@ -23,7 +24,6 @@ class Constants {
     static let NAME = "name";
     static let COURSE = "course";
     static let MATRICULA = "matricula";
-    static let MONITORIAS = "monitorias";
     static let DATA = "data";
     
     // messages

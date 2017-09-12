@@ -16,6 +16,7 @@
 		4C27D9411F435F0D00CF8E72 /* MonitoriaUFVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27D9401F435F0D00CF8E72 /* MonitoriaUFVTests.swift */; };
 		4C27D94C1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C27D94B1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift */; };
 		4C27D95A1F435F9F00CF8E72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */; };
+		4C29B1191F689C5E00856CC9 /* MonitoringDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */; };
 		4C6E284F1F6459DE00E1B0E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E284E1F6459DE00E1B0E4 /* Constants.swift */; };
 		4C6E28511F646C5700E1B0E4 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28501F646C5700E1B0E4 /* Contact.swift */; };
 		4C6E28531F6471DA00E1B0E4 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28521F6471DA00E1B0E4 /* Course.swift */; };
@@ -26,6 +27,7 @@
 		4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */; };
 		4C79B5E91F48B93300530E75 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E81F48B93300530E75 /* ChatListVC.swift */; };
 		4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */; };
+		4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
 		AE3D99F97C80E9704202BB5C /* Pods_MonitoriaUFV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5E08A8825AC9B56D52CCB2 /* Pods_MonitoriaUFV.framework */; };
@@ -67,6 +69,7 @@
 		4C27D94B1F435F0D00CF8E72 /* MonitoriaUFVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoriaUFVUITests.swift; sourceTree = "<group>"; };
 		4C27D94D1F435F0D00CF8E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringDetailVC.swift; sourceTree = "<group>"; };
 		4C6E284E1F6459DE00E1B0E4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C6E28501F646C5700E1B0E4 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		4C6E28521F6471DA00E1B0E4 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationVC.swift; sourceTree = "<group>"; };
 		4C79B5E81F48B93300530E75 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				4C6E284E1F6459DE00E1B0E4 /* Constants.swift */,
 				4C6E28501F646C5700E1B0E4 /* Contact.swift */,
 				4C6E28521F6471DA00E1B0E4 /* Course.swift */,
+				4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				4C79B5E41F48B27800530E75 /* MonitoringVC.swift */,
 				4C79B5E81F48B93300530E75 /* ChatListVC.swift */,
 				4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */,
+				4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -523,8 +529,10 @@
 			files = (
 				4C6E28511F646C5700E1B0E4 /* Contact.swift in Sources */,
 				4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */,
+				4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */,
 				4C79B5E91F48B93300530E75 /* ChatListVC.swift in Sources */,
 				4C79B5E31F48B0DF00530E75 /* ResetVC.swift in Sources */,
+				4C29B1191F689C5E00856CC9 /* MonitoringDetailVC.swift in Sources */,
 				4C27D9291F435F0D00CF8E72 /* AppDelegate.swift in Sources */,
 				4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */,
 				4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */,

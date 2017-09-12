@@ -12,7 +12,9 @@ import FirebaseStorage
 
 protocol FetchData: class {
     func dataReceived(contacts: [Contact]);
-    func dataMonitorias(monitorias: [Course]);
+    func dataCourse(monitorias: [Course]);
+    func dataMonitorias (detail : [Monitoria]);
+    
 
 }
 
@@ -21,6 +23,7 @@ class DBProvider {
     private static let _instance = DBProvider();
     
     weak var delegate: FetchData?;
+    var curso_user = "";
     
     private init(){}
     
@@ -38,6 +41,10 @@ class DBProvider {
     
     var coursesRef: DatabaseReference{
         return dbRef.child(Constants.COURSES)
+    }
+    
+    var monitoriasRef: DatabaseReference {
+        return dbRef.child(Constants.MONITORIAS)
     }
     
     var messagesRef: DatabaseReference {
@@ -87,7 +94,7 @@ class DBProvider {
                 for (key, value) in myContacts {
                     
                     if let contactData = value as? NSDictionary {
-                        //print(contactData)
+                       // print(contactData)
                         
                         if let email = contactData[Constants.NAME] as? String {
                             //print(email)
@@ -105,81 +112,86 @@ class DBProvider {
     
     
     func getCurseUser()-> String{
-        var cursoUser = ""
+        
+        var retorno = " "
         contactsRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
             
             if let myContacts = snapshot.value as? NSDictionary {
                 //print(myContacts)
                 for (key, value) in myContacts {
-                    let id = AuthProvider.Instance.userID()
+                    var id = AuthProvider.Instance.userID()
                     
                     if(id  == key as! String){
                         if let contactData = value as? NSDictionary {
+                           // print(contactData)
                             if let curso = contactData[Constants.COURSE] as? String {
-                                cursoUser = curso
-                                
+                                retorno = curso
                             }
-                            
                         }
                     }
-                    
-                    
                 }
             }
         }
-        print(cursoUser)
-        return cursoUser
         
+        return retorno
     }
-   
-
-
     
-    func getCourses() {
-        
-        //var cursoUser = self.getCurseUser()
-        //print(" \(cursoUser)")
+    
+    func getCourses(valor: String) {
         
         coursesRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
-            
             var monitorias = [Course]()
             if let cursos = snapshot.value as? NSDictionary {
                 for (key, value) in cursos {
-                    //if("SIN" == key as! String){
-                        if let coursesData = value as? NSDictionary{
-                            for (key, value) in coursesData {
-                                if let monitoriasData = value as? NSDictionary{
-                                    for (key, value) in monitoriasData {
-                                        //print(key)
-                                        let newMonitorias = Course(course: key as! String)
+                    //print(key)
+                    if(valor == key as! String){
+                        if let dataCursos = value as? NSDictionary {
+                            for (key, value) in dataCursos {
+                                if let teste = value as? NSDictionary{
+                                    for(key , value ) in teste {
+                                        let newMonitorias = Course(name: value as! String, sigla: key as! String)
                                         monitorias.append(newMonitorias)
-                                        for (key, value) in monitoriasData {
-                                            print(key)
-                                            print(value)
-                                            print("/n")
-                                        }
                                     }
                                 }
                             }
+                        }else {
+                            continue
                         }
-
-//                    }else{
-//                        print("Entrou aqui!")
-//                        var teste = ""
-//                        print(teste)
-//                        let newMonitorias = Course(course: teste )
-//                        monitorias.append(newMonitorias)
-//                    }
-                    
-                    
+                    }
                 }
             }
-            self.delegate?.dataMonitorias(monitorias: monitorias);
+            self.delegate?.dataCourse(monitorias: monitorias);
         }
     }
 
-
+    
+    
+    func getMonitoria(valor: String){
+        print("GETMONITORIAS")
+        monitoriasRef.observeSingleEvent(of: DataEventType.value) {
+            (snapshot: DataSnapshot) in
+            var details = [Monitoria]()
+            
+            if let monitoriasList = snapshot.value as? NSDictionary {
+                for (key, value) in monitoriasList {
+                    //print("CHAVE \(key)")
+                    if(valor ==  key as! String){
+                        if let monitoriaDescription = value as? NSDictionary {
+                            for (key, value) in monitoriaDescription {
+                                let new = Monitoria(name: key as! String, description: value as! String)
+                                details.append(new)
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            self.delegate?.dataMonitorias(detail: details);
+        }
+    }
+   
+    
 
  }

@@ -15,14 +15,17 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     private var contacts = [Contact]();
     private var monitorias = [Course]();
     
+    private let CELL_ID = "MonitoringCell";
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
         
         DBProvider.Instance.delegate = self;
         DBProvider.Instance.getContacts();
-        //DBProvider.Instance.getUserCourse()
-        DBProvider.Instance.getCourses()
+        //DBProvider.Instance.getCurseUser()
+        print(DBProvider.Instance.getCurseUser())
+        DBProvider.Instance.getCourses(valor: "SIN")
         
         
         
@@ -35,8 +38,6 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
 
   
-  
-    
     func dataReceived(contacts: [Contact]) {
         self.contacts = contacts;
         
@@ -51,10 +52,13 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     
-    func dataMonitorias(monitorias: [Course]) {
+    func dataCourse(monitorias: [Course]) {
         self.monitorias = monitorias
         tableView.reloadData();
+    }
     
+    func dataMonitorias(detail: [Monitoria]) {
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,16 +67,15 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count;
+        return monitorias.count;
     }
     
   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MonitoringCell", for: indexPath) as! MonitoringViewCell
-        cell.lbl_title.text = monitorias[indexPath.row].course;
-        
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID, for: indexPath) as! MonitoringViewCell
+        cell.lbl_title.text = monitorias[indexPath.row].sigla;
+        cell.lbl_subtitle.text = monitorias[indexPath.row].name;
         return cell
     }
     
@@ -80,7 +83,18 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == CELL_ID{
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let siglaSelecionada = self.monitorias[indexPath.row].sigla
+                let viewControllerDestino = segue.destination as! MonitoringDetailVC
+                viewControllerDestino.sigla = siglaSelecionada
+            }
+        }
+    }
     
 
 }

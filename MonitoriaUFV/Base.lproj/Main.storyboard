@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -125,7 +124,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daniel Araújo Silva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-pJ-nxX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Programação" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-pJ-nxX">
                                                     <rect key="frame" x="108" y="34" width="226" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
@@ -138,7 +137,7 @@
                                             <outlet property="image_table" destination="mI2-ez-4Hg" id="PnI-5y-IcW"/>
                                             <outlet property="lbl_subtitle" destination="EL0-pJ-nxX" id="I8e-Od-81c"/>
                                             <outlet property="lbl_title" destination="yYm-Hy-U2Z" id="e8j-X8-sI1"/>
-                                            <segue destination="vpB-gT-lwp" kind="show" identifier="CELL_ID" id="950-sb-0Wh"/>
+                                            <segue destination="vpB-gT-lwp" kind="show" identifier="MonitoringCell" id="950-sb-0Wh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -169,7 +168,7 @@
         <!--SIN 100-->
         <scene sceneID="g7z-Xc-Puf">
             <objects>
-                <viewController title="SIN 100" id="vpB-gT-lwp" sceneMemberID="viewController">
+                <viewController title="SIN 100" id="vpB-gT-lwp" customClass="MonitoringDetailVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sX5-bd-cQR"/>
                         <viewControllerLayoutGuide type="bottom" id="9F4-qt-8z9"/>
@@ -179,21 +178,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Disciplina: Programação" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2K0-mn-S0Q">
-                                <rect key="frame" x="23" y="31" width="185" height="21"/>
+                                <rect key="frame" x="23" y="31" width="314" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Professor: Adriana Zanella Martinhago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYj-5X-zfJ">
-                                <rect key="frame" x="23" y="55" width="293" height="21"/>
+                                <rect key="frame" x="23" y="55" width="314" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monitor: Daniel Araújo Silva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jcn-7H-oR7">
-                                <rect key="frame" x="23" y="79" width="209" height="21"/>
+                                <rect key="frame" x="23" y="79" width="314" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -252,10 +251,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="lblDescricao" destination="OPf-yO-py2" id="260-O0-UFa"/>
+                        <outlet property="lblDisciplina" destination="2K0-mn-S0Q" id="m6l-CM-dAb"/>
+                        <outlet property="lblMonitor" destination="Jcn-7H-oR7" id="2WE-ar-cFV"/>
+                        <outlet property="lblProfessor" destination="KYj-5X-zfJ" id="kpB-15-LU5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4f-4P-ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4048.8000000000002" y="-78.710644677661179"/>
+            <point key="canvasLocation" x="4205.6000000000004" y="-81.409295352323838"/>
         </scene>
         <!--SIN 100-->
         <scene sceneID="h4e-9x-L1k">
@@ -359,7 +364,6 @@
         <!--Monitorias-->
         <scene sceneID="Qwg-NF-uzM">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0I6-5k-ABV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fkJ-JS-6Cp" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Monitorias" image="lista" id="aIv-Z5-XVI"/>
                     <toolbarItems/>
@@ -378,6 +382,7 @@
                         <segue destination="ldp-iU-dSj" kind="relationship" relationship="rootViewController" id="NFt-IF-6Is"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0I6-5k-ABV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2388" y="-81.409295352323838"/>
         </scene>
@@ -733,7 +738,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BKl-S4-Toz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="V0X-r3-bVj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="V0X-r3-bVj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
