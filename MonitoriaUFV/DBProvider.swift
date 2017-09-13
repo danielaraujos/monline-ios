@@ -14,6 +14,7 @@ protocol FetchData: class {
     func dataReceived(contacts: [Contact]);
     func dataCourse(monitorias: [Course]);
     func dataMonitorias (detail : [Monitoria]);
+    func userA (user: String)
     
 
 }
@@ -111,8 +112,7 @@ class DBProvider {
     }
     
     
-    func getCurseUser()-> String{
-        
+    func getPegarCursoUsuario()-> String{
         var retorno = " "
         contactsRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
@@ -120,11 +120,9 @@ class DBProvider {
             if let myContacts = snapshot.value as? NSDictionary {
                 //print(myContacts)
                 for (key, value) in myContacts {
-                    var id = AuthProvider.Instance.userID()
-                    
+                    let id = AuthProvider.Instance.userID()
                     if(id  == key as! String){
                         if let contactData = value as? NSDictionary {
-                           // print(contactData)
                             if let curso = contactData[Constants.COURSE] as? String {
                                 retorno = curso
                             }
@@ -132,8 +130,8 @@ class DBProvider {
                     }
                 }
             }
+            self.delegate?.userA(user: retorno)
         }
-        
         return retorno
     }
     
@@ -169,7 +167,6 @@ class DBProvider {
     
     
     func getMonitoria(valor: String){
-        print("GETMONITORIAS")
         monitoriasRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
             var details = [Monitoria]()
@@ -185,7 +182,6 @@ class DBProvider {
                             }
                         }
                     }
-                    
                 }
             }
             self.delegate?.dataMonitorias(detail: details);

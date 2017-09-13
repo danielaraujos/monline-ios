@@ -11,35 +11,26 @@ import Foundation
 class Course {
     
     
-    //SIN
-    //monitorias
-    //SIN100
-    //description:
-    //name:
-    //teacher:
-    //tutor:
-    //name:
-    
-    private var _course = "";
-    private var _monitorias = "";
+    private var _type = "";
     private var _name = "";
-    private var _disciplinas = "";
-    private var _teacher = "";
-    private var _tutor = "";
+    private var _sigla = "";
     
-    init(course: String) {
+    init(name: String, sigla:String) {
         
-        _course = course;
+        _name = name;
+        _sigla = sigla
     }
     
-    
-    var course: String {
-        return _course;
+    init(sigla: String) {
+        _sigla = sigla;
     }
     
-    var monitorias: String {
-        return _monitorias;
+    var sigla: String {
+        get {
+            return _sigla;
+        }
     }
+    
     
     var name: String {
         get {
@@ -47,39 +38,14 @@ class Course {
         }
     }
     
-    var disciplinas: String{
-        return _disciplinas
-    }
-    
-    var couse: String {
+    var type: String {
         get {
-            return _course;
+            return _type;
         }
     }
     
-    
-    var teacher: String {
-        get {
-            return _teacher;
-        }
-    }
-    
-    var tutor: String {
-        get {
-            return _tutor;
-        }
-    }
+  
     
 }
 
 
-
-
-//SIN
-//monitorias
-//SIN100
-//description:
-//name:
-//teacher:
-//tutor:
-//name:

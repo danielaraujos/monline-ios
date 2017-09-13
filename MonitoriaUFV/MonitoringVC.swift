@@ -14,6 +14,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     private var contacts = [Contact]();
     private var monitorias = [Course]();
+    private var disciplina = ""
     
     private let CELL_ID = "MonitoringCell";
     
@@ -22,12 +23,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.back()
         
         DBProvider.Instance.delegate = self;
-        DBProvider.Instance.getContacts();
-        //DBProvider.Instance.getCurseUser()
-        print(DBProvider.Instance.getCurseUser())
-        DBProvider.Instance.getCourses(valor: "SIN")
-        
-        
+        DBProvider.Instance.getPegarCursoUsuario()
         
     }
     
@@ -39,16 +35,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
   
     func dataReceived(contacts: [Contact]) {
-        self.contacts = contacts;
         
-        // get the name of current user
-        for contact in contacts {
-            if contact.id == AuthProvider.Instance.userID() {
-                AuthProvider.Instance.userName = contact.name;
-            }
-        }
-        
-        tableView.reloadData();
     }
     
     
@@ -59,6 +46,11 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func dataMonitorias(detail: [Monitoria]) {
         
+    }
+    
+    func userA(user: String) {
+        self.disciplina = user
+        DBProvider.Instance.getCourses(valor: self.disciplina)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,7 +75,6 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
-    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

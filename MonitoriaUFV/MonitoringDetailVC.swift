@@ -13,6 +13,7 @@ class MonitoringDetailVC: UIViewController,FetchData {
 
     var sigla: String!
     private var details = [Monitoria]();
+    private var contacts = [Contact]();
     
     @IBOutlet weak var lblDisciplina: UILabel!
     @IBOutlet weak var lblProfessor: UILabel!
@@ -23,12 +24,17 @@ class MonitoringDetailVC: UIViewController,FetchData {
         super.viewDidLoad()
         
         DBProvider.Instance.delegate = self;
+        DBProvider.Instance.getContacts()
         DBProvider.Instance.getMonitoria(valor: sigla)
+        self.title = sigla
 
     }
 
     
     func dataReceived(contacts: [Contact]) {
+        
+        self.contacts = contacts;
+        
     }
     
     
@@ -40,11 +46,21 @@ class MonitoringDetailVC: UIViewController,FetchData {
         
         lblDisciplina.text = "Disciplina: \(self.details[2].description)"
         lblProfessor.text = "Professor: \(self.details[3].description)"
-        lblMonitor.text = "Monitor: \(self.details[0].description)"
         lblDescricao.text = self.details[1].description
+        
+        for contact in self.contacts {
+            if contact.id == self.details[0].description {
+                lblMonitor.text = "Monitor: \(contact.name)"
+            }
+        }
+
+        
+        //self.title = self.details[2].description
        
-        
-        
+    }
+    
+    func userA(user: String) {
+    
     }
 
 }

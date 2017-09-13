@@ -128,8 +128,6 @@ class AuthProvider {
     }
     
     
-    
-    
     /*
         Função responsavel por mostrar os erros
      */
