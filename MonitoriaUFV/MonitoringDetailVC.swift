@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class MonitoringDetailVC: UIViewController,FetchData {
 
@@ -23,18 +24,25 @@ class MonitoringDetailVC: UIViewController,FetchData {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SVProgressHUD.show(withStatus: "Carregando")
+        
         DBProvider.Instance.delegate = self;
         DBProvider.Instance.getContacts()
         DBProvider.Instance.getMonitoria(valor: sigla)
         self.title = sigla
+        self.back()
 
     }
 
+    func back(){
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        navigationItem.backBarButtonItem = backItem
+    }
+    
     
     func dataReceived(contacts: [Contact]) {
-        
         self.contacts = contacts;
-        
     }
     
     
@@ -45,17 +53,16 @@ class MonitoringDetailVC: UIViewController,FetchData {
         self.details = detail
         
         lblDisciplina.text = "Disciplina: \(self.details[2].description)"
-        lblProfessor.text = "Professor: \(self.details[3].description)"
+        lblProfessor.text = "Professor (a): \(self.details[3].description)"
         lblDescricao.text = self.details[1].description
         
         for contact in self.contacts {
             if contact.id == self.details[0].description {
-                lblMonitor.text = "Monitor: \(contact.name)"
+                lblMonitor.text = "Monitor (a): \(contact.name)"
             }
         }
-
         
-        //self.title = self.details[2].description
+        SVProgressHUD.dismiss()
        
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate, FetchData {
 
@@ -21,7 +22,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
-        
+        SVProgressHUD.show(withStatus: "Carregando")
         DBProvider.Instance.delegate = self;
         DBProvider.Instance.getPegarCursoUsuario()
         
@@ -65,9 +66,11 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID, for: indexPath) as! MonitoringViewCell
         cell.lbl_title.text = monitorias[indexPath.row].sigla;
         cell.lbl_subtitle.text = monitorias[indexPath.row].name;
+        SVProgressHUD.dismiss()
         return cell
     }
     
