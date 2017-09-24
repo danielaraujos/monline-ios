@@ -64,6 +64,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Cfm-Xg-Ffd" kind="show" identifier="ChatListCell" id="WSl-Ug-8m7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -87,9 +90,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2D-BR-8th" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3327.1999999999998" y="574.36281859070471"/>
+            <point key="canvasLocation" x="3327" y="621"/>
         </scene>
-        <!--Configurações-->
+        <!--Ajustes-->
         <scene sceneID="Y5Q-Bu-0fb">
             <objects>
                 <viewController id="Do6-HY-eGX" customClass="ConfigurationVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
@@ -100,15 +103,66 @@
                     <view key="view" contentMode="scaleToFill" id="g1z-oE-sOs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgH-yF-aha">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXi-Mn-9cP">
+                                        <rect key="frame" x="114" y="67" width="147" height="136"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PDG-Xi-QfR">
+                                <rect key="frame" x="0.0" y="237" width="375" height="360"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AjusteCell" rowHeight="47" id="1l1-7d-1HI">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="47"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1l1-7d-1HI" id="ngn-4B-ShK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="46.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ProfileImg" translatesAutoresizingMaskIntoConstraints="NO" id="LjU-lg-C6E">
+                                                    <rect key="frame" x="27" y="7" width="28" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nome da Configuração" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vE-Rm-lkH">
+                                                    <rect key="frame" x="79" y="11" width="177" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Do6-HY-eGX" id="PzS-PW-4Gn"/>
+                                    <outlet property="delegate" destination="Do6-HY-eGX" id="tZG-dM-Xpo"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Configurações" id="kR5-no-chk">
-                        <barButtonItem key="leftBarButtonItem" title="Sair" id="ZZ5-Cw-cXP">
+                    <navigationItem key="navigationItem" title="Ajustes" id="kR5-no-chk">
+                        <barButtonItem key="leftBarButtonItem" title="Editar" id="o7d-Xi-ba4"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sair" id="ZZ5-Cw-cXP">
                             <connections>
                                 <action selector="btnLogout:" destination="Do6-HY-eGX" id="Srz-f0-P6H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageProfile" destination="vXi-Mn-9cP" id="2Fe-mI-feE"/>
+                        <outlet property="tableView" destination="PDG-Xi-QfR" id="5rq-t4-Yq2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9V-YC-ET2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -308,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tLl-Q8-GaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5996" y="580.65967016491754"/>
+            <point key="canvasLocation" x="4230" y="620"/>
         </scene>
         <!--Denúnciar monitor-->
         <scene sceneID="kjz-J2-tbS">
@@ -342,6 +396,11 @@
                                                         <action selector="btnClose:" destination="zxi-Fx-3hI" id="DTb-Em-1xx"/>
                                                     </connections>
                                                 </barButtonItem>
+                                                <barButtonItem key="rightBarButtonItem" title="Enviar" id="Ydr-E1-aRE">
+                                                    <connections>
+                                                        <action selector="btnEnviar:" destination="zxi-Fx-3hI" id="nJy-aj-i7D"/>
+                                                    </connections>
+                                                </barButtonItem>
                                             </navigationItem>
                                         </items>
                                     </navigationBar>
@@ -349,22 +408,19 @@
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Digite aqui seu problema:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ZLT-gy-INs">
-                                <rect key="frame" x="16" y="152" width="332" height="362"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Digite abaixo o seu problema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88f-O7-HEh">
-                                <rect key="frame" x="24" y="77" width="324" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="text" destination="ZLT-gy-INs" id="h5G-kP-ygq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpg-cL-m9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -457,13 +513,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJh-XX-jBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="574.36281859070471"/>
+            <point key="canvasLocation" x="2388" y="619"/>
         </scene>
-        <!--Configurações-->
+        <!--Ajustes-->
         <scene sceneID="AP5-Z3-PaL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q0n-fl-1AA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Configurações" image="more" id="8VL-vv-W5y"/>
+                    <tabBarItem key="tabBarItem" title="Ajustes" image="more" id="8VL-vv-W5y"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2Tb-N4-mWs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -527,7 +583,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -817,6 +873,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ProfileImg" width="128" height="128"/>
         <image name="angle-mask.png" width="100" height="100"/>
         <image name="favorite_1" width="27" height="25"/>
         <image name="fundo1" width="737" height="1310"/>
@@ -826,4 +883,7 @@
         <image name="logomarca-1" width="304" height="243"/>
         <image name="more" width="40" height="40"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="WSl-Ug-8m7"/>
+    </inferredMetricsTieBreakers>
 </document>

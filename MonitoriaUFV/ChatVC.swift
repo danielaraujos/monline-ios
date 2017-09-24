@@ -23,17 +23,18 @@ class ChatVC: JSQMessagesViewController, MessageReceivedDelegate, UIImagePickerC
         picker.delegate = self;
         MessagesHandler.Instance.delegate = self;
         
-        //self.senderId = "1"
-        //self.senderDisplayName = "Damiel"
-        
-        //self.senderId = "NPPYIoV79TT7luN3kOMYsiprAEG2"
-        //self.senderDisplayName = "Isa Araujo"
-        
         self.senderId = AuthProvider.Instance.userID()
         self.senderDisplayName = AuthProvider.Instance.userName;
         MessagesHandler.Instance.observeMessages();
         MessagesHandler.Instance.observeMediaMessages();
         
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        //textField.resignFirstResponder()
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

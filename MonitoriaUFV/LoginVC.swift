@@ -25,6 +25,14 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         self.rounding()
         self.back()
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        //textField.resignFirstResponder()
+        view.endEditing(true)
     }
     
     func back(){

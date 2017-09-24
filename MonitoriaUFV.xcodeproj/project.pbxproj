@@ -76,6 +76,7 @@
 		4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringDetailVC.swift; sourceTree = "<group>"; };
 		4C29B11A1F68B34300856CC9 /* MessagesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesHandler.swift; sourceTree = "<group>"; };
+		4C30C5AC1F7857DB00E240D8 /* MonitoriaUFV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitoriaUFV.entitlements; sourceTree = "<group>"; };
 		4C6C8DA01F780942000C533B /* Mensagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mensagem.swift; sourceTree = "<group>"; };
 		4C6E284E1F6459DE00E1B0E4 /* Constantes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		4C6E28501F646C5700E1B0E4 /* Usuario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		4C27D9271F435F0D00CF8E72 /* MonitoriaUFV */ = {
 			isa = PBXGroup;
 			children = (
+				4C30C5AC1F7857DB00E240D8 /* MonitoriaUFV.entitlements */,
 				4C4353B11F4649AA00114A76 /* Provider */,
 				4C4353B01F46499600114A76 /* Controller */,
 				4C4353AF1F46498F00114A76 /* View */,
@@ -333,6 +335,14 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = ZX8B9U4537;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					4C27D93B1F435F0D00CF8E72 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -715,6 +725,7 @@
 			baseConfigurationReference = 77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MonitoriaUFV/MonitoriaUFV.entitlements;
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
@@ -731,6 +742,7 @@
 			baseConfigurationReference = 8407CF544D0B76A57A7B2692 /* Pods-MonitoriaUFV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MonitoriaUFV/MonitoriaUFV.entitlements;
 				DEVELOPMENT_TEAM = ZX8B9U4537;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MonitoriaUFV/Info.plist;
