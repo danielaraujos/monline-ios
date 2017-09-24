@@ -30,6 +30,11 @@ class MonitoringDetailVC: UIViewController,FetchData {
         DBProvider.Instance.getMonitoria(valor: sigla)
         self.title = sigla
         self.back()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     func back(){
@@ -60,8 +65,8 @@ class MonitoringDetailVC: UIViewController,FetchData {
 
     func userA(user: String) {}
     
-    @IBAction func btnDuvida(_ sender: Any) {
-       performSegue(withIdentifier: CHATSEGUE, sender: self.details[0].descricao);
+    @IBAction func btnChat(_ sender: Any) {
+        //performSegue(withIdentifier: CHATSEGUE, sender: self.details[0].descricao);
     }
     
 }

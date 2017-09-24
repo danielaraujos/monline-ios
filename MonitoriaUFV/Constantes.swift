@@ -32,7 +32,7 @@ class Constantes {
     static let SENDER_NAME = "sender_name";
     static let URL = "url";
     
-} // class
+}
 
 
 

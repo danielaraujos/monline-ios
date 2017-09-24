@@ -19,6 +19,7 @@
 		4C27D95A1F435F9F00CF8E72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */; };
 		4C29B1191F689C5E00856CC9 /* MonitoringDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */; };
 		4C29B11B1F68B34300856CC9 /* MessagesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C29B11A1F68B34300856CC9 /* MessagesHandler.swift */; };
+		4C6C8DA11F780942000C533B /* Mensagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6C8DA01F780942000C533B /* Mensagem.swift */; };
 		4C6E284F1F6459DE00E1B0E4 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E284E1F6459DE00E1B0E4 /* Constantes.swift */; };
 		4C6E28511F646C5700E1B0E4 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28501F646C5700E1B0E4 /* Usuario.swift */; };
 		4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28521F6471DA00E1B0E4 /* Curso.swift */; };
@@ -75,6 +76,7 @@
 		4C27D9591F435F9F00CF8E72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringDetailVC.swift; sourceTree = "<group>"; };
 		4C29B11A1F68B34300856CC9 /* MessagesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesHandler.swift; sourceTree = "<group>"; };
+		4C6C8DA01F780942000C533B /* Mensagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mensagem.swift; sourceTree = "<group>"; };
 		4C6E284E1F6459DE00E1B0E4 /* Constantes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		4C6E28501F646C5700E1B0E4 /* Usuario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
 		4C6E28521F6471DA00E1B0E4 /* Curso.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curso.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				4C6E28501F646C5700E1B0E4 /* Usuario.swift */,
 				4C6E28521F6471DA00E1B0E4 /* Curso.swift */,
 				4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */,
+				4C6C8DA01F780942000C533B /* Mensagem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				4C27D9291F435F0D00CF8E72 /* AppDelegate.swift in Sources */,
 				4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */,
 				4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */,
+				4C6C8DA11F780942000C533B /* Mensagem.swift in Sources */,
 				4C29B11B1F68B34300856CC9 /* MessagesHandler.swift in Sources */,
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
 				4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */,

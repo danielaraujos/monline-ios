@@ -27,6 +27,10 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         DBProvider.Instance.getPegarCursoUsuario()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func back(){
         let backItem = UIBarButtonItem()
         backItem.title = " "

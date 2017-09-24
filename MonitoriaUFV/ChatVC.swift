@@ -33,6 +33,11 @@ class ChatVC: JSQMessagesViewController, MessageReceivedDelegate, UIImagePickerC
         self.senderDisplayName = AuthProvider.Instance.userName;
         MessagesHandler.Instance.observeMessages();
         MessagesHandler.Instance.observeMediaMessages();
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     

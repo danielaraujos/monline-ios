@@ -12,10 +12,12 @@ class ConfigurationVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @IBAction func btnLogout(_ sender: Any) {
         if AuthProvider.Instance.logOut() {
             print("LOGOUT COM SUCESSO!")
