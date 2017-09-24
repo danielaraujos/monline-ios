@@ -13,8 +13,8 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
 
     @IBOutlet weak var tableView: UITableView!
     
-    private var contacts = [Contact]();
-    private var monitorias = [Course]();
+    private var contacts = [Usuario]();
+    private var monitorias = [Curso]();
     private var disciplina = ""
     
     private let CELL_ID = "MonitoringCell";
@@ -25,7 +25,6 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         SVProgressHUD.show(withStatus: "Carregando")
         DBProvider.Instance.delegate = self;
         DBProvider.Instance.getPegarCursoUsuario()
-        
     }
     
     func back(){
@@ -33,21 +32,15 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
     }
-
-  
-    func dataReceived(contacts: [Contact]) {
-        
-    }
     
+    func dataReceived(contacts: [Usuario]) {}
     
-    func dataCourse(monitorias: [Course]) {
+    func dataCourse(monitorias: [Curso]) {
         self.monitorias = monitorias
         tableView.reloadData();
     }
     
-    func dataMonitorias(detail: [Monitoria]) {
-        
-    }
+    func dataMonitorias(detail: [Monitoria]) {}
     
     func userA(user: String) {
         self.disciplina = user
@@ -58,28 +51,22 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         return 1;
     }
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return monitorias.count;
     }
     
-  
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID, for: indexPath) as! MonitoringViewCell
         cell.lbl_title.text = monitorias[indexPath.row].sigla;
-        cell.lbl_subtitle.text = monitorias[indexPath.row].name;
+        cell.lbl_subtitle.text = monitorias[indexPath.row].nome;
         SVProgressHUD.dismiss()
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == CELL_ID{
             if let indexPath = tableView.indexPathForSelectedRow{
@@ -89,6 +76,4 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         }
     }
-    
-
 }

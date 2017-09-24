@@ -10,58 +10,21 @@ import Foundation
 
 class Monitoria {
 
+    //Variaveis
+    var nome: String?;
+    var professor: String?;
+    var descricao: String?;
+    var monitor: String?;
 
-//    
-//    description: close
-//    name:
-//    teacher:
-//    tutor:
-    
-    
-    private var _description = "";
-    private var _name = "";
-    private var _teacher = "";
-    private var _tutor = "";
-    
-    init(name: String, description:String, teacher :String, tutor:String) {
-        
-        _name = name;
-        _description = description
-        _teacher = teacher
-        _tutor = tutor
+    init(nome: String, descricao:String, professor :String, monitor:String) {
+        self.nome = nome;
+        self.descricao = descricao
+        self.professor = professor
+        self.monitor = monitor
     }
     
-    init(name: String, description:String) {
-        
-        _name = name;
-        _description = description
+    init(nome: String, descricao:String) {
+        self.nome = nome;
+        self.descricao = descricao
     }
-    
-  
-    var description: String {
-        get {
-            return _description;
-        }
-    }
-    
-    
-    var name: String {
-        get {
-            return _name;
-        }
-    }
-    
-    var teacher: String {
-        get {
-            return _teacher;
-        }
-    }
-    
-    var tutor: String {
-        get {
-            return _tutor;
-        }
-    }
-
-
 }

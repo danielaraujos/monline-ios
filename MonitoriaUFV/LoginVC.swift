@@ -87,8 +87,6 @@ class LoginVC: UIViewController {
         return true
     }
     
-    
-    
     /* Função responsavel por arredondar os cantos para os botoes e views */
     func rounding(){
         viewUser.layer.cornerRadius = 20;
@@ -106,8 +104,4 @@ class LoginVC: UIViewController {
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);
     }
-    
-
-
-
 }

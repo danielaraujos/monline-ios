@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-
 class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var nameTextField: UITextField!
@@ -19,8 +18,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    
-    var coursesOption = ["SIN", "NTR"]
+    var coursesOption = ["Selecione o curso:","SIN", "NTR"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +28,6 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         courseTextField.inputView = pickerView
     }
     
-    
     /*
      Funções responsavel por mostrar a barra de navegação
      */
@@ -38,8 +35,6 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
-    
-    
     /*
      Funções responsaveis por fazer o selected nos textview
      */
@@ -71,9 +66,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         
         if checkTrue(name: name, course: course,matricula:matricula,email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
-            
             AuthProvider.Instance.signUp(withEmail: email, password: password,name: name, course: course,matricula:matricula, loginHandler: { (message) in
-                
                 if message != nil {
                     SVProgressHUD.dismiss()
                     self.showAlert(title: "Problema na criação do Usuário", message: message!)
@@ -87,18 +80,11 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
                     
                     self.showAlert(title: "Parabéns...", message: "Conta criada com sucesso!")
                     SVProgressHUD.dismiss()
-                    
                 }
             })
             SVProgressHUD.dismiss()
         }
-        
     }
-    
-    
-    
-    
-    
     
     /* Função responsável por checar se os campos estão preenchidos ou dentre os conformes */
     func checkTrue(name: String,course: String,matricula: String, email: String, password: String) -> Bool{
@@ -112,8 +98,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         return true
     }
-    
-    
+
     /* Função responsavel pelos alertas */
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
@@ -121,7 +106,4 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);
     }
-    
-  
-
 }

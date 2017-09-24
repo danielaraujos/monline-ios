@@ -14,24 +14,22 @@ class MonitoringDetailVC: UIViewController,FetchData {
 
     var sigla: String!
     private var details = [Monitoria]();
-    private var contacts = [Contact]();
+    private var contacts = [Usuario]();
+    private let CHATSEGUE = "ChatSegue";
     
     @IBOutlet weak var lblDisciplina: UILabel!
     @IBOutlet weak var lblProfessor: UILabel!
     @IBOutlet weak var lblMonitor: UILabel!
     @IBOutlet weak var lblDescricao: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         SVProgressHUD.show(withStatus: "Carregando")
-        
         DBProvider.Instance.delegate = self;
         DBProvider.Instance.getContacts()
         DBProvider.Instance.getMonitoria(valor: sigla)
         self.title = sigla
         self.back()
-
     }
 
     func back(){
@@ -40,34 +38,30 @@ class MonitoringDetailVC: UIViewController,FetchData {
         navigationItem.backBarButtonItem = backItem
     }
     
-    
-    func dataReceived(contacts: [Contact]) {
+    func dataReceived(contacts: [Usuario]) {
         self.contacts = contacts;
     }
-    
-    
-    func dataCourse(monitorias: [Course]) {
+
+    func dataCourse(monitorias: [Curso]) {
     }
     
     func dataMonitorias(detail: [Monitoria]) {
         self.details = detail
-        
-        lblDisciplina.text = "Disciplina: \(self.details[2].description)"
-        lblProfessor.text = "Professor (a): \(self.details[3].description)"
-        lblDescricao.text = self.details[1].description
-        
+        lblDisciplina.text = "Disciplina: \(self.details[3].descricao!)"
+        lblProfessor.text = "Professor (a): \(self.details[2].descricao!)"
+        lblDescricao.text = self.details[0].descricao!
         for contact in self.contacts {
-            if contact.id == self.details[0].description {
-                lblMonitor.text = "Monitor (a): \(contact.name)"
+            if contact.id == self.details[1].descricao! {
+                lblMonitor.text = "Monitor (a): \(contact.nome!)"
             }
         }
-        
         SVProgressHUD.dismiss()
-       
-    }
-    
-    func userA(user: String) {
-    
     }
 
+    func userA(user: String) {}
+    
+    @IBAction func btnDuvida(_ sender: Any) {
+       performSegue(withIdentifier: CHATSEGUE, sender: self.details[0].descricao);
+    }
+    
 }

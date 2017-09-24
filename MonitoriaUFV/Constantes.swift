@@ -1,18 +1,18 @@
 //
-//  Constants.swift
-//  Chat App For iOS 10
+//  Contact.swift
+//  MonitoriaUFV
 //
-//  Created by MacBook on 11/22/16.
-//  Copyright © 2016 Awesome Tuts. All rights reserved.
+//  Created by Daniel Araújo on 09/09/17.
+//  Copyright © 2017 Daniel Araújo Silva. All rights reserved.
 //
 
 import Foundation
 
-class Constants {
+class Constantes {
 
     // DBProvider
-    static let CONTACTS = "Contacts";
-    static let COURSES = "Courses"
+    static let USUARIOS = "Usuarios";
+    static let CURSOS = "Cursos"
     static let MONITORIAS = "Monitorias";
     static let MESSAGES = "Messages";
     static let MEDIA_MESSAGES = "Media_Messages";
@@ -20,9 +20,9 @@ class Constants {
     static let VIDEO_STORAGE = "Video_Storage";
     
     static let EMAIL = "email";
-    static let PASSWORD = "password";
-    static let NAME = "name";
-    static let COURSE = "course";
+    static let SENHA = "senha";
+    static let NOME = "nome";
+    static let CURSO = "curso";
     static let MATRICULA = "matricula";
     static let DATA = "data";
     

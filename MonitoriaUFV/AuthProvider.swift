@@ -48,13 +48,10 @@ class AuthProvider {
         }
     }
     
-    
-    
     /*
      Função responsavel por realizar o cadastro no Firebase
      */
     func signUp(withEmail: String, password: String,name: String, course: String, matricula:String, loginHandler: LoginHandler?) {
-        
         Auth.auth().createUser(withEmail: withEmail, password: password, completion: { (user, error) in
             if error != nil {
                 self.handleErrors(err: error as! NSError, loginHandler: loginHandler);
@@ -62,9 +59,7 @@ class AuthProvider {
                 loginHandler?(nil);
                 if user?.uid != nil {
                     DBProvider.Instance.saveUser(withID: user!.uid, email: withEmail, password: password, name: name, course: course, matricula: matricula);
-                    
-                    // login the user
-                   // self.login(withEmail: withEmail, password: password, loginHandler: loginHandler);
+                   self.login(withEmail: withEmail, password: password, loginHandler: loginHandler);
                 }
             }
         });
@@ -77,7 +72,6 @@ class AuthProvider {
      */
     
     func resetPassword(withEmail: String,loginHandler: LoginHandler?) {
-        
          Auth.auth().sendPasswordReset(withEmail: withEmail) { (error) in
             if error != nil {
                 print(error?.localizedDescription)
@@ -115,7 +109,6 @@ class AuthProvider {
         if Auth.auth().currentUser != nil {
             return true;
         }
-        
         return false;
     }
     
@@ -133,41 +126,34 @@ class AuthProvider {
      */
     
     private func handleErrors(err: NSError, loginHandler: LoginHandler?) {
-        
         if let errCode = AuthErrorCode(rawValue: err.code) {
-            
             switch errCode {
+                case .wrongPassword:
+                    loginHandler?(LoginErrorCode.WRONG_PASSWORD);
+                    break;
                 
-            case .wrongPassword:
-                loginHandler?(LoginErrorCode.WRONG_PASSWORD);
-                break;
+                case .invalidEmail:
+                    loginHandler?(LoginErrorCode.INVALID_EMAIL);
+                    break;
                 
-            case .invalidEmail:
-                loginHandler?(LoginErrorCode.INVALID_EMAIL);
-                break;
+                case .userNotFound:
+                    loginHandler?(LoginErrorCode.USER_NOT_FOUND);
+                    break;
                 
-            case .userNotFound:
-                loginHandler?(LoginErrorCode.USER_NOT_FOUND);
-                break;
+                case .emailAlreadyInUse:
+                    loginHandler?(LoginErrorCode.EMAIL_ALREADY_IN_USE);
+                    break;
                 
-            case .emailAlreadyInUse:
-                loginHandler?(LoginErrorCode.EMAIL_ALREADY_IN_USE);
-                break;
+                case .weakPassword:
+                    loginHandler?(LoginErrorCode.WEAK_PASSWORD);
+                    break;
                 
-            case .weakPassword:
-                loginHandler?(LoginErrorCode.WEAK_PASSWORD);
-                break;
-                
-            default:
-                loginHandler?(LoginErrorCode.PROBLEM_CONNECTING);
-                break;
-                
+                default:
+                    loginHandler?(LoginErrorCode.PROBLEM_CONNECTING);
+                    break;
             }
         }
     }
-
-    
-    
 }
 
 

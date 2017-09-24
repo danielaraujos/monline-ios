@@ -11,12 +11,10 @@ import FirebaseDatabase
 import FirebaseStorage
 
 protocol FetchData: class {
-    func dataReceived(contacts: [Contact]);
-    func dataCourse(monitorias: [Course]);
+    func dataReceived(contacts: [Usuario]);
+    func dataCourse(monitorias: [Curso]);
     func dataMonitorias (detail : [Monitoria]);
     func userA (user: String)
-    
-
 }
 
 class DBProvider {
@@ -37,23 +35,23 @@ class DBProvider {
     }
     
     var contactsRef: DatabaseReference {
-        return dbRef.child(Constants.CONTACTS);
+        return dbRef.child(Constantes.USUARIOS);
     }
     
     var coursesRef: DatabaseReference{
-        return dbRef.child(Constants.COURSES)
+        return dbRef.child(Constantes.CURSOS)
     }
     
     var monitoriasRef: DatabaseReference {
-        return dbRef.child(Constants.MONITORIAS)
+        return dbRef.child(Constantes.MONITORIAS)
     }
     
     var messagesRef: DatabaseReference {
-        return dbRef.child(Constants.MESSAGES);
+        return dbRef.child(Constantes.MESSAGES);
     }
     
     var mediaMessagesRef: DatabaseReference {
-        return dbRef.child(Constants.MEDIA_MESSAGES);
+        return dbRef.child(Constantes.MEDIA_MESSAGES);
     }
     
     
@@ -62,21 +60,21 @@ class DBProvider {
     }
     
     var imageStorageRef: StorageReference {
-        return storageRef.child(Constants.IMAGE_STORAGE);
+        return storageRef.child(Constantes.IMAGE_STORAGE);
     }
     
     var videoStorageRef: StorageReference {
-        return storageRef.child(Constants.VIDEO_STORAGE);
+        return storageRef.child(Constantes.VIDEO_STORAGE);
     }
 
     
     func saveUser(withID: String, email: String, password: String, name: String, course: String, matricula: String) {
         let data: Dictionary<String, Any> = [
-            Constants.EMAIL: email,
-            Constants.PASSWORD: password,
-            Constants.NAME: name,
-            Constants.COURSE: course,
-            Constants.MATRICULA: matricula
+            Constantes.EMAIL: email,
+            Constantes.SENHA: password,
+            Constantes.NOME: name,
+            Constantes.CURSO: course,
+            Constantes.MATRICULA: matricula
             
         ];
         
@@ -88,7 +86,7 @@ class DBProvider {
         
         contactsRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
-            var contacts = [Contact]();
+            var contacts = [Usuario]();
             
             if let myContacts = snapshot.value as? NSDictionary {
                 //print(myContacts)
@@ -97,10 +95,10 @@ class DBProvider {
                     if let contactData = value as? NSDictionary {
                        // print(contactData)
                         
-                        if let email = contactData[Constants.NAME] as? String {
+                        if let email = contactData[Constantes.NOME] as? String {
                             //print(email)
                             let id = key as! String;
-                            let newContact = Contact(id: id, name: email);
+                            let newContact = Usuario(id: id, nome: email);
                             contacts.append(newContact);
                         }
                     }
@@ -123,7 +121,7 @@ class DBProvider {
                     let id = AuthProvider.Instance.userID()
                     if(id  == key as! String){
                         if let contactData = value as? NSDictionary {
-                            if let curso = contactData[Constants.COURSE] as? String {
+                            if let curso = contactData[Constantes.CURSO] as? String {
                                 retorno = curso
                             }
                         }
@@ -140,7 +138,7 @@ class DBProvider {
         
         coursesRef.observeSingleEvent(of: DataEventType.value) {
             (snapshot: DataSnapshot) in
-            var monitorias = [Course]()
+            var monitorias = [Curso]()
             if let cursos = snapshot.value as? NSDictionary {
                 for (key, value) in cursos {
                     //print(key)
@@ -149,7 +147,7 @@ class DBProvider {
                             for (key, value) in dataCursos {
                                 if let teste = value as? NSDictionary{
                                     for(key , value ) in teste {
-                                        let newMonitorias = Course(name: value as! String, sigla: key as! String)
+                                        let newMonitorias = Curso(nome: value as! String, sigla: key as! String)
                                         monitorias.append(newMonitorias)
                                     }
                                 }
@@ -177,7 +175,7 @@ class DBProvider {
                     if(valor ==  key as! String){
                         if let monitoriaDescription = value as? NSDictionary {
                             for (key, value) in monitoriaDescription {
-                                let new = Monitoria(name: key as! String, description: value as! String)
+                                let new = Monitoria(nome: key as! String, descricao: value as! String)
                                 details.append(new)
                             }
                         }
