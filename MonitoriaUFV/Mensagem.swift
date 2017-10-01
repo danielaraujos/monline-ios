@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseAuth
+
 class Mensagem {
     
     var paraID: String?
@@ -29,10 +32,10 @@ class Mensagem {
         self.larguraImagem = dictionary["larguraImagem"] as? NSNumber
         self.alturaImagem = dictionary["alturaImagem"] as? NSNumber
     }
-//    
-//    func idParceiro() -> String? {
-//        return paraID == FIRAuth.auth()?.currentUser?.uid ? meuID : paraID
-//    }
+    
+    func idParceiro() -> String? {
+        return paraID == Auth.auth().currentUser!.uid ? meuID : paraID
+    }
     
     
     

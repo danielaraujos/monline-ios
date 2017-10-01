@@ -120,6 +120,15 @@ class AuthProvider {
         return Auth.auth().currentUser!.uid;
     }
     
+    /*
+     Função retorna o id do parceiro
+     */
+//
+//    func idParceiro() -> String? {
+//        return paraID == FIRAuth.auth()?.currentUser?.uid ? meuID : paraID
+//    }
+
+    
     
     /*
         Função responsavel por mostrar os erros

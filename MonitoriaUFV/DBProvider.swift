@@ -75,9 +75,7 @@ class DBProvider {
             Constantes.NOME: name,
             Constantes.CURSO: course,
             Constantes.MATRICULA: matricula
-            
         ];
-        
         contactsRef.child(withID).setValue(data);
     }
     

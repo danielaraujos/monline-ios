@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,7 +30,7 @@
                                     <constraint firstAttribute="height" constant="554" id="VK2-vf-Kj8"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatListCell" rowHeight="72" id="uvO-I8-6DH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatListCell" rowHeight="72" id="uvO-I8-6DH" customClass="MessagesViewCell" customModule="MonitoriaUFV" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uvO-I8-6DH" id="aKi-re-xLM">
@@ -65,7 +66,10 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Cfm-Xg-Ffd" kind="show" identifier="ChatListCell" id="WSl-Ug-8m7"/>
+                                            <outlet property="image_1" destination="4SB-bQ-Hhd" id="oRo-RD-jHx"/>
+                                            <outlet property="lbl_date" destination="HHk-2n-2cy" id="xO2-af-HfD"/>
+                                            <outlet property="sub_title" destination="RyK-3i-7dD" id="c6y-36-eBO"/>
+                                            <outlet property="title" destination="o96-nQ-o63" id="Ojv-sp-GwO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -166,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9V-YC-ET2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="1308.3958020989505"/>
+            <point key="canvasLocation" x="2756" y="1307"/>
         </scene>
         <!--Monitorias-->
         <scene sceneID="ngg-fi-x8c">
@@ -308,7 +312,6 @@
                                 </state>
                                 <connections>
                                     <action selector="btnChat:" destination="vpB-gT-lwp" eventType="touchUpInside" id="K64-nA-Fm1"/>
-                                    <segue destination="Cfm-Xg-Ffd" kind="show" identifier="ChatSegue" id="UPW-va-fh0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iC-3y-TSI">
@@ -327,14 +330,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="SIN 100" id="Gxe-ic-Kao">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="LGP-az-9Z7">
-                            <connections>
-                                <segue destination="0BS-Q4-Xr9" kind="show" id="aZu-lE-rcK"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="LGP-az-9Z7">
+                                <connections>
+                                    <segue destination="0BS-Q4-Xr9" kind="show" id="aZu-lE-rcK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="dFk-du-JJK"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btn" destination="FOY-VQ-F0K" id="h8d-Eb-MDy"/>
                         <outlet property="lblDescricao" destination="OPf-yO-py2" id="260-O0-UFa"/>
                         <outlet property="lblDisciplina" destination="2K0-mn-S0Q" id="m6l-CM-dAb"/>
                         <outlet property="lblMonitor" destination="Jcn-7H-oR7" id="2WE-ar-cFV"/>
@@ -344,25 +351,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4f-4P-ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4205.6000000000004" y="-81.409295352323838"/>
-        </scene>
-        <!--SIN 100-->
-        <scene sceneID="h4e-9x-L1k">
-            <objects>
-                <viewController title="SIN 100" id="Cfm-Xg-Ffd" customClass="ChatVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fB3-sJ-H5c"/>
-                        <viewControllerLayoutGuide type="bottom" id="kTI-Pi-SH6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="amM-kU-rSv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Chat" id="EoH-jT-0Xx"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tLl-Q8-GaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4230" y="620"/>
         </scene>
         <!--Denúnciar monitor-->
         <scene sceneID="kjz-J2-tbS">
@@ -424,7 +412,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mpg-cL-m9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5436" y="-287.40629685157421"/>
+            <point key="canvasLocation" x="5183" y="446"/>
         </scene>
         <!--Horários-->
         <scene sceneID="8EX-v4-qRW">
@@ -442,7 +430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etA-pT-TJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5474" y="-963"/>
+            <point key="canvasLocation" x="5182" y="-313"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8Fq-4Q-kXf">
@@ -458,6 +446,7 @@
                     <connections>
                         <segue destination="fkJ-JS-6Cp" kind="relationship" relationship="viewControllers" id="lYN-DU-xWb"/>
                         <segue destination="dlJ-S4-mG0" kind="relationship" relationship="viewControllers" id="iIA-X0-zQl"/>
+                        <segue destination="gq8-AN-vep" kind="relationship" relationship="viewControllers" id="ko5-kI-uG6"/>
                         <segue destination="q0n-fl-1AA" kind="relationship" relationship="viewControllers" id="ESF-RV-Jrz"/>
                     </connections>
                 </tabBarController>
@@ -538,7 +527,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wtc-Jb-J1o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1448.8" y="1307.4962518740631"/>
+            <point key="canvasLocation" x="2038" y="1308"/>
+        </scene>
+        <!--Monitor-->
+        <scene sceneID="TKQ-Hv-TV9">
+            <objects>
+                <viewController id="wEk-pN-cUb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1k7-Vh-Eeg"/>
+                        <viewControllerLayoutGuide type="bottom" id="AZQ-xl-vZw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h6O-Sp-MJl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Monitor" id="k2A-MQ-ADb"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SbB-h2-6Jo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2233" y="2015"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="g64-Yn-zrs">
@@ -871,6 +880,35 @@
             </objects>
             <point key="canvasLocation" x="-602.39999999999998" y="244.22788605697153"/>
         </scene>
+        <!--Monitor-->
+        <scene sceneID="7cr-ZK-TIe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gq8-AN-vep" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Monitor" image="lista" id="KWo-ge-x9M"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="eD3-AF-ark">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.046657986110000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wEk-pN-cUb" kind="relationship" relationship="rootViewController" id="ixJ-MJ-1N9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nod-qw-AnS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1416" y="2015.8920539730136"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ProfileImg" width="128" height="128"/>
@@ -883,7 +921,4 @@
         <image name="logomarca-1" width="304" height="243"/>
         <image name="more" width="40" height="40"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="WSl-Ug-8m7"/>
-    </inferredMetricsTieBreakers>
 </document>

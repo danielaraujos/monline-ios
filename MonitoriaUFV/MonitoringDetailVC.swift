@@ -17,6 +17,7 @@ class MonitoringDetailVC: UIViewController,FetchData {
     private var contacts = [Usuario]();
     private let CHATSEGUE = "ChatSegue";
     
+    @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var lblDisciplina: UILabel!
     @IBOutlet weak var lblProfessor: UILabel!
     @IBOutlet weak var lblMonitor: UILabel!
@@ -65,8 +66,18 @@ class MonitoringDetailVC: UIViewController,FetchData {
 
     func userA(user: String) {}
     
+    
+    //var messagesController: MessagesController?
+    
+   
+    
     @IBAction func btnChat(_ sender: Any) {
-        //performSegue(withIdentifier: CHATSEGUE, sender: self.details[0].descricao);
+        var id = self.details[0].descricao!
+        perform(#selector(handleNewMessage))
     }
     
+    @objc func handleNewMessage() {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(chatLogController, animated: true)
+    }
 }
