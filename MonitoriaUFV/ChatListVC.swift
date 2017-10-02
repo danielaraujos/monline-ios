@@ -108,9 +108,6 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell", for: indexPath) as! MessagesViewCell
         
-        
-        
-        
         let message = self.mensagens[indexPath.row]
         cell.message = message
         return cell
@@ -122,8 +119,32 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        self.showChatControllerForUser(id: self.mensagens[indexPath.row].paraID!)
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.tableView.deselectRow(at: indexPath, animated: true)
+//        self.showChatControllerForUser(id: self.mensagens[indexPath.row].paraID!)
+//    }
+    
+    
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = mensagens[indexPath.row]
+        
+        guard let chatPartnerId = message.idParceiro() else {
+            return
+        }
+        
+        let ref = Database.database().reference().child(Constantes.USUARIOS).child(chatPartnerId)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let dictionary = snapshot.value as? [String: AnyObject] else {
+                return
+            }
+            
+            let user = Usuario(dictionary: dictionary)
+            user.id = chatPartnerId
+            //print(user.id!)
+            //user.setValuesForKeys(dictionary)
+            //self.showChatControllerForUser(user)
+            self.showChatControllerForUser(id: user.id as! String)
+            
+        }, withCancel: nil)
     }
 }

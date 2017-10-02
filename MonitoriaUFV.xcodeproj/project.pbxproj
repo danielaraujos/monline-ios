@@ -30,6 +30,7 @@
 		4C79B5E71F48B40400530E75 /* ConfigurationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */; };
 		4C79B5E91F48B93300530E75 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E81F48B93300530E75 /* ChatListVC.swift */; };
 		4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */; };
+		4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */; };
 		4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
@@ -88,6 +89,7 @@
 		4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationVC.swift; sourceTree = "<group>"; };
 		4C79B5E81F48B93300530E75 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMensagemCell.swift; sourceTree = "<group>"; };
 		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */,
 				4C559DC51F8181EF0093ACAA /* MessagesViewCell.swift */,
+				4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				4C6C8DA11F780942000C533B /* Mensagem.swift in Sources */,
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
 				4C559DC61F8181EF0093ACAA /* MessagesViewCell.swift in Sources */,
+				4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */,
 				4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */,
 				4CFDC3611F6C74AB00010FB8 /* ReporterVC.swift in Sources */,
 				4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */,

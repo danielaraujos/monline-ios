@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout  {
     
     var idMonitor: String?
     
@@ -26,17 +26,64 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         return textField
     }()
     
+    let cellId = "cellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Chat"
+        
+        collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor.white
+        collectionView?.register(ChatMensagemCell.self, forCellWithReuseIdentifier: cellId)
+        
+        observeMessages()
         
         setupInputComponents()
     }
     
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mensagens.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMensagemCell
+        
+        let message = mensagens[indexPath.item]
+        cell.textView.text = message.texto
+        
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
+    }
+    
+    
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     func setupInputComponents() {
         let containerView = UIView()
+        containerView.backgroundColor = UIColor.white
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
@@ -67,7 +114,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
         let separatorLineView = UIView()
-        separatorLineView.backgroundColor = UIColor.gray
+        separatorLineView.backgroundColor = hexStringToUIColor(hex: "#1C93D1")
         separatorLineView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(separatorLineView)
         //x,y,w,h
@@ -77,6 +124,41 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
+    var mensagens = [Mensagem]()
+    
+    func observeMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid)
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messagesRef = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as? [String: AnyObject] else {
+                    return
+                }
+                //print(snapshot)
+                
+                let message = Mensagem(dictionary: dictionary)
+                //potential of crashing if keys don't match
+                message.setValuesForKeys(dictionary)
+
+                if message.idParceiro() == self.idMonitor {
+                    self.mensagens.append(message)
+                    DispatchQueue.main.async(execute: {
+                        self.collectionView?.reloadData()
+                    })
+                }
+               
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
+    
     func handleSend() {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
@@ -84,7 +166,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let toId = idMonitor!
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
-        let values = ["texto": inputTextField.text!, "paraID": toId, "deID": fromId, "timestamp": timestamp] as [String : Any]
+        let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
         //childRef.updateChildValues(values)
         
         childRef.updateChildValues(values) { (error, ref) in
