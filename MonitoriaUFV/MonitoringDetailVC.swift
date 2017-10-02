@@ -72,12 +72,12 @@ class MonitoringDetailVC: UIViewController,FetchData {
    
     
     @IBAction func btnChat(_ sender: Any) {
-        var id = self.details[0].descricao!
-        perform(#selector(handleNewMessage))
+        self.handleNewMessage(id: self.details[1].descricao!)
     }
     
-    @objc func handleNewMessage() {
+    @objc func handleNewMessage(id: String) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.idMonitor = id
         navigationController?.pushViewController(chatLogController, animated: true)
     }
 }

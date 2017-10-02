@@ -30,13 +30,19 @@ class MessagesViewCell: UITableViewCell {
     var message: Mensagem? {
         didSet {
             if let paraID = message?.paraID {
+                print(paraID)
                 let ref = Database.database().reference().child(Constantes.MONITORIAS)
                 ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                    //print(snapshot)
                     if let monitorias = snapshot.value as? NSDictionary {
                         for (key, value) in monitorias {
                             if let data = value as? NSDictionary {
-                                if let monitoria = data[Constantes.NOME] as? String {
-                                    self.title.text = monitoria
+                                if let monitor = data[Constantes.MONITOR] as? String {
+                                    if(monitor == paraID){
+                                        if let monitoria = data[Constantes.NOME] as? String {
+                                            self.title.text = monitoria
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -44,14 +50,14 @@ class MessagesViewCell: UITableViewCell {
                 }, withCancel: nil)
             }
             
+            self.sub_title.text = message?.texto
+            
             if let seconds = message?.timestamp?.doubleValue {
                 let timestampDate = Date(timeIntervalSince1970: seconds)
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "hh:mm:ss a"
                 self.lbl_date.text = dateFormatter.string(from: timestampDate)
             }
-            
-                self.sub_title.text = message?.texto
             
         }
     }

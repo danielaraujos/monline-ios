@@ -29,8 +29,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Chat Log Controller"
-        
+        navigationItem.title = "Chat"
         collectionView?.backgroundColor = UIColor.white
         
         setupInputComponents()
@@ -82,7 +81,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let ref = Database.database().reference().child(Constantes.MESSAGES)
         let childRef = ref.childByAutoId()
         //is it there best thing to include the name inside of the message node
-        let toId = "eNL1A3UjVYcoeV5bS7WDw8WhGUG3"
+        let toId = idMonitor!
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
         let values = ["texto": inputTextField.text!, "paraID": toId, "deID": fromId, "timestamp": timestamp] as [String : Any]
