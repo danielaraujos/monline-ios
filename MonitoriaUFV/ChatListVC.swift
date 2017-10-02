@@ -11,6 +11,7 @@ import Firebase
 
 class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     var mensagens = [Mensagem]()
+    var messagesDictionary = [String: Mensagem]()
     
     func back(){
         let backItem = UIBarButtonItem()
@@ -34,11 +36,18 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         let ref = Database.database().reference().child(Constantes.MESSAGES)
         ref.observe(.childAdded, with: { (snapshot) in
             
-            print(snapshot)
-            
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Mensagem(dictionary: dictionary)
-                self.mensagens.append(message)
+                //self.mensagens.append(message)
+                
+                if let paraID = message.paraID {
+                    self.messagesDictionary[paraID] = message
+                    
+                    self.mensagens = Array(self.messagesDictionary.values)
+                    self.mensagens.sort(by: { (message1, message2) -> Bool in
+                        return message1.timestamp!.int32Value > message2.timestamp!.int32Value
+                    })
+                }
                 
                 //this will crash because of background thread, so lets call this on dispatch_async main thread
                 DispatchQueue.main.async(execute: {
@@ -54,7 +63,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return mensagens.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,10 +72,17 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell", for: indexPath) as! MessagesViewCell
-        cell.title.text = "Teste"
-        cell.sub_title.text = "aaaa"
-        cell.lbl_date.text = "11/08/1201"
+        
+        let message = self.mensagens[indexPath.row]
+        cell.message = message
         return cell
+    }
+    
+    
+    func showChatControllerForUser(_ user: Monitoria) {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        //chatLogController.user = user
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
 

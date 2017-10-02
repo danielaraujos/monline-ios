@@ -25,6 +25,7 @@ class Constantes {
     static let CURSO = "curso";
     static let MATRICULA = "matricula";
     static let DATA = "data";
+    static let MONITOR = "monitor";
     
     // messages
     static let TEXT = "text";
