@@ -78,14 +78,29 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     }
     
     func handleSend() {
-        let ref = Database.database().reference().child(Constantes.MESSAGES)
+        let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
         //is it there best thing to include the name inside of the message node
         let toId = idMonitor!
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
         let values = ["texto": inputTextField.text!, "paraID": toId, "deID": fromId, "timestamp": timestamp] as [String : Any]
-        childRef.updateChildValues(values)
+        //childRef.updateChildValues(values)
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error ?? "")
+                return
+            }
+            
+            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId)
+            
+            let messageId = childRef.key
+            userMessagesRef.updateChildValues([messageId: 1])
+            
+            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId)
+            recipientUserMessagesRef.updateChildValues([messageId: 1])
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

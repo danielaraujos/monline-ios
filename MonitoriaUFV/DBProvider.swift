@@ -47,7 +47,7 @@ class DBProvider {
     }
     
     var messagesRef: DatabaseReference {
-        return dbRef.child(Constantes.MESSAGES);
+        return dbRef.child(Constantes.MENSAGENS);
     }
     
     var mediaMessagesRef: DatabaseReference {

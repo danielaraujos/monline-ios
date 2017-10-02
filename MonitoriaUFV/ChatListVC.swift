@@ -16,7 +16,12 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
-        self.observeMessages()
+        //self.observeMessages()
+        
+        self.mensagens.removeAll()
+        self.messagesDictionary.removeAll()
+        tableView.reloadData()
+        self.observeUserMessages()
     }
     
     var mensagens = [Mensagem]()
@@ -32,8 +37,45 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    func observeUserMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let ref = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messagesReference = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
+            
+            messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let message = Mensagem(dictionary: dictionary)
+                    
+                    if let toId = message.paraID {
+                        self.messagesDictionary[toId] = message
+                        
+                        self.mensagens = Array(self.messagesDictionary.values)
+                        self.mensagens.sort(by: { (message1, message2) -> Bool in
+                            
+                            return message1.timestamp!.int32Value > message2.timestamp!.int32Value
+                        })
+                    }
+                    
+                    //this will crash because of background thread, so lets call this on dispatch_async main thread
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
+    
     func observeMessages() {
-        let ref = Database.database().reference().child(Constantes.MESSAGES)
+        let ref = Database.database().reference().child(Constantes.MENSAGENS)
         ref.observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -65,6 +107,9 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell", for: indexPath) as! MessagesViewCell
+        
+        
+        
         
         let message = self.mensagens[indexPath.row]
         cell.message = message
