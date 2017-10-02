@@ -38,18 +38,15 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Mensagem(dictionary: dictionary)
-                //self.mensagens.append(message)
                 
                 if let paraID = message.paraID {
                     self.messagesDictionary[paraID] = message
-                    
                     self.mensagens = Array(self.messagesDictionary.values)
                     self.mensagens.sort(by: { (message1, message2) -> Bool in
                         return message1.timestamp!.int32Value > message2.timestamp!.int32Value
                     })
                 }
                 
-                //this will crash because of background thread, so lets call this on dispatch_async main thread
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
                 })
@@ -66,10 +63,6 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         return mensagens.count
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell", for: indexPath) as! MessagesViewCell
         
@@ -78,13 +71,14 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
-    
-    func showChatControllerForUser(_ user: Monitoria) {
+    func showChatControllerForUser(id: String) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
-        //chatLogController.user = user
+        chatLogController.idMonitor = id
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
-
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        self.showChatControllerForUser(id: self.mensagens[indexPath.row].paraID!)
+    }
 }

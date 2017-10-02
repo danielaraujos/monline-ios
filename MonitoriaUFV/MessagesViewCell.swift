@@ -30,7 +30,6 @@ class MessagesViewCell: UITableViewCell {
     var message: Mensagem? {
         didSet {
             if let paraID = message?.paraID {
-                print(paraID)
                 let ref = Database.database().reference().child(Constantes.MONITORIAS)
                 ref.observeSingleEvent(of: .value, with: { (snapshot) in
                     //print(snapshot)
