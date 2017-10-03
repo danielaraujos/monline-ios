@@ -53,8 +53,8 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     let message = Mensagem(dictionary: dictionary)
                     
-                    if let toId = message.paraID {
-                        self.messagesDictionary[toId] = message
+                    if let idParceiro = message.idParceiro() {
+                        self.messagesDictionary[idParceiro] = message
                         
                         self.mensagens = Array(self.messagesDictionary.values)
                         self.mensagens.sort(by: { (message1, message2) -> Bool in
@@ -63,16 +63,28 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
                         })
                     }
                     
-                    //this will crash because of background thread, so lets call this on dispatch_async main thread
-                    DispatchQueue.main.async(execute: {
-                        self.tableView.reloadData()
-                    })
+                    self.timer?.invalidate()
+                    print("we just canceled our timer")
+                    
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                    print("schedule a table reload in 0.1 sec")
                 }
                 
             }, withCancel: nil)
             
         }, withCancel: nil)
     }
+    
+    var timer: Timer?
+    
+    func handleReloadTable() {
+        //this will crash because of background thread, so lets call this on dispatch_async main thread
+        DispatchQueue.main.async(execute: {
+            print("we reloaded the table")
+            self.tableView.reloadData()
+        })
+    }
+    
     
     func observeMessages() {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
