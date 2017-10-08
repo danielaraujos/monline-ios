@@ -26,6 +26,8 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         var pickerView = UIPickerView()
         pickerView.delegate = self
         courseTextField.inputView = pickerView
+        print("ERRO1")
+        //self.aaa()
     }
     
     /*
@@ -53,9 +55,6 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         courseTextField.text = coursesOption[row]
     }
-    
-    
-    
     
     @IBAction func btnRegister(_ sender: Any) {
         let email = emailTextField.text!
@@ -106,4 +105,19 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);
     }
+    
+    func aaa(){
+        print("ERRRO")
+        let ref = Database.database().reference().child(Constantes.CURSOS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let sigla = snapshot.key
+            print(sigla)
+            let cursoUsuarioRef = Database.database().reference().child(Constantes.CURSO).child("nome")
+            cursoUsuarioRef.observe(.childAdded, with: { (conteudo) in
+                let nome = conteudo as! String
+                print(nome)
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+
 }

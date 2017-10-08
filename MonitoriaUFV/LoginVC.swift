@@ -41,13 +41,11 @@ class LoginVC: UIViewController {
         navigationItem.backBarButtonItem = backItem
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         if AuthProvider.Instance.isLoggedIn() {
             performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil);
         }
@@ -60,7 +58,6 @@ class LoginVC: UIViewController {
         if checkTrue(email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
             AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
-                
                 if message != nil {
                     SVProgressHUD.dismiss()
                     self.showAlert(title: "Problema na autentificação", message: message!)
@@ -70,15 +67,10 @@ class LoginVC: UIViewController {
                     print("LOGIN COM SUCESSO!")
                     SVProgressHUD.dismiss()
                     self.performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil)
-                    
                 }
             })
             SVProgressHUD.dismiss()
         }
-    }
-    
-    @IBAction func btnRegister(_ sender: Any) {
-        
     }
     
 

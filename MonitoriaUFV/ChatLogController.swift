@@ -34,7 +34,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         navigationItem.title = "Chat"
         
         collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        //collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(ChatMensagemCell.self, forCellWithReuseIdentifier: cellId)
@@ -52,7 +52,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         containerView.backgroundColor = UIColor.white
         
         let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Send", for: UIControlState())
+        sendButton.setTitle("Enviar", for: UIControlState())
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         containerView.addSubview(sendButton)
@@ -154,6 +154,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.textView.textColor = UIColor.white
             cell.profileImageView.isHidden = true
             
+            self.title = " NOME DA MONITORIA"
             cell.bubbleViewRightAnchor?.isActive = true
             cell.bubbleViewLeftAnchor?.isActive = false
             
@@ -162,6 +163,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#828787")
             cell.textView.textColor = UIColor.black
             cell.profileImageView.isHidden = false
+            self.title = " MEU NOME"
             
             cell.bubbleViewRightAnchor?.isActive = false
             cell.bubbleViewLeftAnchor?.isActive = true
@@ -242,11 +244,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     var mensagens = [Mensagem]()
     
     func observeMessages() {
-        guard let uid = Auth.auth().currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid, let toId = idMonitor else {
             return
         }
         
-        let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid)
+        let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(toId)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
             
             let messageId = snapshot.key
@@ -256,19 +258,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 guard let dictionary = snapshot.value as? [String: AnyObject] else {
                     return
                 }
-                //print(snapshot)
-                
                 let message = Mensagem(dictionary: dictionary)
-                //potential of crashing if keys don't match
-                message.setValuesForKeys(dictionary)
-
-                if message.idParceiro() == self.idMonitor {
-                    self.mensagens.append(message)
-                    DispatchQueue.main.async(execute: {
-                        self.collectionView?.reloadData()
-                    })
-                }
-               
+                
+                //do we need to attempt filtering anymore?
+                self.mensagens.append(message)
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                })
             }, withCancel: nil)
             
         }, withCancel: nil)
@@ -291,12 +287,12 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             }
             
             self.inputTextField.text = nil
-            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId)
+            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
             
             let messageId = childRef.key
             userMessagesRef.updateChildValues([messageId: 1])
             
-            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId)
+            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
             recipientUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
@@ -305,6 +301,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         handleSend()
         return true
     }
+    
+    
 }
 
 

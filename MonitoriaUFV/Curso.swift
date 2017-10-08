@@ -28,7 +28,7 @@ class Curso{
     init(dictionary: [String: AnyObject]) {
         self.nome = dictionary["nome"] as? String
         self.sigla = dictionary["sigla"] as? String
-        self.tipo = dictionary["tipo"] as? String
+        //self.tipo = dictionary["tipo"] as? String
     }
 }
 

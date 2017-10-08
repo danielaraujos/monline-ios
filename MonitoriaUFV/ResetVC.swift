@@ -15,8 +15,6 @@ class ResetVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +47,7 @@ class ResetVC: UIViewController {
             SVProgressHUD.dismiss()
         }
     }
+    
     /* Função responsavel pelos alertas */
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);

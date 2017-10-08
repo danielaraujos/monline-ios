@@ -13,15 +13,17 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     
     @IBOutlet weak var tableView: UITableView!
+    var meuID = Auth.auth().currentUser?.uid
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
-        //self.observeMessages()
         
         self.mensagens.removeAll()
         self.messagesDictionary.removeAll()
         tableView.reloadData()
         self.observeUserMessages()
+        self.verificarMonitor()
     }
     
     var mensagens = [Mensagem]()
@@ -44,47 +46,56 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         
         let ref = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
+            let userId = snapshot.key
+            Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+                let messageId = snapshot.key
+                self.fetchMessageWithMessageId(messageId)
             
-            let messageId = snapshot.key
-            let messagesReference = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
+   
+    
+    fileprivate func fetchMessageWithMessageId(_ messageId: String) {
+        
+        let messagesReference = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
+        messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
             
-            messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let message = Mensagem(dictionary: dictionary)
                 
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let message = Mensagem(dictionary: dictionary)
-                    
-                    if let idParceiro = message.idParceiro() {
-                        self.messagesDictionary[idParceiro] = message
-                        
-                        self.mensagens = Array(self.messagesDictionary.values)
-                        self.mensagens.sort(by: { (message1, message2) -> Bool in
-                            
-                            return message1.timestamp!.int32Value > message2.timestamp!.int32Value
-                        })
-                    }
-                    
-                    self.timer?.invalidate()
-                    print("we just canceled our timer")
-                    
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-                    print("schedule a table reload in 0.1 sec")
+                if let idParceiro = message.idParceiro() {
+                    self.messagesDictionary[idParceiro] = message
                 }
                 
-            }, withCancel: nil)
+                self.attemptReloadOfTable()
+                
+           }
             
         }, withCancel: nil)
+    }
+    
+    fileprivate func attemptReloadOfTable() {
+        self.timer?.invalidate()
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
     
     var timer: Timer?
     
     func handleReloadTable() {
+        self.mensagens = Array(self.messagesDictionary.values)
+        self.mensagens.sort(by: { (message1, message2) -> Bool in
+            
+            return message1.timestamp!.int32Value > message2.timestamp!.int32Value
+        })
+        
         //this will crash because of background thread, so lets call this on dispatch_async main thread
         DispatchQueue.main.async(execute: {
-            print("we reloaded the table")
             self.tableView.reloadData()
         })
     }
-    
     
     func observeMessages() {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
@@ -131,10 +142,6 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.tableView.deselectRow(at: indexPath, animated: true)
-//        self.showChatControllerForUser(id: self.mensagens[indexPath.row].paraID!)
-//    }
     
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -159,4 +166,51 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             
         }, withCancel: nil)
     }
+    
+    
+    func verificarMonitor() {
+        
+        let ref = Database.database().reference().child(Constantes.MONITORIAS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let siglaMonitoria = snapshot.key
+            let conteudoReferencia = Database.database().reference().child(Constantes.MONITORIAS).child(siglaMonitoria)
+            conteudoReferencia.observeSingleEvent(of: .value, with: { (conteudoRef) in
+                if let dictionary = conteudoRef.value as? [String: AnyObject] {
+                    let conteudo = Monitoria(dictionary: dictionary)
+                    
+                    if conteudo.monitor == self.meuID {
+                        print("Sou monitor")
+                        
+                        let ref1 = Database.database().reference().child(Constantes.USUARIOS)
+                        ref1.observe(.childAdded, with: { (usuarios) in
+                            let id = usuarios.key
+                            if self.meuID == id{
+                                let ref2 = Database.database().reference().child(Constantes.USUARIOS).child(id)
+                                ref2.observeSingleEvent(of: .value, with: { (snapshot) in
+                                    
+                                    
+                                    
+                                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                                        let usuarios = Usuario(dictionary: dictionary)
+                                        //self.title = usuarios.nome
+                                        print(usuarios.nome)
+                                        
+                                    }
+                                    
+                                }, withCancel: nil)
+                            }
+                            
+                            
+                        }, withCancel: nil)
+                        
+                    }
+                    
+                }
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
+    
+    
+    
 }

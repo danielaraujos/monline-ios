@@ -121,6 +121,7 @@ class DBProvider {
                         if let contactData = value as? NSDictionary {
                             if let curso = contactData[Constantes.CURSO] as? String {
                                 retorno = curso
+                                //print("CURSO USUARIO: \(curso)")
                             }
                         }
                     }
@@ -139,12 +140,12 @@ class DBProvider {
             var monitorias = [Curso]()
             if let cursos = snapshot.value as? NSDictionary {
                 for (key, value) in cursos {
-                    //print(key)
                     if(valor == key as! String){
                         if let dataCursos = value as? NSDictionary {
                             for (key, value) in dataCursos {
                                 if let teste = value as? NSDictionary{
                                     for(key , value ) in teste {
+                                        print(value)
                                         let newMonitorias = Curso(nome: value as! String, sigla: key as! String)
                                         monitorias.append(newMonitorias)
                                     }
@@ -169,7 +170,7 @@ class DBProvider {
             
             if let monitoriasList = snapshot.value as? NSDictionary {
                 for (key, value) in monitoriasList {
-                    //print("CHAVE \(key)")
+                    print("CHAVE \(key)")
                     if(valor ==  key as! String){
                         if let monitoriaDescription = value as? NSDictionary {
                             for (key, value) in monitoriaDescription {
@@ -183,7 +184,9 @@ class DBProvider {
             self.delegate?.dataMonitorias(detail: details);
         }
     }
-   
+    
+    
+    
     
 
  }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Usuario {
+class Usuario  : NSObject {
     
     //Variaveis
     var id: String?;
@@ -21,8 +21,8 @@ class Usuario {
     //var tipo: String?;
     
     //Construtores
-    init(id: String) {
-        self.id = id;
+    init(curso: String) {
+        self.curso = curso;
     }
     
     init(id: String, nome: String) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Monitoria {
+class Monitoria : NSObject {
 
     //Variaveis
     var nome: String?;
@@ -21,6 +21,13 @@ class Monitoria {
         self.descricao = descricao
         self.professor = professor
         self.monitor = monitor
+    }
+    
+    init(dictionary: [String: Any]) {
+        self.nome = dictionary["nome"] as? String
+        self.descricao = dictionary["descricao"] as? String
+        self.professor = dictionary["professor"] as? String
+        self.monitor = dictionary["monitor"] as? String
     }
     
     init(nome: String, descricao:String) {

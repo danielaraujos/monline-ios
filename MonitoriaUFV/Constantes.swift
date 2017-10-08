@@ -24,6 +24,7 @@ class Constantes {
     static let SENHA = "senha";
     static let NOME = "nome";
     static let CURSO = "curso";
+    static let TIPO = "tipo";
     static let MATRICULA = "matricula";
     static let DATA = "data";
     static let MONITOR = "monitor";

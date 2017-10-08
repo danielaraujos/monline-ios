@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import Firebase
 import SVProgressHUD
 
-class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate, FetchData {
+class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
-    private var contacts = [Usuario]();
     private var monitorias = [Curso]();
     private var disciplina = ""
     
@@ -23,8 +23,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         super.viewDidLoad()
         self.back()
         SVProgressHUD.show(withStatus: "Carregando")
-        DBProvider.Instance.delegate = self;
-        DBProvider.Instance.getPegarCursoUsuario()
+        self.buscarCursos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,19 +35,48 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
     }
-    
-    func dataReceived(contacts: [Usuario]) {}
-    
-    func dataCourse(monitorias: [Curso]) {
-        self.monitorias = monitorias
-        tableView.reloadData();
+
+    func buscarCursos() {
+        let id = AuthProvider.Instance.userID()
+        let ref = Database.database().reference().child(Constantes.CURSOS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let sigla = snapshot.key
+            print(sigla)
+            let cursoUsuarioRef = Database.database().reference().child(Constantes.USUARIOS)
+            cursoUsuarioRef.observe(.childAdded, with: { (conteudo) in
+                let idUsuarios = conteudo.key
+                print(idUsuarios)
+                if id == idUsuarios{
+                    self.buscarCursoUsuario(id, sigla)
+                }
+            }, withCancel: nil)
+        }, withCancel: nil)
     }
     
-    func dataMonitorias(detail: [Monitoria]) {}
+    fileprivate func buscarCursoUsuario(_ id: String, _ sigla:String) {
+        let conteudoReferencia = Database.database().reference().child(Constantes.USUARIOS).child(id).child(Constantes.CURSO)
+        conteudoReferencia.observeSingleEvent(of: .value, with: { (snapshot) in
+            let curso = snapshot.value as! String
+            if(curso == sigla){
+                self.buscarAsMonitoriasDoCurso(sigla)
+            }
+        }, withCancel: nil)
+    }
     
-    func userA(user: String) {
-        self.disciplina = user
-        DBProvider.Instance.getCourses(valor: self.disciplina)
+    fileprivate func buscarAsMonitoriasDoCurso(_ sigla:String) {
+        let cursoRef = Database.database().reference().child(Constantes.CURSOS).child(sigla).child(Constantes.TIPO)
+        cursoRef.observeSingleEvent(of: .value, with: { (filho) in
+            if let dictionary = filho.value as? [String: AnyObject] {
+                for(key , value ) in dictionary {
+                    let novaMonitorias = Curso(nome: value as! String, sigla: key as! String)
+                    self.monitorias.append(novaMonitorias)
+                }
+            }
+            DispatchQueue.main.async(execute: {
+                self.tableView.reloadData()
+                SVProgressHUD.dismiss()
+            })
+        }, withCancel: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,7 +98,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == CELL_ID{
             if let indexPath = tableView.indexPathForSelectedRow{
