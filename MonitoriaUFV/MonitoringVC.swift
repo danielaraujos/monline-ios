@@ -41,11 +41,9 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let ref = Database.database().reference().child(Constantes.CURSOS)
         ref.observe(.childAdded, with: { (snapshot) in
             let sigla = snapshot.key
-            print(sigla)
             let cursoUsuarioRef = Database.database().reference().child(Constantes.USUARIOS)
             cursoUsuarioRef.observe(.childAdded, with: { (conteudo) in
                 let idUsuarios = conteudo.key
-                print(idUsuarios)
                 if id == idUsuarios{
                     self.buscarCursoUsuario(id, sigla)
                 }
