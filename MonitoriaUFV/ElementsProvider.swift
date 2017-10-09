@@ -9,11 +9,9 @@
 
 import UIKit
 
-class ElementsProvider {
+class ElementsProvider  : NSObject  {
     
     private static let _instance = ElementsProvider();
-    
-    private init(){}
     
     static var Instance: ElementsProvider{
         return _instance
@@ -35,6 +33,13 @@ class ElementsProvider {
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
             alpha: CGFloat(1.0)
         )
+    }
+    
+    static func voltarSemTexto(){
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        //navigationItem.backBarButtonItem = backItem
+        
     }
     
     

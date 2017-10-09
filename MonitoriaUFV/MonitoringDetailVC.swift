@@ -10,11 +10,10 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class MonitoringDetailVC: UIViewController,FetchData {
+class MonitoringDetailVC: UIViewController {
 
     var sigla: String!
-    private var details = [Monitoria]();
-    private var contacts = [Usuario]();
+    //private var usuario = Usuario?
     private let CHATSEGUE = "ChatSegue";
     
     @IBOutlet weak var btn: UIButton!
@@ -26,11 +25,9 @@ class MonitoringDetailVC: UIViewController,FetchData {
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.show(withStatus: "Carregando")
-        DBProvider.Instance.delegate = self;
-        DBProvider.Instance.getContacts()
-        DBProvider.Instance.getMonitoria(valor: sigla)
         self.title = sigla
-        self.back()
+        ElementsProvider.voltarSemTexto()
+        self.buscarMonitoria()
         
     }
     
@@ -38,46 +35,54 @@ class MonitoringDetailVC: UIViewController,FetchData {
         self.tabBarController?.tabBar.isHidden = false
     }
 
-    func back(){
-        let backItem = UIBarButtonItem()
-        backItem.title = " "
-        navigationItem.backBarButtonItem = backItem
-    }
     
-    func dataReceived(contacts: [Usuario]) {
-        self.contacts = contacts;
-    }
-
-    func dataCourse(monitorias: [Curso]) {
-    }
     
-    func dataMonitorias(detail: [Monitoria]) {
-        self.details = detail
-        lblDisciplina.text = "Disciplina: \(self.details[3].descricao!)"
-        lblProfessor.text = "Professor (a): \(self.details[2].descricao!)"
-        lblDescricao.text = self.details[0].descricao!
-        for contact in self.contacts {
-            if contact.id == self.details[1].descricao! {
-                lblMonitor.text = "Monitor (a): \(contact.nome!)"
+    
+    func buscarMonitoria() {
+        let ref = Database.database().reference().child(Constantes.MONITORIAS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let nomeDisciplina = snapshot.key as! String
+            if(self.sigla == nomeDisciplina){
+                let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
+                cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
+                    if let dictionary = conteudo.value as? [String: AnyObject] {
+                        let novaMonitorias = Monitoria(dictionary: dictionary)
+                        self.lblDisciplina.text = "Disciplina: \(novaMonitorias.nome!)"
+                        self.lblProfessor.text = "Professor (a): \(novaMonitorias.professor!)"
+                        self.lblDescricao.text = novaMonitorias.descricao!
+                        self.buscarUsuario(novaMonitorias.monitor!)
+                    }
+                }, withCancel: nil)
             }
-        }
-        SVProgressHUD.dismiss()
+        }, withCancel: nil)
     }
-
-    func userA(user: String) {}
     
+    fileprivate func buscarUsuario(_ id: String) {
+        let ref = Database.database().reference().child(Constantes.USUARIOS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let idUsuarios = snapshot.key as! String
+            let ref = Database.database().reference().child(Constantes.USUARIOS).child(id)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let novosUsuarios = Usuario(dictionary: dictionary)
+                    if(idUsuarios == id){
+                        //self.usuario = novosUsuarios
+                        self.lblMonitor.text = "Monitor (a): \(novosUsuarios.nome!)"
+                        SVProgressHUD.dismiss()
+                    }
+                }
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
     
-    //var messagesController: MessagesController?
-    
-   
     
     @IBAction func btnChat(_ sender: Any) {
-        self.handleNewMessage(id: self.details[1].descricao!)
+        //self.handleNewMessage(self.usuario)
     }
     
-    @objc func handleNewMessage(id: String) {
+    @objc func handleNewMessage(_ usuario: Usuario) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
-        chatLogController.idMonitor = id
+        chatLogController.usuario = usuario
         navigationController?.pushViewController(chatLogController, animated: true)
     }
 }

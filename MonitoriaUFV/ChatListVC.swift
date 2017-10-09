@@ -17,7 +17,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.back()
+        ElementsProvider.voltarSemTexto()
         
         self.mensagens.removeAll()
         self.messagesDictionary.removeAll()
@@ -29,11 +29,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var mensagens = [Mensagem]()
     var messagesDictionary = [String: Mensagem]()
     
-    func back(){
-        let backItem = UIBarButtonItem()
-        backItem.title = " "
-        navigationItem.backBarButtonItem = backItem
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
