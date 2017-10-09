@@ -12,7 +12,16 @@ import Firebase
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout  {
     
     var idMonitor: String?
-    var usuario: Usuario? 
+    //var usuario: Usuario?
+    
+    var usuario: Usuario? {
+        didSet {
+            navigationItem.title = usuario?.nome!
+            self.title = usuario?.nome!
+            
+            observeMessages()
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -31,9 +40,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Chat"
-        
         collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
         //collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         collectionView?.alwaysBounceVertical = true
@@ -41,10 +47,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         collectionView?.register(ChatMensagemCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.keyboardDismissMode = .interactive
-        
-        observeMessages()
-        
-       // setupInputComponents()
+        print("aaaa\(usuario?.id!)")
     }
     
     lazy var inputContainerView: UIView = {
@@ -155,7 +158,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.textView.textColor = UIColor.white
             cell.profileImageView.isHidden = true
             
-            self.title = " NOME DA MONITORIA"
+            //self.title = " NOME DA MONITORIA"
             cell.bubbleViewRightAnchor?.isActive = true
             cell.bubbleViewLeftAnchor?.isActive = false
             
@@ -164,7 +167,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#828787")
             cell.textView.textColor = UIColor.black
             cell.profileImageView.isHidden = false
-            self.title = " MEU NOME"
+            //self.title = " MEU NOME"
             
             cell.bubbleViewRightAnchor?.isActive = false
             cell.bubbleViewLeftAnchor?.isActive = true
@@ -245,7 +248,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     var mensagens = [Mensagem]()
     
     func observeMessages() {
-        guard let uid = Auth.auth().currentUser?.uid, let toId = idMonitor else {
+        guard let uid = Auth.auth().currentUser?.uid, let toId = usuario?.id! else {
             return
         }
         
@@ -275,7 +278,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
         //is it there best thing to include the name inside of the message node
-        let toId = idMonitor!
+        let toId = usuario?.id as! String
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
         let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]

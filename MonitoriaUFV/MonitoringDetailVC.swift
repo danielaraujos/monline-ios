@@ -13,7 +13,7 @@ import SVProgressHUD
 class MonitoringDetailVC: UIViewController {
 
     var sigla: String!
-    //private var usuario = Usuario?
+    var usuario : Usuario!
     private let CHATSEGUE = "ChatSegue";
     
     @IBOutlet weak var btn: UIButton!
@@ -28,16 +28,12 @@ class MonitoringDetailVC: UIViewController {
         self.title = sigla
         ElementsProvider.voltarSemTexto()
         self.buscarMonitoria()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
 
-    
-    
-    
     func buscarMonitoria() {
         let ref = Database.database().reference().child(Constantes.MONITORIAS)
         ref.observe(.childAdded, with: { (snapshot) in
@@ -66,7 +62,8 @@ class MonitoringDetailVC: UIViewController {
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     let novosUsuarios = Usuario(dictionary: dictionary)
                     if(idUsuarios == id){
-                        //self.usuario = novosUsuarios
+                        self.usuario = novosUsuarios
+                        self.usuario.id = idUsuarios
                         self.lblMonitor.text = "Monitor (a): \(novosUsuarios.nome!)"
                         SVProgressHUD.dismiss()
                     }
@@ -75,9 +72,8 @@ class MonitoringDetailVC: UIViewController {
         }, withCancel: nil)
     }
     
-    
     @IBAction func btnChat(_ sender: Any) {
-        //self.handleNewMessage(self.usuario)
+        self.handleNewMessage(self.usuario)
     }
     
     @objc func handleNewMessage(_ usuario: Usuario) {

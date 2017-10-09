@@ -25,6 +25,10 @@ class Usuario  : NSObject {
         self.curso = curso;
     }
     
+    init(id: String) {
+        self.id = id;
+    }
+    
     init(id: String, nome: String) {
         self.id = id;
         self.nome = nome;

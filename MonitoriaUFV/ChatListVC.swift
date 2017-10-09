@@ -15,6 +15,9 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var tableView: UITableView!
     var meuID = Auth.auth().currentUser?.uid
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ElementsProvider.voltarSemTexto()
