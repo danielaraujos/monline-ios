@@ -650,7 +650,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnRegister:" destination="xtE-CF-Nd4" eventType="touchUpInside" id="PNz-DG-ruf"/>
                                     <segue destination="Wr1-MA-SSh" kind="show" id="8wK-Tn-r5T"/>
                                 </connections>
                             </button>
@@ -719,13 +718,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Selecione seu curso" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xf3-te-HJX">
-                                <rect key="frame" x="30" y="191" width="315" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Curso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-wt-9tp">
                                 <rect key="frame" x="32" y="166" width="125" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -786,11 +778,18 @@
                                     <action selector="btnRegister:" destination="Wr1-MA-SSh" eventType="touchUpInside" id="y35-AY-iry"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Curso" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nef-TA-HBt">
+                                <rect key="frame" x="31" y="191" width="315" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="courseTextField" destination="Xf3-te-HJX" id="BPM-SR-g8Q"/>
+                        <outlet property="couseTextField" destination="Nef-TA-HBt" id="YyD-O7-74r"/>
                         <outlet property="emailTextField" destination="arW-Bk-q27" id="Ksb-FQ-1Hr"/>
                         <outlet property="matriculaTextField" destination="76B-u2-GTp" id="LOB-HI-5I3"/>
                         <outlet property="nameTextField" destination="xTG-r4-yvh" id="03D-68-YrX"/>
@@ -799,7 +798,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMi-F5-10n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-428" y="1044"/>
+            <point key="canvasLocation" x="-428" y="1043.9280359820091"/>
         </scene>
         <!--Redefinir senha-->
         <scene sceneID="min-ef-GL6">

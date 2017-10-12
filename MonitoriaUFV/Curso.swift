@@ -11,6 +11,7 @@ import Foundation
 class Curso{
     
     //Variaveis
+    var id: String?;
     var nome: String?;
     var sigla: String?;
     var tipo: String?;
@@ -25,7 +26,12 @@ class Curso{
         self.sigla = sigla;
     }
     
+    init(nome: String) {
+        self.nome = nome;
+    }
+    
     init(dictionary: [String: AnyObject]) {
+        self.id = dictionary["id"] as? String
         self.nome = dictionary["nome"] as? String
         self.sigla = dictionary["sigla"] as? String
         //self.tipo = dictionary["tipo"] as? String

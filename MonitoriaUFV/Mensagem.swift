@@ -8,10 +8,9 @@
 
 import Foundation
 import Firebase
-import FirebaseAuth
 
 class Mensagem : NSObject {
-    
+
     var paraID: String?
     var texto: String?
     var timestamp: NSNumber?
@@ -26,11 +25,11 @@ class Mensagem : NSObject {
         self.texto = dictionary["texto"] as? String
         self.meuID = dictionary["meuID"] as? String
         self.timestamp = dictionary["timestamp"] as? NSNumber
-        //self.imageUrl = dictionary["imageUrl"] as? String
-        //self.videoUrl = dictionary["videoUrl"] as? String
+        self.imageUrl = dictionary["imageUrl"] as? String
+        self.videoUrl = dictionary["videoUrl"] as? String
     
-        //self.larguraImagem = dictionary["larguraImagem"] as? NSNumber
-        //self.alturaImagem = dictionary["alturaImagem"] as? NSNumber
+        self.larguraImagem = dictionary["larguraImagem"] as? NSNumber
+        self.alturaImagem = dictionary["alturaImagem"] as? NSNumber
     }
     
     func idParceiro() -> String? {

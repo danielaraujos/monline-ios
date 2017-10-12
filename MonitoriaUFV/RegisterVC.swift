@@ -13,21 +13,26 @@ import SVProgressHUD
 class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var courseTextField: UITextField!
     @IBOutlet weak var matriculaTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var couseTextField: UITextField!
     
-    var coursesOption = ["Selecione o curso:","SIN", "NTR"]
+    private var siglaCurso : String!
+    
+    private var coursesOption = [Curso]();
+    var selecione : Curso?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var pickerView = UIPickerView()
         pickerView.delegate = self
-        courseTextField.inputView = pickerView
-        print("ERRO1")
-        //self.aaa()
+        self.selecione = Curso.init(nome: "Selecione o curso")
+        self.coursesOption.append(self.selecione!)
+        self.buscarSiglaCursos()
+        couseTextField.inputView = pickerView
     }
     
     /*
@@ -49,19 +54,24 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return coursesOption[row]
+        return coursesOption[row].nome!
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        courseTextField.text = coursesOption[row]
+        if(coursesOption[row].nome! == "Selecione o curso"){
+            self.couseTextField.text = " "
+        }else{
+            self.couseTextField.text = coursesOption[row].nome!
+            self.siglaCurso = coursesOption[row].id!
+        }
     }
     
     @IBAction func btnRegister(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         let name = nameTextField.text!
-        let course = courseTextField.text!
         let matricula = matriculaTextField.text!
+        var course = self.siglaCurso!
         
         if checkTrue(name: name, course: course,matricula:matricula,email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
@@ -70,13 +80,13 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
                     SVProgressHUD.dismiss()
                     self.showAlert(title: "Problema na criação do Usuário", message: message!)
                 }else {
-                    
+
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
                     self.nameTextField.text = ""
-                    self.courseTextField.text = ""
+
                     self.matriculaTextField.text = ""
-                    
+
                     self.showAlert(title: "Parabéns...", message: "Conta criada com sucesso!")
                     SVProgressHUD.dismiss()
                 }
@@ -106,18 +116,24 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         present(alert, animated: true, completion: nil);
     }
     
-    func aaa(){
-        print("ERRRO")
+    func buscarSiglaCursos(){
+        SVProgressHUD.show(withStatus: "Carregando")
         let ref = Database.database().reference().child(Constantes.CURSOS)
         ref.observe(.childAdded, with: { (snapshot) in
-            let sigla = snapshot.key
-            print(sigla)
-            let cursoUsuarioRef = Database.database().reference().child(Constantes.CURSO).child("nome")
-            cursoUsuarioRef.observe(.childAdded, with: { (conteudo) in
-                let nome = conteudo as! String
-                print(nome)
-            }, withCancel: nil)
+            var sigla = snapshot.key
+            self.buscarNomeCursos(sigla)
         }, withCancel: nil)
     }
-
+    
+    fileprivate func buscarNomeCursos(_ sigla:String){
+        let ref1 = Database.database().reference().child(Constantes.CURSOS).child(sigla)
+        ref1.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let cursos = Curso(dictionary: dictionary)
+                cursos.id = sigla
+                self.coursesOption.append(cursos)
+                SVProgressHUD.dismiss()
+            }
+        }, withCancel: nil)
+    }
 }
