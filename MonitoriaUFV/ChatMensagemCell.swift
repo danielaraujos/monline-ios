@@ -1,7 +1,7 @@
 
 import UIKit
 
-class ChatMensagemCell: UICollectionViewCell {
+class ChatMensagemCell: UICollectionViewCell{
 
     let textView: UITextView = {
         let tv = UITextView()
@@ -42,6 +42,7 @@ class ChatMensagemCell: UICollectionViewCell {
         return imageView
     }()
     
+    
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleViewRightAnchor: NSLayoutConstraint?
     var bubbleViewLeftAnchor: NSLayoutConstraint?
@@ -52,6 +53,7 @@ class ChatMensagemCell: UICollectionViewCell {
         addSubview(bubbleView)
         addSubview(textView)
         addSubview(profileImageView)
+        
         
         bubbleView.addSubview(messageImageView)
         messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
@@ -100,3 +102,5 @@ class ChatMensagemCell: UICollectionViewCell {
     }
     
 }
+
+

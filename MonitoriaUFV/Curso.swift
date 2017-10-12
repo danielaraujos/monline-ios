@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Curso{
+class Curso: NSObject{
     
     //Variaveis
     var id: String?;

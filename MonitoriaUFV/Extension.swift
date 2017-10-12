@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import Foundation
+
+class Extension(){
+    
+    
+    
+}
+
 
 let imageCache = NSCache<AnyObject, AnyObject>()
 

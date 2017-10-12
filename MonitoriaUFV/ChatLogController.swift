@@ -21,6 +21,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -231,10 +232,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         //        if let profileImageUrl = self.user?.profileImageUrl {
         //            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
         //        }
-        let profileImageUrl = #imageLiteral(resourceName: "profile")
+        let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
         
         if let messageImageUrl = message.imageUrl {
-            //cell.messageImageView.loadImageUsingCacheWithUrlString(messageImageUrl)
+            cell.messageImageView.loadImageUsingCacheWithUrlString(messageImageUrl)
+            
             cell.messageImageView.isHidden = false
             
             cell.bubbleView.backgroundColor = UIColor.clear
@@ -354,6 +356,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
         let toId = usuario?.id as! String
+        
+        
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
         let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
