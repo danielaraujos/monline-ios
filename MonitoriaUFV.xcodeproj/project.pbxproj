@@ -95,7 +95,6 @@
 		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
-		4CDCC1961F8EEFDF00D05DE2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReporterVC.swift; sourceTree = "<group>"; };
 		77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.debug.xcconfig"; sourceTree = "<group>"; };
 		8407CF544D0B76A57A7B2692 /* Pods-MonitoriaUFV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,7 +172,6 @@
 			children = (
 				4C30C5AC1F7857DB00E240D8 /* MonitoriaUFV.entitlements */,
 				4C4353B11F4649AA00114A76 /* Provider */,
-				4CDCC1951F8EEFC500D05DE2 /* Helpers */,
 				4C4353B01F46499600114A76 /* Controller */,
 				4C4353AF1F46498F00114A76 /* View */,
 				4C4353AE1F46498400114A76 /* Model */,
@@ -252,14 +250,6 @@
 				4C881CA41F83028D00764BE8 /* ElementsProvider.swift */,
 			);
 			name = Provider;
-			sourceTree = "<group>";
-		};
-		4CDCC1951F8EEFC500D05DE2 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				4CDCC1961F8EEFDF00D05DE2 /* Extension.swift */,
-			);
-			name = Helpers;
 			sourceTree = "<group>";
 		};
 		5A3B99F2EDE9AA82A6703194 /* Frameworks */ = {
