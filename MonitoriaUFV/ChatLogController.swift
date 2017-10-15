@@ -20,6 +20,34 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
     }
     
+    var mensagens = [Mensagem]()
+    
+    func observeMessages() {
+        guard let uid = Auth.auth().currentUser?.uid, let toId = usuario?.id! else {
+            return
+        }
+        
+        let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(toId)
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messagesRef = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String: AnyObject] else {
+                    return
+                }
+                let message = Mensagem(dictionary: dictionary)
+                self.mensagens.append(message)
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                    //scroll to the last index
+                    let indexPath = IndexPath(item: self.mensagens.count - 1, section: 0)
+                    self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                })
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         self.tabBarController?.tabBar.isHidden = true
@@ -43,6 +71,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(ChatMensagemCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.keyboardDismissMode = .interactive
+        
+        self.setupKeyboardObservers()
     }
     
     lazy var inputContainerView: UIView = {
@@ -134,7 +164,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 }
                 
                 if let imageUrl = metadata?.downloadURL()?.absoluteString {
-                    self.sendMessageWithImageUrl(imageUrl)
+                    self.sendMessageWithImageUrl(imageUrl, image: image)
                 }
                 
             })
@@ -183,8 +213,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     func setupKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardDidShow() {
+        if mensagens.count > 0 {
+            let indexPath = IndexPath(item: mensagens.count - 1, section: 0)
+            collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -201,8 +240,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         })
     }
     
+    
     func handleKeyboardWillHide(_ notification: Notification) {
         let keyboardDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        
         containerViewBottomAnchor?.constant = 0
         UIView.animate(withDuration: keyboardDuration!, animations: {
             self.view.layoutIfNeeded()
@@ -216,6 +257,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMensagemCell
+        cell.chatLogController = self
+        
         let message = mensagens[indexPath.item]
         cell.textView.text = message.texto
         
@@ -223,6 +266,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         if let texto = message.texto {
             cell.bubbleWidthAnchor?.constant = estimateFrameForText(texto).width + 32
+            cell.textView.isHidden = false
+        } else if message.imageUrl != nil {
+            //fall in here if its an image message
+            cell.bubbleWidthAnchor?.constant = 200
+            cell.textView.isHidden = true
         }
         return cell
     }
@@ -233,17 +281,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         //            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
         //        }
         let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
-        
-        if let messageImageUrl = message.imageUrl {
-            cell.messageImageView.loadImageUsingCacheWithUrlString(messageImageUrl)
-            
-            cell.messageImageView.isHidden = false
-            
-            cell.bubbleView.backgroundColor = UIColor.clear
-        } else {
-            cell.messageImageView.isHidden = true
-        }
-        
+       
         if message.meuID == Auth.auth().currentUser?.uid {
             cell.bubbleView.backgroundColor = ChatMensagemCell.blueColor
             cell.textView.textColor = UIColor.white
@@ -263,18 +301,43 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleViewLeftAnchor?.isActive = true
         }
         
+        if let messageImageUrl = message.imageUrl {
+            cell.messageImageView.loadImageUsingCacheWithUrlString(messageImageUrl)
+            cell.messageImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+        } else {
+            cell.messageImageView.isHidden = true
+        }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView?.collectionViewLayout.invalidateLayout()
     }
     
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        var height: CGFloat = 80
+//        if let text = mensagens[indexPath.item].texto {
+//            height = estimateFrameForText(text).height + 20
+//        }
+//        return CGSize(width: view.frame.width, height: height)
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         var height: CGFloat = 80
-        if let text = mensagens[indexPath.item].texto {
+        
+        let message = mensagens[indexPath.item]
+        if let text = message.texto {
             height = estimateFrameForText(text).height + 20
+        } else if let imageWidth = message.larguraImagem?.floatValue, let imageHeight = message.alturaImagem?.floatValue {
+   
+            height = CGFloat(imageHeight / imageWidth * 200)
+            
         }
-        return CGSize(width: view.frame.width, height: height)
+        
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: width, height: height)
     }
     
     fileprivate func estimateFrameForText(_ text: String) -> CGRect {
@@ -284,6 +347,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     var containerViewBottomAnchor: NSLayoutConstraint?
+    
+    
     
     func setupInputComponents() {
         let containerView = UIView()
@@ -327,48 +392,68 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
-    var mensagens = [Mensagem]()
+ 
     
-    func observeMessages() {
-        guard let uid = Auth.auth().currentUser?.uid, let toId = usuario?.id! else {
-            return
-        }
-        
-        let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(toId)
-        userMessagesRef.observe(.childAdded, with: { (snapshot) in
-            
-            let messageId = snapshot.key
-            let messagesRef = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
-            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                guard let dictionary = snapshot.value as? [String: AnyObject] else {
-                    return
-                }
-                let message = Mensagem(dictionary: dictionary)
-                self.mensagens.append(message)
-                DispatchQueue.main.async(execute: {
-                    self.collectionView?.reloadData()
-                })
-            }, withCancel: nil)
-        }, withCancel: nil)
+//    func handleSend() {
+//        let ref = Database.database().reference().child(Constantes.MENSAGENS)
+//        let childRef = ref.childByAutoId()
+//        let toId = usuario?.id as! String
+//
+//
+//        let fromId = Auth.auth().currentUser!.uid
+//        let timestamp = Int(Date().timeIntervalSince1970)
+//        let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
+//
+//        childRef.updateChildValues(values) { (error, ref) in
+//            if error != nil {
+//                print(error ?? "")
+//                return
+//            }
+//
+//            self.inputTextField.text = nil
+//            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
+//
+//            let messageId = childRef.key
+//            userMessagesRef.updateChildValues([messageId: 1])
+//
+//            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
+//            recipientUserMessagesRef.updateChildValues([messageId: 1])
+//        }
+//    }
+    
+    
+
+    func handleSend() {
+        let properties = ["texto": inputTextField.text!]
+        sendMessageWithProperties(properties as [String : AnyObject])
     }
     
-    func handleSend() {
+    fileprivate func sendMessageWithImageUrl(_ imageUrl: String, image: UIImage) {
+        let properties: [String: AnyObject] = ["imageUrl": imageUrl as AnyObject, "larguraImagem": image.size.width as AnyObject, "alturaImagem": image.size.height as AnyObject]
+        sendMessageWithProperties(properties)
+    }
+    
+    fileprivate func sendMessageWithProperties(_ properties: [String: AnyObject]) {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
         let toId = usuario?.id as! String
-        
-        
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
-        let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
+        
+        var values: [String: AnyObject] = ["paraID": toId as AnyObject, "meuID": fromId as AnyObject, "timestamp": timestamp as AnyObject]
+        
+        //append properties dictionary onto values somehow??
+        //key $0, value $1
+        properties.forEach({values[$0] = $1})
         
         childRef.updateChildValues(values) { (error, ref) in
             if error != nil {
-                print(error ?? "")
+                print(error!)
                 return
             }
             
             self.inputTextField.text = nil
+            
             let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
             
             let messageId = childRef.key
@@ -382,5 +467,72 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()
         return true
+    }
+    
+    var startingFrame: CGRect?
+    var blackBackgroundView: UIView?
+    var startingImageView: UIImageView?
+    
+    //my custom zooming logic
+    func performZoomInForStartingImageView(_ startingImageView: UIImageView) {
+        
+        self.startingImageView = startingImageView
+        self.startingImageView?.isHidden = true
+        
+        startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
+        
+        let zoomingImageView = UIImageView(frame: startingFrame!)
+        zoomingImageView.backgroundColor = UIColor.red
+        zoomingImageView.image = startingImageView.image
+        zoomingImageView.isUserInteractionEnabled = true
+        zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOut)))
+        
+        if let keyWindow = UIApplication.shared.keyWindow {
+            blackBackgroundView = UIView(frame: keyWindow.frame)
+            blackBackgroundView?.backgroundColor = UIColor.black
+            blackBackgroundView?.alpha = 0
+            keyWindow.addSubview(blackBackgroundView!)
+            
+            keyWindow.addSubview(zoomingImageView)
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                self.blackBackgroundView?.alpha = 1
+                self.inputContainerView.alpha = 0
+                
+                // math?
+                // h2 / w1 = h1 / w1
+                // h2 = h1 / w1 * w1
+                let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+                
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+                
+                zoomingImageView.center = keyWindow.center
+                
+            }, completion: { (completed) in
+                //                    do nothing
+            })
+            
+        }
+    }
+    
+    func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
+        
+        if let zoomOutImageView = tapGesture.view {
+            //need to animate back out to controller
+            zoomOutImageView.layer.cornerRadius = 16
+            zoomOutImageView.clipsToBounds = true
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                
+                zoomOutImageView.frame = self.startingFrame!
+                self.blackBackgroundView?.alpha = 0
+                self.inputContainerView.alpha = 1
+                
+            }, completion: { (completed) in
+                zoomOutImageView.removeFromSuperview()
+                self.startingImageView?.isHidden = false
+            })
+        }
     }
 }
