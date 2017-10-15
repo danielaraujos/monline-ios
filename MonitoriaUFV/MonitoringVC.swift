@@ -24,6 +24,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.back()
         SVProgressHUD.show(withStatus: "Carregando")
         self.buscarCursos()
+        print(AuthProvider.Instance.userID())
     }
     
     override func viewWillAppear(_ animated: Bool) {

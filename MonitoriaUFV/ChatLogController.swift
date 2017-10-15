@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import MobileCoreServices
+import AVFoundation
+import SVProgressHUD
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
@@ -129,12 +132,95 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         imagePickerController.allowsEditing = true
         imagePickerController.delegate = self
+        imagePickerController.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
         
         present(imagePickerController, animated: true, completion: nil)
     }
     
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//
+//        var selectedImageFromPicker: UIImage?
+//
+//        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+//            selectedImageFromPicker = editedImage
+//        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+//
+//            selectedImageFromPicker = originalImage
+//        }
+//
+//        if let selectedImage = selectedImageFromPicker {
+//            uploadToFirebaseStorageUsingImage(selectedImage)
+//        }
+//
+//        dismiss(animated: true, completion: nil)
+//    }
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
+        if let videoUrl = info[UIImagePickerControllerMediaURL] as? URL {
+            //we selected a video
+            handleVideoSelectedForUrl(videoUrl)
+        } else {
+            //we selected an image
+            handleImageSelectedForInfo(info as [String : AnyObject])
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func handleVideoSelectedForUrl(_ url: URL) {
+        let filename = UUID().uuidString + ".mov"
+        let uploadTask = Storage.storage().reference().child(Constantes.VIDEO_STORAGE).child(filename).putFile(from:url, metadata: nil, completion: { (metadata, error) in
+            
+            if error != nil {
+                print("Failed upload of video:", error!)
+                return
+            }
+            
+            if let videoUrl = metadata?.downloadURL()?.absoluteString {
+                if let thumbnailImage = self.thumbnailImageForFileUrl(url) {
+                    
+                    self.uploadToFirebaseStorageUsingImage(thumbnailImage, completion: { (imageUrl) in
+                        let properties: [String: AnyObject] = ["imageUrl": imageUrl as AnyObject, "larguraImagem": thumbnailImage.size.width as AnyObject, "alturaImagem": thumbnailImage.size.height as AnyObject, "videoUrl": videoUrl as AnyObject]
+                        self.sendMessageWithProperties(properties)
+                        
+                    })
+                }
+            }
+        })
+        
+        uploadTask.observe(.progress) { (snapshot) in
+            if let completedUnitCount = snapshot.progress?.completedUnitCount {
+                var porcentagem = completedUnitCount/100
+               SVProgressHUD.show(withStatus: "Enviando ... \(porcentagem) %")
+                
+                //self.navigationItem.title = String(completedUnitCount)
+            }
+        }
+        
+        uploadTask.observe(.success) { (snapshot) in
+            SVProgressHUD.dismiss()
+            self.navigationItem.title = self.usuario?.nome
+        }
+    }
+    
+    fileprivate func thumbnailImageForFileUrl(_ fileUrl: URL) -> UIImage? {
+        let asset = AVAsset(url: fileUrl)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            
+            let thumbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+            return UIImage(cgImage: thumbnailCGImage)
+            
+        } catch let err {
+            print(err)
+        }
+        
+        return nil
+    }
+    
+    fileprivate func handleImageSelectedForInfo(_ info: [String: AnyObject]) {
         var selectedImageFromPicker: UIImage?
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
@@ -145,13 +231,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
         
         if let selectedImage = selectedImageFromPicker {
-            uploadToFirebaseStorageUsingImage(selectedImage)
+            uploadToFirebaseStorageUsingImage(selectedImage, completion: { (imageUrl) in
+                self.sendMessageWithImageUrl(imageUrl, image: selectedImage)
+            })
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
-    fileprivate func uploadToFirebaseStorageUsingImage(_ image: UIImage) {
+    fileprivate func uploadToFirebaseStorageUsingImage(_ image: UIImage, completion: @escaping (_ imageUrl: String) -> ()) {
         let imageName = UUID().uuidString
         let ref = Storage.storage().reference().child(Constantes.IMAGE_STORAGE).child(imageName)
         
@@ -164,39 +250,14 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 }
                 
                 if let imageUrl = metadata?.downloadURL()?.absoluteString {
-                    self.sendMessageWithImageUrl(imageUrl, image: image)
+                    completion(imageUrl)
                 }
                 
             })
         }
     }
     
-    fileprivate func sendMessageWithImageUrl(_ imageUrl: String) {
-        let ref = Database.database().reference().child(Constantes.MENSAGENS)
-        let childRef = ref.childByAutoId()
-        let toId = usuario?.id as! String
-        let fromId = AuthProvider.Instance.userID()
-        let timestamp = Int(Date().timeIntervalSince1970)
-        
-        let values = ["imageUrl": imageUrl, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
-        
-        childRef.updateChildValues(values) { (error, ref) in
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            self.inputTextField.text = nil
-            
-            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
-            
-            let messageId = childRef.key
-            userMessagesRef.updateChildValues([messageId: 1])
-            
-            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
-            recipientUserMessagesRef.updateChildValues([messageId: 1])
-        }
-    }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -260,6 +321,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         cell.chatLogController = self
         
         let message = mensagens[indexPath.item]
+        cell.message = message
         cell.textView.text = message.texto
         
         setupCell(cell, message: message)
@@ -272,6 +334,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleWidthAnchor?.constant = 200
             cell.textView.isHidden = true
         }
+        
+        cell.playButton.isHidden = message.videoUrl == nil
+       
         return cell
     }
     
@@ -314,15 +379,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView?.collectionViewLayout.invalidateLayout()
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        var height: CGFloat = 80
-//        if let text = mensagens[indexPath.item].texto {
-//            height = estimateFrameForText(text).height + 20
-//        }
-//        return CGSize(width: view.frame.width, height: height)
-//    }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var height: CGFloat = 80
@@ -433,6 +490,33 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         sendMessageWithProperties(properties)
     }
     
+//    fileprivate func sendMessageWithImageUrl(_ imageUrl: String) {
+//        let ref = Database.database().reference().child(Constantes.MENSAGENS)
+//        let childRef = ref.childByAutoId()
+//        let toId = usuario?.id as! String
+//        let fromId = AuthProvider.Instance.userID()
+//        let timestamp = Int(Date().timeIntervalSince1970)
+//        
+//        let values = ["imageUrl": imageUrl, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
+//        
+//        childRef.updateChildValues(values) { (error, ref) in
+//            if error != nil {
+//                print(error!)
+//                return
+//            }
+//            
+//            self.inputTextField.text = nil
+//            
+//            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
+//            
+//            let messageId = childRef.key
+//            userMessagesRef.updateChildValues([messageId: 1])
+//            
+//            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
+//            recipientUserMessagesRef.updateChildValues([messageId: 1])
+//        }
+//    }
+    
     fileprivate func sendMessageWithProperties(_ properties: [String: AnyObject]) {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)
         let childRef = ref.childByAutoId()
@@ -463,6 +547,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             recipientUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
+    
+   
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()
@@ -517,7 +603,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
-        
         if let zoomOutImageView = tapGesture.view {
             //need to animate back out to controller
             zoomOutImageView.layer.cornerRadius = 16
@@ -536,3 +621,4 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
     }
 }
+

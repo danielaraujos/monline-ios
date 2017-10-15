@@ -342,6 +342,8 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btn" destination="FOY-VQ-F0K" id="h8d-Eb-MDy"/>
+                        <outlet property="denuncia" destination="6iC-3y-TSI" id="ExU-DX-IKN"/>
+                        <outlet property="duvida" destination="FOY-VQ-F0K" id="K1X-Eq-sqP"/>
                         <outlet property="lblDescricao" destination="OPf-yO-py2" id="260-O0-UFa"/>
                         <outlet property="lblDisciplina" destination="2K0-mn-S0Q" id="m6l-CM-dAb"/>
                         <outlet property="lblMonitor" destination="Jcn-7H-oR7" id="2WE-ar-cFV"/>

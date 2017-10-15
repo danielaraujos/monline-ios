@@ -15,7 +15,10 @@ class MonitoringDetailVC: UIViewController {
     var sigla: String!
     var usuario : Usuario!
     private let CHATSEGUE = "ChatSegue";
+    var meuId = AuthProvider.Instance.userID()
     
+    @IBOutlet weak var denuncia: UIButton!
+    @IBOutlet weak var duvida: UIButton!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var lblDisciplina: UILabel!
     @IBOutlet weak var lblProfessor: UILabel!
@@ -47,6 +50,8 @@ class MonitoringDetailVC: UIViewController {
                         self.lblProfessor.text = "Professor (a): \(novaMonitorias.professor!)"
                         self.lblDescricao.text = novaMonitorias.descricao!
                         self.buscarUsuario(novaMonitorias.monitor!)
+                        
+                        
                     }
                 }, withCancel: nil)
             }
@@ -65,6 +70,13 @@ class MonitoringDetailVC: UIViewController {
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
                         self.lblMonitor.text = "Monitor (a): \(novosUsuarios.nome!)"
+                        
+                        //Desabilita os botoes para os donos da disciplina
+                        if(self.meuId == id){
+                            print("DONO DA DISCIPLINA")
+                            self.duvida.isHidden = true
+                            self.denuncia.isHidden = true
+                        }
                         SVProgressHUD.dismiss()
                     }
                 }

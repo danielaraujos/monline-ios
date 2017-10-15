@@ -25,6 +25,38 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         self.verificarMonitor()
     }
     
+    
+     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let message = self.mensagens[indexPath.row]
+        
+        if let chatPartnerId = message.idParceiro() {
+            Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
+                
+                if error != nil {
+                    print("Failed to delete message:", error!)
+                    return
+                }
+                
+                self.messagesDictionary.removeValue(forKey: chatPartnerId)
+                self.tentarRecarregarTabelas()
+                
+                //                //this is one way of updating the table, but its actually not that safe..
+                //                self.messages.removeAtIndex(indexPath.row)
+                //                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                
+            })
+        }
+    }
+    
     var mensagens = [Mensagem]()
     var messagesDictionary = [String: Mensagem]()
     
