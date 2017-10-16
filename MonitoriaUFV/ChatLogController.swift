@@ -16,13 +16,36 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     var usuario: Usuario? {
         didSet {
-            navigationItem.title = usuario?.nome!
-            self.title = usuario?.nome!
-            
+            if(self.usuario?.monitor != "0"){
+                self.buscarNomeMonitora(usuario?.monitor as! String)
+            }else{
+                self.title = usuario?.nome!
+            }
             observeMessages()
         }
     }
     
+    
+    /*
+     Me retorna o nome da monitoria
+     */
+    fileprivate func buscarNomeMonitora(_ sigla: String) {
+        let ref = Database.database().reference().child(Constantes.MONITORIAS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let nomeDisciplina = snapshot.key as! String
+            if(sigla == nomeDisciplina){
+                let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
+                cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
+                    if let dictionary = conteudo.value as? [String: AnyObject] {
+                        let novaMonitorias = Monitoria(dictionary: dictionary)
+                        self.title = novaMonitorias.nome!
+                    }
+                }, withCancel: nil)
+            }
+        }, withCancel: nil)
+    }
+    
+
     var mensagens = [Mensagem]()
     
     func observeMessages() {

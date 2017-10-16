@@ -14,38 +14,36 @@ class MessagesViewCell: UITableViewCell {
     @IBOutlet weak var sub_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
     @IBOutlet weak var image_1: UIImageView!
-    
+    var meuID = AuthProvider.Instance.userID()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.rounding()
-        // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    
     var message: Mensagem? {
         didSet {
             if let paraID = message?.paraID {
-                let ref = Database.database().reference().child(Constantes.MONITORIAS)
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    //print(snapshot)
-                    if let monitorias = snapshot.value as? NSDictionary {
-                        for (key, value) in monitorias {
-                            if let data = value as? NSDictionary {
-                                if let monitor = data[Constantes.MONITOR] as? String {
-                                    if(monitor == paraID){
-                                        if let monitoria = data[Constantes.NOME] as? String {
-                                            self.title.text = monitoria
-                                        }
-                                    }
+                let ref = Database.database().reference().child(Constantes.USUARIOS)
+                ref.observe(.childAdded, with: { (snapshot) in
+                    let idUsuarios = snapshot.key as! String
+                    print(idUsuarios)
+                    let ref = Database.database().reference().child(Constantes.USUARIOS).child(idUsuarios)
+                    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let dictionary = snapshot.value as? [String: AnyObject] {
+                            var novosUsuarios = Usuario(dictionary: dictionary)
+                            if(idUsuarios == paraID){
+                                print(novosUsuarios.nome!)
+                                if(novosUsuarios.monitor! != "0"){
+                                    self.title.text = "\(novosUsuarios.nome!) - \(novosUsuarios.monitor!)"
                                 }
                             }
                         }
-                    }
+                    }, withCancel: nil)
                 }, withCancel: nil)
             }
             
@@ -60,8 +58,6 @@ class MessagesViewCell: UITableViewCell {
             
         }
     }
-    
-    
     /* Função responsavel por arredondar os cantos para os botoes e views */
     func rounding(){
         image_1.layer.cornerRadius = 10;

@@ -17,12 +17,12 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ElementsProvider.voltarSemTexto()
+        //ElementsProvider.voltarSemTexto()
         self.mensagens.removeAll()
         self.messagesDictionary.removeAll()
         tableView.reloadData()
         self.buscarDestinatarioMensagens()
-        self.verificarMonitor()
+        //self.verificarMonitor()
     }
     
     
@@ -49,10 +49,6 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 self.messagesDictionary.removeValue(forKey: chatPartnerId)
                 self.tentarRecarregarTabelas()
                 
-                //                //this is one way of updating the table, but its actually not that safe..
-                //                self.messages.removeAtIndex(indexPath.row)
-                //                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                
             })
         }
     }
@@ -72,17 +68,18 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         let ref = Database.database().reference().child(Constantes.MENSUSUARIO).child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
             let userId = snapshot.key
-            Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
-                let messageId = snapshot.key
-                self.desimpactandoMensagens(messageId)
+            Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(userId)
+                .observe(.childAdded, with: { (snapshot) in
+                let idMensagem = snapshot.key
+                self.desimpactandoMensagens(idMensagem)
             
             }, withCancel: nil)
         }, withCancel: nil)
     }
     
-    fileprivate func desimpactandoMensagens(_ messageId: String) {
-        let messagesReference = Database.database().reference().child(Constantes.MENSAGENS).child(messageId)
-        messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
+    fileprivate func desimpactandoMensagens(_ idMensagem: String) {
+        let ref = Database.database().reference().child(Constantes.MENSAGENS).child(idMensagem)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let message = Mensagem(dictionary: dictionary)
                 if let idParceiro = message.idParceiro() {
@@ -171,36 +168,38 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     
-    func verificarMonitor() {
-        
-        let ref = Database.database().reference().child(Constantes.MONITORIAS)
-        ref.observe(.childAdded, with: { (snapshot) in
-            let siglaMonitoria = snapshot.key
-            let conteudoReferencia = Database.database().reference().child(Constantes.MONITORIAS).child(siglaMonitoria)
-            conteudoReferencia.observeSingleEvent(of: .value, with: { (conteudoRef) in
-                if let dictionary = conteudoRef.value as? [String: AnyObject] {
-                    let conteudo = Monitoria(dictionary: dictionary)
-                    
-                    if conteudo.monitor == self.id {
-                        print("Sou monitor")
-                        
-                        let ref1 = Database.database().reference().child(Constantes.USUARIOS)
-                        ref1.observe(.childAdded, with: { (usuarios) in
-                            let idUsuario = usuarios.key
-                            if self.id == idUsuario{
-                                let ref2 = Database.database().reference().child(Constantes.USUARIOS).child(idUsuario)
-                                ref2.observeSingleEvent(of: .value, with: { (snapshot) in
-                                    if let dictionary = snapshot.value as? [String: AnyObject] {
-                                        let usuarios = Usuario(dictionary: dictionary)
-                                        //self.title = usuarios.nome
-                                        print(usuarios.nome)
-                                    }
-                                }, withCancel: nil)
-                            }
-                        }, withCancel: nil)
-                    }
-                }
-            }, withCancel: nil)
-        }, withCancel: nil)
-    }
+    
+//
+//    func verificarMonitor() {
+//
+//        let ref = Database.database().reference().child(Constantes.MONITORIAS)
+//        ref.observe(.childAdded, with: { (snapshot) in
+//            let siglaMonitoria = snapshot.key
+//            let conteudoReferencia = Database.database().reference().child(Constantes.MONITORIAS).child(siglaMonitoria)
+//            conteudoReferencia.observeSingleEvent(of: .value, with: { (conteudoRef) in
+//                if let dictionary = conteudoRef.value as? [String: AnyObject] {
+//                    let conteudo = Monitoria(dictionary: dictionary)
+//
+//                    if conteudo.monitor == self.id {
+//                        print("Sou monitor")
+//
+//                        let ref1 = Database.database().reference().child(Constantes.USUARIOS)
+//                        ref1.observe(.childAdded, with: { (usuarios) in
+//                            let idUsuario = usuarios.key
+//                            if self.id == idUsuario{
+//                                let ref2 = Database.database().reference().child(Constantes.USUARIOS).child(idUsuario)
+//                                ref2.observeSingleEvent(of: .value, with: { (snapshot) in
+//                                    if let dictionary = snapshot.value as? [String: AnyObject] {
+//                                        let usuarios = Usuario(dictionary: dictionary)
+//                                        //self.title = usuarios.nome
+//                                        print(usuarios.nome)
+//                                    }
+//                                }, withCancel: nil)
+//                            }
+//                        }, withCancel: nil)
+//                    }
+//                }
+//            }, withCancel: nil)
+//        }, withCancel: nil)
+//    }
 }
