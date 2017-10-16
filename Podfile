@@ -11,8 +11,6 @@ target 'MonitoriaUFV' do
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
     pod 'Firebase/Auth'
-    pod 'JSQMessagesViewController'
-    pod 'SDWebImage'
     pod 'SVProgressHUD'
 
   target 'MonitoriaUFVTests' do

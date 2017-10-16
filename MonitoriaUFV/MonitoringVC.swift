@@ -17,14 +17,18 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     private var monitorias = [Curso]();
     private var disciplina = ""
     
+    var meuID = AuthProvider.Instance.userID()
+    var disciplinaMonitor: String?
+    
     private let CELL_ID = "MonitoringCell";
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.back()
         SVProgressHUD.show(withStatus: "Carregando")
+        self.buscarMonitoriaQueSouMonitor()
         self.buscarCursos()
-        print(AuthProvider.Instance.userID())
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,17 +40,32 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
     }
+    
+    func buscarMonitoriaQueSouMonitor() {
+        let ref = Database.database().reference().child(Constantes.MONITORIAS)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let nomeDisciplina = snapshot.key as! String
+            let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
+            cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
+                if let dictionary = conteudo.value as? [String: AnyObject] {
+                    let novaMonitorias = Monitoria(dictionary: dictionary)
+                    if(novaMonitorias.monitor! == self.meuID){
+                        self.disciplinaMonitor = nomeDisciplina
+                    }
+                }
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
 
     func buscarCursos() {
-        let id = AuthProvider.Instance.userID()
         let ref = Database.database().reference().child(Constantes.CURSOS)
         ref.observe(.childAdded, with: { (snapshot) in
             let sigla = snapshot.key
             let cursoUsuarioRef = Database.database().reference().child(Constantes.USUARIOS)
             cursoUsuarioRef.observe(.childAdded, with: { (conteudo) in
                 let idUsuarios = conteudo.key
-                if id == idUsuarios{
-                    self.buscarCursoUsuario(id, sigla)
+                if self.meuID == idUsuarios{
+                    self.buscarCursoUsuario(self.meuID, sigla)
                 }
             }, withCancel: nil)
         }, withCancel: nil)
@@ -67,8 +86,10 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         cursoRef.observeSingleEvent(of: .value, with: { (filho) in
             if let dictionary = filho.value as? [String: AnyObject] {
                 for(key , value ) in dictionary {
-                    let novaMonitorias = Curso(nome: value as! String, sigla: key as! String)
-                    self.monitorias.append(novaMonitorias)
+                    if(key != self.disciplinaMonitor){
+                        let novaMonitorias = Curso(nome: value as! String, sigla: key as! String)
+                        self.monitorias.append(novaMonitorias)
+                    }
                 }
             }
             DispatchQueue.main.async(execute: {
@@ -77,6 +98,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             })
         }, withCancel: nil)
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1;

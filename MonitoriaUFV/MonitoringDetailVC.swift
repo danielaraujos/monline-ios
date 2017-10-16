@@ -70,13 +70,6 @@ class MonitoringDetailVC: UIViewController {
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
                         self.lblMonitor.text = "Monitor (a): \(novosUsuarios.nome!)"
-                        
-                        //Desabilita os botoes para os donos da disciplina
-                        if(self.meuId == id){
-                            print("DONO DA DISCIPLINA")
-                            self.duvida.isHidden = true
-                            self.denuncia.isHidden = true
-                        }
                         SVProgressHUD.dismiss()
                     }
                 }

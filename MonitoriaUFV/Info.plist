@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -43,5 +43,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) camera use.</string>
+    
+    <key>NSContactsUsageDescription</key>
+    <string>$(PRODUCT_NAME) contacts use.</string>
+    
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) photos and video use.</string>
+    
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>$(PRODUCT_NAME) bluetooth use.</string>
+    
 </dict>
 </plist>
