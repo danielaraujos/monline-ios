@@ -72,10 +72,11 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         let name = nameTextField.text!
         let matricula = matriculaTextField.text!
         var course = self.siglaCurso!
+        var monitor = "0"
         
         if checkTrue(name: name, course: course,matricula:matricula,email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
-            AuthProvider.Instance.signUp(withEmail: email, password: password,name: name, course: course,matricula:matricula, loginHandler: { (message) in
+            AuthProvider.Instance.signUp(withEmail: email, password: password,name: name, course: course,matricula:matricula,monitor: monitor, loginHandler: { (message) in
                 if message != nil {
                     SVProgressHUD.dismiss()
                     self.showAlert(title: "Problema na criação do Usuário", message: message!)

@@ -68,13 +68,14 @@ class DBProvider {
     }
 
     
-    func saveUser(withID: String, email: String, password: String, name: String, course: String, matricula: String) {
+    func saveUser(withID: String, email: String, password: String, name: String, course: String, matricula: String, monitor: String) {
         let data: Dictionary<String, Any> = [
             Constantes.EMAIL: email,
             Constantes.SENHA: password,
             Constantes.NOME: name,
             Constantes.CURSO: course,
-            Constantes.MATRICULA: matricula
+            Constantes.MATRICULA: matricula,
+            Constantes.MONITOR: monitor
         ];
         contactsRef.child(withID).setValue(data);
     }

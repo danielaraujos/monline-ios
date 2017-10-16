@@ -18,6 +18,7 @@ class Usuario  : NSObject {
     var senha: String?;
     var ImagemURL: String?;
     var email: String?;
+    var monitor: String?
     //var tipo: String?;
     
     //Construtores
@@ -40,6 +41,7 @@ class Usuario  : NSObject {
         self.email = dictionary["email"] as? String
         self.curso = dictionary["curso"] as? String
         self.matricula = dictionary["matriculo"] as? String
+        self.monitor = dictionary["monitor"] as? String
         self.ImagemURL = dictionary["ImagemURL"] as? String
     }
     

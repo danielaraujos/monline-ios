@@ -51,14 +51,14 @@ class AuthProvider {
     /*
      Função responsavel por realizar o cadastro no Firebase
      */
-    func signUp(withEmail: String, password: String,name: String, course: String, matricula:String, loginHandler: LoginHandler?) {
+    func signUp(withEmail: String, password: String,name: String, course: String, matricula:String, monitor: String,  loginHandler: LoginHandler?) {
         Auth.auth().createUser(withEmail: withEmail, password: password, completion: { (user, error) in
             if error != nil {
                 self.handleErrors(err: error as! NSError, loginHandler: loginHandler);
             } else {
                 loginHandler?(nil);
                 if user?.uid != nil {
-                    DBProvider.Instance.saveUser(withID: user!.uid, email: withEmail, password: password, name: name, course: course, matricula: matricula);
+                    DBProvider.Instance.saveUser(withID: user!.uid, email: withEmail, password: password, name: name, course: course, matricula: matricula, monitor: monitor);
                    self.login(withEmail: withEmail, password: password, loginHandler: loginHandler);
                 }
             }
