@@ -39,22 +39,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
     }
-//
-//    func buscarMonitoriaQueSouMonitor() {
-//        let ref = Database.database().reference().child(Constantes.MONITORIAS)
-//        ref.observe(.childAdded, with: { (snapshot) in
-//            let nomeDisciplina = snapshot.key as! String
-//            let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
-//            cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
-//                if let dictionary = conteudo.value as? [String: AnyObject] {
-//                    let novaMonitorias = Monitoria(dictionary: dictionary)
-//                    if(novaMonitorias.monitor! == self.meuID){
-//                        self.disciplinaMonitor = nomeDisciplina
-//                    }
-//                }
-//            }, withCancel: nil)
-//        }, withCancel: nil)
-//    }
+
     
     /*
      Leio a estrutura Cursos, leio a estrutura dos usuario e verifico na lista de usuarios, qual é o meu usuario

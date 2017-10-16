@@ -23,6 +23,10 @@ class Monitoria : NSObject {
         self.monitor = monitor
     }
     
+    init(nome: String) {
+        self.nome = nome;
+    }
+    
     init(dictionary: [String: Any]) {
         self.nome = dictionary["nome"] as? String
         self.descricao = dictionary["descricao"] as? String

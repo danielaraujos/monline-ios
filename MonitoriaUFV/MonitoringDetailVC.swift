@@ -37,6 +37,9 @@ class MonitoringDetailVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
 
+    /*
+     Realiza a leitura  da estrutura monitorias, e com a chave consegue ler os atrbiutos filhos dele
+     */
     func buscarMonitoria() {
         let ref = Database.database().reference().child(Constantes.MONITORIAS)
         ref.observe(.childAdded, with: { (snapshot) in
@@ -49,24 +52,22 @@ class MonitoringDetailVC: UIViewController {
                         self.lblDisciplina.text = "Disciplina: \(novaMonitorias.nome!)"
                         self.lblProfessor.text = "Professor (a): \(novaMonitorias.professor!)"
                         self.lblDescricao.text = novaMonitorias.descricao!
-                        self.buscarUsuario(novaMonitorias.monitor!)
-                        
-                        
+                        self.buscarUsuario()
                     }
                 }, withCancel: nil)
             }
         }, withCancel: nil)
     }
     
-    fileprivate func buscarUsuario(_ id: String) {
+    fileprivate func buscarUsuario() {
         let ref = Database.database().reference().child(Constantes.USUARIOS)
         ref.observe(.childAdded, with: { (snapshot) in
             let idUsuarios = snapshot.key as! String
-            let ref = Database.database().reference().child(Constantes.USUARIOS).child(id)
+            let ref = Database.database().reference().child(Constantes.USUARIOS).child(idUsuarios)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let novosUsuarios = Usuario(dictionary: dictionary)
-                    if(idUsuarios == id){
+                    var novosUsuarios = Usuario(dictionary: dictionary)
+                    if(novosUsuarios.monitor == self.sigla){
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
                         self.lblMonitor.text = "Monitor (a): \(novosUsuarios.nome!)"
