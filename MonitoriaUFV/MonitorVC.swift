@@ -11,7 +11,7 @@ import UIKit
 class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var monitores : [Monitor] = []
-    let CELL_ID = "a"
+    let CELL_ID = "MonitorCell"
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -21,14 +21,14 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func lista(){
         var monitor: Monitor;
-        monitor = Monitor(id: 1, nome: "Perfil completo", image: #imageLiteral(resourceName: "user"))
+        monitor = Monitor(id: 1, nome: "Ver lista de seguidores", image: #imageLiteral(resourceName: "user"))
         self.monitores.append(monitor)
-        monitor = Monitor(id: 2, nome: "Relatar um problema", image: #imageLiteral(resourceName: "relatar"))
+        monitor = Monitor(id: 2, nome: "Mensagens para serguidores", image: #imageLiteral(resourceName: "relatar"))
         self.monitores.append(monitor)
-        monitor = Monitor(id: 3, nome: "Ajuda", image: #imageLiteral(resourceName: "informa"))
+        monitor = Monitor(id: 3, nome: "Atualizar horário", image: #imageLiteral(resourceName: "informa"))
         self.monitores.append(monitor)
-        monitor = Monitor(id: 4, nome: "Contar a um amigo", image: #imageLiteral(resourceName: "contar"))
-        self.monitores.append(monitor)
+        //monitor = Monitor(id: 4, nome: "Contar a um amigo", image: #imageLiteral(resourceName: "contar"))
+        //self.monitores.append(monitor)
         
     }
 
