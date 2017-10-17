@@ -34,6 +34,9 @@
 		4C881CA51F83028D00764BE8 /* ElementsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C881CA41F83028D00764BE8 /* ElementsProvider.swift */; };
 		4C8DE6DA1F9558E3005133D0 /* Configuracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE6D91F9558E3005133D0 /* Configuracao.swift */; };
 		4C8DE6DC1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */; };
+		4CA25BCF1F96A16900E1D7CF /* MonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25BCE1F96A16900E1D7CF /* MonitorVC.swift */; };
+		4CA25BD11F96A20B00E1D7CF /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25BD01F96A20B00E1D7CF /* Monitor.swift */; };
+		4CA25BD31F96A30D00E1D7CF /* MonitorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA25BD21F96A30D00E1D7CF /* MonitorTableViewCell.swift */; };
 		4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
@@ -96,6 +99,9 @@
 		4C881CA41F83028D00764BE8 /* ElementsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsProvider.swift; sourceTree = "<group>"; };
 		4C8DE6D91F9558E3005133D0 /* Configuracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuracao.swift; sourceTree = "<group>"; };
 		4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracoesTableViewCell.swift; sourceTree = "<group>"; };
+		4CA25BCE1F96A16900E1D7CF /* MonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorVC.swift; sourceTree = "<group>"; };
+		4CA25BD01F96A20B00E1D7CF /* Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
+		4CA25BD21F96A30D00E1D7CF /* MonitorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorTableViewCell.swift; sourceTree = "<group>"; };
 		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
@@ -217,6 +223,7 @@
 				4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */,
 				4C6C8DA01F780942000C533B /* Mensagem.swift */,
 				4C8DE6D91F9558E3005133D0 /* Configuracao.swift */,
+				4CA25BD01F96A20B00E1D7CF /* Monitor.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -228,6 +235,7 @@
 				4C559DC51F8181EF0093ACAA /* MessagesViewCell.swift */,
 				4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */,
 				4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */,
+				4CA25BD21F96A30D00E1D7CF /* MonitorTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 				4C79B5E61F48B40400530E75 /* ConfigurationVC.swift */,
 				4C29B1181F689C5E00856CC9 /* MonitoringDetailVC.swift */,
 				4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */,
+				4CA25BCE1F96A16900E1D7CF /* MonitorVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -582,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C559DC41F8169C00093ACAA /* ChatLogController.swift in Sources */,
+				4CA25BCF1F96A16900E1D7CF /* MonitorVC.swift in Sources */,
 				4C6E28511F646C5700E1B0E4 /* Usuario.swift in Sources */,
 				4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */,
 				4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */,
@@ -594,6 +604,8 @@
 				4C6C8DA11F780942000C533B /* Mensagem.swift in Sources */,
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
 				4C559DC61F8181EF0093ACAA /* MessagesViewCell.swift in Sources */,
+				4CA25BD31F96A30D00E1D7CF /* MonitorTableViewCell.swift in Sources */,
+				4CA25BD11F96A20B00E1D7CF /* Monitor.swift in Sources */,
 				4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */,
 				4C8DE6DA1F9558E3005133D0 /* Configuracao.swift in Sources */,
 				4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */,
