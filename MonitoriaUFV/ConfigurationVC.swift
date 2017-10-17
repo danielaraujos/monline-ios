@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import MessageUI
 
-class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
     var configuracoes : [Configuracao] = []
     var usuario: Usuario?
@@ -33,14 +34,12 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         var config: Configuracao;
         config = Configuracao(id: 1, nome: "Perfil completo", image: #imageLiteral(resourceName: "user"))
         self.configuracoes.append(config)
-        config = Configuracao(id: 2, nome: "Relatar um problema", image: #imageLiteral(resourceName: "relatar"))
-        self.configuracoes.append(config)
         config = Configuracao(id: 3, nome: "Ajuda", image: #imageLiteral(resourceName: "informa"))
         self.configuracoes.append(config)
         config = Configuracao(id: 4, nome: "Contar a um amigo", image: #imageLiteral(resourceName: "contar"))
         self.configuracoes.append(config)
-//        config = Configuracao(id: 5, name: "Compartilhar o Hinário", image: #imageLiteral(resourceName: "compartilhar"))
-//        self.configuracoes.append(config)
+        config = Configuracao(id: 5, nome: "Avaliar aplicativo", image: #imageLiteral(resourceName: "relatar"))
+        self.configuracoes.append(config)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -106,13 +105,18 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         let selecionado = self.configuracoes[indexPath.row]
         
         if selecionado.id == 1 {
+            //perfil completo
             print("1")
-        }else if selecionado.id == 2 {
-            print("2")
         }else if selecionado.id == 3{
-            print("3")
+            //ajuda
+            self.padrao("daniel.araujos@icloud.com", "Preciso de ajuda")
         }else  if selecionado.id == 4{
-            print("4")
+            //contar a um amigo
+            self.compartilhar()
+        }else if selecionado.id == 5 {
+            self.avaliarApp(appId: "id1200173802", completion: { (success) in
+                print("RateApp \(success)")
+            })
         }
     }
     
@@ -125,6 +129,54 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func arredondandoImagem(){
         image.layer.cornerRadius = 40;
         image.clipsToBounds = true;
+    }
+    
+    
+  
+    
+    func padrao(_ email: String, _ descricao: String) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([email])
+            mail.setMessageBody("<p>Dispositivo: \(UIDevice.current.name)</p>", isHTML: true)
+            mail.setSubject(descricao)
+            
+            present(mail, animated: true)
+        } else {
+            self.showAlert(title: "Ops.", message: "Ocorreu algum problema no envio. Tente novamente mais tarde!")
+        }
+    }
+    
+    func compartilhar(){
+        let site = "#"
+        let activitiVC = UIActivityViewController(activityItems: [site], applicationActivities: nil)
+        activitiVC.popoverPresentationController?.sourceView = self.view
+        self.present(activitiVC, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
+    }
+    
+    //Avaliacao na apple store
+    func avaliarApp(appId: String, completion: @escaping ((_ success: Bool)->())) {
+        guard let url = URL(string : "itms-apps://itunes.apple.com/app/" + appId) else {
+            completion(false)
+            return
+        }
+        guard #available(iOS 10, *) else {
+            completion(UIApplication.shared.openURL(url))
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: completion)
     }
     
 }

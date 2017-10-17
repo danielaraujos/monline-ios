@@ -21,14 +21,14 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func lista(){
         var monitor: Monitor;
-        monitor = Monitor(id: 1, nome: "Ver lista de seguidores", image: #imageLiteral(resourceName: "user"))
+        monitor = Monitor(id: 1, nome: "Lista de seguidores", image: #imageLiteral(resourceName: "user"))
         self.monitores.append(monitor)
         monitor = Monitor(id: 2, nome: "Mensagens para serguidores", image: #imageLiteral(resourceName: "relatar"))
         self.monitores.append(monitor)
-        monitor = Monitor(id: 3, nome: "Atualizar horário", image: #imageLiteral(resourceName: "informa"))
+        monitor = Monitor(id: 3, nome: "Atualizar horários", image: #imageLiteral(resourceName: "informa"))
         self.monitores.append(monitor)
-        //monitor = Monitor(id: 4, nome: "Contar a um amigo", image: #imageLiteral(resourceName: "contar"))
-        //self.monitores.append(monitor)
+        monitor = Monitor(id: 4, nome: "Atualizar monitoria", image: #imageLiteral(resourceName: "contar"))
+        self.monitores.append(monitor)
         
     }
 
