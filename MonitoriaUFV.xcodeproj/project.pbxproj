@@ -32,6 +32,8 @@
 		4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */; };
 		4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */; };
 		4C881CA51F83028D00764BE8 /* ElementsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C881CA41F83028D00764BE8 /* ElementsProvider.swift */; };
+		4C8DE6DA1F9558E3005133D0 /* Configuracao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE6D91F9558E3005133D0 /* Configuracao.swift */; };
+		4C8DE6DC1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */; };
 		4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
@@ -92,6 +94,8 @@
 		4C79B5EA1F4A53C400530E75 /* AuthProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMensagemCell.swift; sourceTree = "<group>"; };
 		4C881CA41F83028D00764BE8 /* ElementsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsProvider.swift; sourceTree = "<group>"; };
+		4C8DE6D91F9558E3005133D0 /* Configuracao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuracao.swift; sourceTree = "<group>"; };
+		4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracoesTableViewCell.swift; sourceTree = "<group>"; };
 		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				4C6E28521F6471DA00E1B0E4 /* Curso.swift */,
 				4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */,
 				4C6C8DA01F780942000C533B /* Mensagem.swift */,
+				4C8DE6D91F9558E3005133D0 /* Configuracao.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */,
 				4C559DC51F8181EF0093ACAA /* MessagesViewCell.swift */,
 				4C881CA21F82FA9200764BE8 /* ChatMensagemCell.swift */,
+				4C8DE6DB1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -589,11 +595,13 @@
 				4C27D9311F435F0D00CF8E72 /* MonitoriaUFV.xcdatamodeld in Sources */,
 				4C559DC61F8181EF0093ACAA /* MessagesViewCell.swift in Sources */,
 				4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */,
+				4C8DE6DA1F9558E3005133D0 /* Configuracao.swift in Sources */,
 				4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */,
 				4CFDC3611F6C74AB00010FB8 /* ReporterVC.swift in Sources */,
 				4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */,
 				4C881CA51F83028D00764BE8 /* ElementsProvider.swift in Sources */,
 				4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */,
+				4C8DE6DC1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift in Sources */,
 				4C79B5E51F48B27800530E75 /* MonitoringVC.swift in Sources */,
 				4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */,
 				4C6E284F1F6459DE00E1B0E4 /* Constantes.swift in Sources */,

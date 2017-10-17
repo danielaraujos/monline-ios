@@ -19,6 +19,7 @@ class Constantes {
     static let MEDIA_MESSAGES = "Media_Messages";
     static let IMAGE_STORAGE = "Image_Storage";
     static let VIDEO_STORAGE = "Video_Storage";
+    static let PROFILE_STORAGE = "Profile_Storage";
     
     static let EMAIL = "email";
     static let SENHA = "senha";

@@ -127,6 +127,10 @@ class AuthProvider {
 //    func idParceiro() -> String? {
 //        return paraID == FIRAuth.auth()?.currentUser?.uid ? meuID : paraID
 //    }
+    
+    
+    
+    
 
     
     

@@ -14,7 +14,7 @@ class MessagesViewCell: UITableViewCell {
     @IBOutlet weak var sub_title: UILabel!
     @IBOutlet weak var lbl_date: UILabel!
     @IBOutlet weak var image_1: UIImageView!
-    var meuID = AuthProvider.Instance.userID()
+    //var meuID = AuthProvider.Instance.userID()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,15 +37,37 @@ class MessagesViewCell: UITableViewCell {
                         if let dictionary = snapshot.value as? [String: AnyObject] {
                             var novosUsuarios = Usuario(dictionary: dictionary)
                             if(idUsuarios == paraID){
-                                print(novosUsuarios.nome!)
-                                if(novosUsuarios.monitor! != "0"){
-                                    self.title.text = "\(novosUsuarios.nome!) - \(novosUsuarios.monitor!)"
+                                if(novosUsuarios.monitor! == "0"){
+                                    self.title.text = novosUsuarios.nome!
+                                }else{
+                                    self.title.text = novosUsuarios.monitor!
                                 }
                             }
                         }
                     }, withCancel: nil)
                 }, withCancel: nil)
+                
             }
+            
+//            if let meuID = message?.meuID {
+//
+//                let ref = Database.database().reference().child(Constantes.USUARIOS)
+//                ref.observe(.childAdded, with: { (snapshot) in
+//                    let idUsuarios = snapshot.key as! String
+//                    let ref = Database.database().reference().child(Constantes.USUARIOS).child(meuID)
+//                    ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//                        if let dictionary = snapshot.value as? [String: AnyObject] {
+//                            var novosUsuarios = Usuario(dictionary: dictionary)
+//                            if(novosUsuarios.monitor! != "0"){
+//                                self.title.text = novosUsuarios.monitor!
+//                            }else{
+//                                self.title.text = novosUsuarios.nome!
+//                            }
+//                        }
+//                    }, withCancel: nil)
+//                }, withCancel: nil)
+//
+//            }
             
             self.sub_title.text = message?.texto
             
