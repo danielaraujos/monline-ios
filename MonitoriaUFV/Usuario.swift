@@ -40,7 +40,8 @@ class Usuario  : NSObject {
         self.nome = dictionary["nome"] as? String
         self.email = dictionary["email"] as? String
         self.curso = dictionary["curso"] as? String
-        self.matricula = dictionary["matriculo"] as? String
+        self.matricula = dictionary["matricula"] as? String
+        self.senha = dictionary["senha"] as? String
         self.monitor = dictionary["monitor"] as? String
         self.ImagemURL = dictionary["ImagemURL"] as? String
     }

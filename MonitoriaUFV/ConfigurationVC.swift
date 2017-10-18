@@ -14,6 +14,7 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
 
     var configuracoes : [Configuracao] = []
     var usuario: Usuario?
+    //var CELL_ID = "PerfilSegue"
     
     @IBOutlet weak var imageProfile: UIView!
     @IBOutlet weak var lblNome: UILabel!
@@ -106,7 +107,7 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         
         if selecionado.id == 1 {
             //perfil completo
-            print("1")
+            self.mostrarProfile(meuID)
         }else if selecionado.id == 3{
             //ajuda
             self.padrao("daniel.araujos@icloud.com", "Preciso de ajuda")
@@ -119,6 +120,13 @@ class ConfigurationVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             })
         }
     }
+    
+    
+    func mostrarProfile(_ id: String) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "ProfileVC")
+        self.navigationController!.pushViewController(controller, animated: true)
+    }
+    
     
     @IBAction func btnUpload(_ sender: Any) {
         self.selecionarImagem()

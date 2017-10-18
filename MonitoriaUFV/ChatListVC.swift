@@ -167,39 +167,4 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
-    
-    
-//
-//    func verificarMonitor() {
-//
-//        let ref = Database.database().reference().child(Constantes.MONITORIAS)
-//        ref.observe(.childAdded, with: { (snapshot) in
-//            let siglaMonitoria = snapshot.key
-//            let conteudoReferencia = Database.database().reference().child(Constantes.MONITORIAS).child(siglaMonitoria)
-//            conteudoReferencia.observeSingleEvent(of: .value, with: { (conteudoRef) in
-//                if let dictionary = conteudoRef.value as? [String: AnyObject] {
-//                    let conteudo = Monitoria(dictionary: dictionary)
-//
-//                    if conteudo.monitor == self.id {
-//                        print("Sou monitor")
-//
-//                        let ref1 = Database.database().reference().child(Constantes.USUARIOS)
-//                        ref1.observe(.childAdded, with: { (usuarios) in
-//                            let idUsuario = usuarios.key
-//                            if self.id == idUsuario{
-//                                let ref2 = Database.database().reference().child(Constantes.USUARIOS).child(idUsuario)
-//                                ref2.observeSingleEvent(of: .value, with: { (snapshot) in
-//                                    if let dictionary = snapshot.value as? [String: AnyObject] {
-//                                        let usuarios = Usuario(dictionary: dictionary)
-//                                        //self.title = usuarios.nome
-//                                        print(usuarios.nome)
-//                                    }
-//                                }, withCancel: nil)
-//                            }
-//                        }, withCancel: nil)
-//                    }
-//                }
-//            }, withCancel: nil)
-//        }, withCancel: nil)
-//    }
 }
