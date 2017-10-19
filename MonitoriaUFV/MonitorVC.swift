@@ -13,7 +13,10 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var monitores : [Monitor] = []
     let CELL_ID = "MonitorCell"
+    let HORARIOS_CELL = "HorariosCell"
     var meuID = AuthProvider.Instance.userID()
+    var sigla: String?
+    var value: Int?
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -22,8 +25,8 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-       // self.verificacaoUsuario()
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func verificacaoUsuario() {
@@ -33,6 +36,7 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 var novosUsuarios = Usuario(dictionary: dictionary)
                 if(novosUsuarios.monitor != "0"){
                     self.lista()
+                    self.sigla = novosUsuarios.monitor!
                     DispatchQueue.main.async(execute: {
                         self.tableView.reloadData()
                     })
@@ -76,6 +80,29 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.titulo.text = monitor.nome
         cell.imageIcon.image = monitor.image
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        let selecionado = self.monitores[indexPath.row]
+        
+        if selecionado.id == 1 {
+            self.value = 1
+        }else if selecionado.id == 2{
+            self.value = 2
+        }else  if selecionado.id == 3{
+            self.atualizaHorario(self.sigla!)
+        }else if selecionado.id == 4 {
+            self.value = 4
+        }
+        
+    }
+    
+    
+    
+    @objc func atualizaHorario(_ sigla: String) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "HorariosMonitorVC")
+        self.navigationController!.pushViewController(controller, animated: true)
     }
     
     func showAlert(title: String, message: String) {

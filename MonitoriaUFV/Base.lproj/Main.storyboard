@@ -115,13 +115,6 @@
                                         <rect key="frame" x="112" y="50" width="150" height="136"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMI-fc-Vkx">
-                                        <rect key="frame" x="112" y="50" width="150" height="136"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="btnUpload:" destination="Do6-HY-eGX" eventType="touchUpInside" id="5Ef-Fk-zDy"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -624,29 +617,55 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="8eg-E0-Cqj" id="Xam-sh-fEr"/>
+                        <segue destination="SmL-Fe-j8A" kind="show" identifier="HorariosCell" id="5Ex-dL-AK6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbB-h2-6Jo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2232.8000000000002" y="2014.5427286356824"/>
         </scene>
-        <!--View Controller-->
+        <!--Cadastrar Horários-->
         <scene sceneID="0Jp-nB-dNp">
             <objects>
-                <viewController id="SmL-Fe-j8A" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HorariosMonitorVC" storyboardIdentifier="HorariosMonitorVC" title="Cadastrar Horários" id="SmL-Fe-j8A" customClass="HorariosMonitorVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D8g-Gz-CUq"/>
                         <viewControllerLayoutGuide type="bottom" id="bGz-Lx-7NJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rhh-Os-Odj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="ofd-p2-tay">
+                                <rect key="frame" x="16" y="20" width="343" height="397"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-kr-XpX">
+                                <rect key="frame" x="29" y="480" width="317" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Atualizar">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnActionAtualizar:" destination="SmL-Fe-j8A" eventType="touchUpInside" id="VwP-rG-Mpz"/>
+                                    <action selector="lblAtualizarA:" destination="hRD-yH-yW8" eventType="touchUpInside" id="W3L-CD-3iB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <connections>
+                        <outlet property="btnAtualizar" destination="N1o-kr-XpX" id="3FW-ui-eKz"/>
+                        <outlet property="textViewHorario" destination="ofd-p2-tay" id="KV4-BE-uJl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-84-Wjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3036" y="2015"/>
+            <point key="canvasLocation" x="3036" y="2014.5427286356824"/>
         </scene>
         <!--Perfil-->
         <scene sceneID="JiZ-fb-r8w">

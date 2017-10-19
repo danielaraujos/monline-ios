@@ -36,6 +36,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func btnSelected(_ sender: Any) {
+        print("Selecionou")
     }
     func lerProfile(){
         let ref = Database.database().reference().child(Constantes.USUARIOS).child(self.meuID)

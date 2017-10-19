@@ -12,14 +12,13 @@ import Firebase
 class HorariosVC: UIViewController {
 
     var recebimento: String?
-    
+    var meuID = AuthProvider.Instance.userID()
     @IBOutlet weak var textViewConteudo: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buscarHorarios()
     }
     
-
     func buscarHorarios() {
         let ref = Database.database().reference().child(Constantes.HORARIOS)
         ref.observe(.childAdded, with: { (snapshot) in
@@ -37,6 +36,5 @@ class HorariosVC: UIViewController {
             }, withCancel: nil)
         }, withCancel: nil)
     }
-    
 
 }
