@@ -15,6 +15,7 @@ class MonitoringDetailVC: UIViewController {
     var sigla: String!
     var usuario : Usuario!
     private let CHATSEGUE = "ChatSegue";
+    private let HORARIOSSEGUE = "HorariosSegue"
     var meuId = AuthProvider.Instance.userID()
     
     @IBOutlet weak var denuncia: UIButton!
@@ -81,10 +82,22 @@ class MonitoringDetailVC: UIViewController {
     @IBAction func btnChat(_ sender: Any) {
         self.handleNewMessage(self.usuario)
     }
+    @IBAction func btnHorarios(_ sender: Any) {
+       print("Me clicou")
+    }
     
     @objc func handleNewMessage(_ usuario: Usuario) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.usuario = usuario
         navigationController?.pushViewController(chatLogController, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == HORARIOSSEGUE{
+            let viewControllerDestino = segue.destination as! HorariosVC
+            viewControllerDestino.recebimento = self.sigla
+        }
+    }
+    
+    
 }

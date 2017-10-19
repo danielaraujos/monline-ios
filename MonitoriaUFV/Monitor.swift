@@ -20,6 +20,10 @@ class Monitor : NSObject{
         self.image = image
     }
     
+    init(nome:String) {
+        self.nome = nome
+    }
+    
     
 }
 

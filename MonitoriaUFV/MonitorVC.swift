@@ -7,16 +7,45 @@
 //
 
 import UIKit
+import Firebase
 
 class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var monitores : [Monitor] = []
     let CELL_ID = "MonitorCell"
+    var meuID = AuthProvider.Instance.userID()
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lista()
+        self.verificacaoUsuario()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+       // self.verificacaoUsuario()
+    }
+    
+    func verificacaoUsuario() {
+        let ref = Database.database().reference().child(Constantes.USUARIOS).child(self.meuID)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                var novosUsuarios = Usuario(dictionary: dictionary)
+                if(novosUsuarios.monitor != "0"){
+                    self.lista()
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }else{
+                    var monitor: Monitor;
+                    monitor = Monitor(id: 5, nome: "Você não é monitor!", image: #imageLiteral(resourceName: "informa"))
+                    self.monitores.append(monitor)
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }
+            }
+        }, withCancel: nil)
     }
     
     func lista(){
@@ -29,8 +58,8 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.monitores.append(monitor)
         monitor = Monitor(id: 4, nome: "Atualizar monitoria", image: #imageLiteral(resourceName: "contar"))
         self.monitores.append(monitor)
-        
     }
+    
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1;
@@ -47,6 +76,13 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.titulo.text = monitor.nome
         cell.imageIcon.image = monitor.image
         return cell
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
     }
 
 }

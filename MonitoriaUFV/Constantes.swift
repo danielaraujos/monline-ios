@@ -15,6 +15,7 @@ class Constantes {
     static let CURSOS = "Cursos"
     static let MONITORIAS = "Monitorias";
     static let MENSAGENS = "Mensagens";
+    static let HORARIOS = "Horarios";
     static let MENSUSUARIO = "Mensagens_Usuarios"
     static let MEDIA_MESSAGES = "Media_Messages";
     static let IMAGE_STORAGE = "Image_Storage";
