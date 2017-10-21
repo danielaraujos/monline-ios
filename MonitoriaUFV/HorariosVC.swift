@@ -19,6 +19,10 @@ class HorariosVC: UIViewController {
         self.buscarHorarios()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func buscarHorarios() {
         let ref = Database.database().reference().child(Constantes.HORARIOS)
         ref.observe(.childAdded, with: { (snapshot) in

@@ -54,8 +54,8 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func lista(){
         var monitor: Monitor;
-        monitor = Monitor(id: 1, nome: "Lista de seguidores", image: #imageLiteral(resourceName: "user"))
-        self.monitores.append(monitor)
+//        monitor = Monitor(id: 1, nome: "Lista de seguidores", image: #imageLiteral(resourceName: "user"))
+//        self.monitores.append(monitor)
         monitor = Monitor(id: 2, nome: "Mensagens para serguidores", image: #imageLiteral(resourceName: "relatar"))
         self.monitores.append(monitor)
         monitor = Monitor(id: 3, nome: "Atualizar horários", image: #imageLiteral(resourceName: "informa"))
@@ -93,7 +93,7 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }else  if selecionado.id == 3{
             self.atualizaHorario(self.sigla!)
         }else if selecionado.id == 4 {
-            self.value = 4
+            self.atualizaMonitor(self.sigla!)
         }
         
     }
@@ -102,6 +102,11 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc func atualizaHorario(_ sigla: String) {
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "HorariosMonitorVC")
+        self.navigationController!.pushViewController(controller, animated: true)
+    }
+    
+    @objc func atualizaMonitor(_ sigla: String) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MonitoriaMonitorVC")
         self.navigationController!.pushViewController(controller, animated: true)
     }
     

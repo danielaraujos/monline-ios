@@ -1,28 +1,30 @@
 //
-//  HorariosMonitorVC.swift
+//  MonitoriaMonitorVC.swift
 //  MonitoriaUFV
 //
-//  Created by Daniel Araújo on 18/10/2017.
+//  Created by Daniel Araújo on 20/10/2017.
 //  Copyright © 2017 Daniel Araújo Silva. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class HorariosMonitorVC: UIViewController {
+class MonitoriaMonitorVC: UIViewController {
 
-    var recebimento: String?
     var meuID = AuthProvider.Instance.userID()
     var monitor: String?
     
-    @IBOutlet weak var textViewHorario: UITextView!
-    @IBOutlet weak var btnAtualizar: UIButton!
+    @IBOutlet weak var textFieldDisciplina: UITextField!
+    @IBOutlet weak var textViewDescricao: UITextView!
+    @IBOutlet weak var textFieldProfessor: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lerUsuario()
 
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -32,37 +34,34 @@ class HorariosMonitorVC: UIViewController {
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let novosUsuarios = Usuario(dictionary: dictionary)
-                self.buscarHorarios(novosUsuarios.monitor!)
+                self.buscarMonitoria(novosUsuarios.monitor!)
                 self.monitor = novosUsuarios.monitor!
             }
         }, withCancel: nil)
     }
     
-    func buscarHorarios(_ monitor: String) {
+    func buscarMonitoria(_ monitor: String) {
         print(monitor)
-        let ref = Database.database().reference().child(Constantes.HORARIOS).child(monitor)
+        let ref = Database.database().reference().child(Constantes.MONITORIAS).child(monitor)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                let mhorarios = Horarios(dictionary: dictionary)
-                self.textViewHorario.text = mhorarios.texto!
-                //print(mhorarios.texto!)
+                let monitorias = Monitoria(dictionary: dictionary)
+                self.textViewDescricao.text = monitorias.descricao!
+                self.textFieldProfessor.text = monitorias.professor!
+                self.textFieldDisciplina.text = monitorias.nome!
             }
         }, withCancel: nil)
     }
     
     
-    @IBAction func btnActionAtualizar(_ sender: Any) {
-        self.atualiza(self.monitor!)
-    }
-    
     func atualiza(_ monitor: String){
-        let values = ["texto":self.textViewHorario.text]
-        let ref = Database.database().reference().child(Constantes.HORARIOS).child(monitor).updateChildValues(values){ (error, ref) in
+        let values = ["descricao":self.textViewDescricao.text,"nome":self.textFieldDisciplina.text,"professor":self.textFieldProfessor.text ]
+        let ref = Database.database().reference().child(Constantes.MONITORIAS).child(monitor).updateChildValues(values){ (error, ref) in
             if(error != nil){
                 print("Error",error)
-                self.showAlert(title: "Error", message: "Erro ao atualizar os horários, tente novamente.")
+                self.showAlert(title: "Error", message: "Erro ao atualizar a monitoria, tente novamente.")
             }else{
-                self.showAlert(title: "Sucesso", message: "Horários atualizados com sucesso!")
+                self.showAlert(title: "Sucesso", message: "Monitoria atualizada com sucesso!")
             }
         }
     }
@@ -73,7 +72,9 @@ class HorariosMonitorVC: UIViewController {
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);
     }
-    
-    
 
+    @IBAction func btnAtualizar(_ sender: Any) {
+        self.atualiza(self.monitor!)
+    }
+    
 }

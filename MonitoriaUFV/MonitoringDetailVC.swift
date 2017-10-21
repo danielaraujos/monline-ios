@@ -16,8 +16,9 @@ class MonitoringDetailVC: UIViewController {
     var usuario : Usuario!
     private let CHATSEGUE = "ChatSegue";
     private let HORARIOSSEGUE = "HorariosSegue"
-    var meuId = AuthProvider.Instance.userID()
+    var meuID = AuthProvider.Instance.userID()
     
+    @IBOutlet weak var alerta: UIBarButtonItem!
     @IBOutlet weak var denuncia: UIButton!
     @IBOutlet weak var duvida: UIButton!
     @IBOutlet weak var btn: UIButton!
@@ -32,10 +33,12 @@ class MonitoringDetailVC: UIViewController {
         self.title = sigla
         ElementsProvider.voltarSemTexto()
         self.buscarMonitoria()
+        self.observar(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        
     }
 
     /*
@@ -68,6 +71,7 @@ class MonitoringDetailVC: UIViewController {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     var novosUsuarios = Usuario(dictionary: dictionary)
+                    
                     if(novosUsuarios.monitor == self.sigla){
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
@@ -85,6 +89,65 @@ class MonitoringDetailVC: UIViewController {
     @IBAction func btnHorarios(_ sender: Any) {
        print("Me clicou")
     }
+
+    @IBAction func btnAlerta(_ sender: Any) {
+        self.observar(true)
+    }
+
+    func inscricao()-> DatabaseReference{
+        let ref = Database.database().reference().child(Constantes.INSCRICAO).child(self.sigla).child(self.meuID)
+        var values: [String: AnyObject] = ["id": self.meuID as AnyObject]
+        ref.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error!)
+                return
+            }
+        }
+        return ref
+    }
+    
+    func remover(){
+        return Database.database().reference().child(Constantes.INSCRICAO).child(self.sigla).child(self.meuID).removeValue(completionBlock: { (error, ref) in
+            if error != nil {
+                print("Failed to delete message:", error!)
+                return
+            }
+        })
+        
+    }
+    
+    func observar(_ click: Bool){
+        let ref = Database.database().reference().child(Constantes.INSCRICAO).child(self.sigla)
+        //ref.observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.observe(.childAdded, with: { (snapshot) in
+//            print(snapshot.key)
+//            if(click == true){
+//                if(self.meuID == snapshot.key){
+//                    self.remover()
+//                    self.alerta.image = UIImage(named: "alerta")
+//                    print("Igual")
+//                }else{
+//                    self.observar(false)
+//                    self.inscricao()
+//                    self.alerta.image = UIImage(named: "alertaA")
+//                    print("Desigual")
+//
+//
+//                }
+//            }
+            self.inscricao()
+            if(self.meuID == snapshot.key){
+                self.alerta.image = UIImage(named: "alertaA")
+            }
+            
+            
+        }, withCancel: nil)
+        
+        
+    }
+    
+    
+    
     
     @objc func handleNewMessage(_ usuario: Usuario) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())

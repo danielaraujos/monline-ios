@@ -355,11 +355,16 @@
                                     <segue destination="0BS-Q4-Xr9" kind="show" identifier="HorariosSegue" id="aZu-lE-rcK"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="favorite_1" id="dFk-du-JJK"/>
+                            <barButtonItem image="alerta" id="dFk-du-JJK">
+                                <connections>
+                                    <action selector="btnAlerta:" destination="vpB-gT-lwp" id="GWu-AH-Xz0"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="alerta" destination="dFk-du-JJK" id="615-az-JAj"/>
                         <outlet property="btn" destination="FOY-VQ-F0K" id="h8d-Eb-MDy"/>
                         <outlet property="denuncia" destination="6iC-3y-TSI" id="ExU-DX-IKN"/>
                         <outlet property="duvida" destination="FOY-VQ-F0K" id="K1X-Eq-sqP"/>
@@ -618,16 +623,17 @@
                     <connections>
                         <outlet property="tableView" destination="8eg-E0-Cqj" id="Xam-sh-fEr"/>
                         <segue destination="SmL-Fe-j8A" kind="show" identifier="HorariosCell" id="5Ex-dL-AK6"/>
+                        <segue destination="I9y-fa-OVV" kind="show" id="znv-Bz-xlo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbB-h2-6Jo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2232.8000000000002" y="2014.5427286356824"/>
         </scene>
-        <!--Cadastrar Horários-->
+        <!--Atualizar Horários-->
         <scene sceneID="0Jp-nB-dNp">
             <objects>
-                <viewController restorationIdentifier="HorariosMonitorVC" storyboardIdentifier="HorariosMonitorVC" title="Cadastrar Horários" id="SmL-Fe-j8A" customClass="HorariosMonitorVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HorariosMonitorVC" storyboardIdentifier="HorariosMonitorVC" title="Atualizar Horários" id="SmL-Fe-j8A" customClass="HorariosMonitorVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D8g-Gz-CUq"/>
                         <viewControllerLayoutGuide type="bottom" id="bGz-Lx-7NJ"/>
@@ -666,6 +672,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmZ-84-Wjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3036" y="2014.5427286356824"/>
+        </scene>
+        <!--Atualizar Monitoria-->
+        <scene sceneID="LCe-gM-Lfq">
+            <objects>
+                <viewController restorationIdentifier="MonitoriaMonitorVC" storyboardIdentifier="MonitoriaMonitorVC" title="Atualizar Monitoria" id="I9y-fa-OVV" customClass="MonitoriaMonitorVC" customModule="MonitoriaUFV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P9M-ZJ-bJm"/>
+                        <viewControllerLayoutGuide type="bottom" id="yak-uM-AVy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C7e-xn-NEG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digite o nome da disciplina" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iWk-Ae-P0L">
+                                <rect key="frame" x="26" y="76" width="313" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Disciplina:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nan-Bo-yaP">
+                                <rect key="frame" x="28" y="55" width="145" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digite o nome do professor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOP-pV-1eO">
+                                <rect key="frame" x="28" y="344" width="313" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Professor responsável:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afV-Qu-8KP">
+                                <rect key="frame" x="30" y="323" width="154" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Descrição:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYn-D3-i9s">
+                                <rect key="frame" x="28" y="117" width="145" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="K5G-9L-Cxn">
+                                <rect key="frame" x="26" y="138" width="313" height="162"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOh-Kj-cjH">
+                                <rect key="frame" x="24" y="480" width="317" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Atualizar">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnActionAtualizar:" destination="SmL-Fe-j8A" eventType="touchUpInside" id="gjf-Gg-wbE"/>
+                                    <action selector="btnAtualizar:" destination="I9y-fa-OVV" eventType="touchUpInside" id="FCp-xI-neC"/>
+                                    <action selector="lblAtualizarA:" destination="hRD-yH-yW8" eventType="touchUpInside" id="YpY-rm-2TP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="textFieldDisciplina" destination="iWk-Ae-P0L" id="9Ja-8v-uv5"/>
+                        <outlet property="textFieldProfessor" destination="qOP-pV-1eO" id="w72-0s-3n2"/>
+                        <outlet property="textViewDescricao" destination="K5G-9L-Cxn" id="mga-PY-ql5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W96-tF-5ti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3021.5999999999999" y="2729.6851574212897"/>
         </scene>
         <!--Perfil-->
         <scene sceneID="JiZ-fb-r8w">
@@ -1158,6 +1245,7 @@
     </scenes>
     <resources>
         <image name="ProfileImg" width="128" height="128"/>
+        <image name="alerta" width="26" height="24"/>
         <image name="angle-mask.png" width="100" height="100"/>
         <image name="favorite_1" width="27" height="25"/>
         <image name="fundo1" width="737" height="1310"/>

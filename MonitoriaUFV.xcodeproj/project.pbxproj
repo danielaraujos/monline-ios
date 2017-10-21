@@ -44,6 +44,7 @@
 		4CAA30A91F673B5700D6F5A5 /* Monitoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */; };
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
+		4CC324EB1F9AB6430072F617 /* MonitoriaMonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */; };
 		4CD3442D1F983DAA003306D0 /* HorariosMonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */; };
 		4CFDC3611F6C74AB00010FB8 /* ReporterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */; };
 		AE3D99F97C80E9704202BB5C /* Pods_MonitoriaUFV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5E08A8825AC9B56D52CCB2 /* Pods_MonitoriaUFV.framework */; };
@@ -114,6 +115,7 @@
 		4CAA30A81F673B5700D6F5A5 /* Monitoria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitoria.swift; sourceTree = "<group>"; };
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
+		4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoriaMonitorVC.swift; sourceTree = "<group>"; };
 		4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorariosMonitorVC.swift; sourceTree = "<group>"; };
 		4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReporterVC.swift; sourceTree = "<group>"; };
 		77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				4CA25BD41F96ADF000E1D7CF /* ProfileVC.swift */,
 				4C43B7861F980D9500017138 /* HorariosVC.swift */,
 				4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */,
+				4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				4CA25BD31F96A30D00E1D7CF /* MonitorTableViewCell.swift in Sources */,
 				4CA25BD11F96A20B00E1D7CF /* Monitor.swift in Sources */,
 				4CA25BD51F96ADF000E1D7CF /* ProfileVC.swift in Sources */,
+				4CC324EB1F9AB6430072F617 /* MonitoriaMonitorVC.swift in Sources */,
 				4C881CA31F82FA9200764BE8 /* ChatMensagemCell.swift in Sources */,
 				4C8DE6DA1F9558E3005133D0 /* Configuracao.swift in Sources */,
 				4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */,
