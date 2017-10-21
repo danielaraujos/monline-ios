@@ -70,7 +70,6 @@ class MonitoringDetailVC: UIViewController {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     var novosUsuarios = Usuario(dictionary: dictionary)
-                    
                     if(novosUsuarios.monitor == self.sigla){
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
@@ -86,11 +85,12 @@ class MonitoringDetailVC: UIViewController {
         self.handleNewMessage(self.usuario)
     }
     @IBAction func btnHorarios(_ sender: Any) {
-       print("Me clicou")
+       
     }
 
     @IBAction func btnAlerta(_ sender: Any) {
         self.observar(true)
+        self.showAlert(title: "Parabéns!", message: "Você acabou de seguir a monitoria. Receberá notificações sobre a mesma.")
     }
 
     func inscricao()-> DatabaseReference{
@@ -108,7 +108,7 @@ class MonitoringDetailVC: UIViewController {
     func remover(){
         return Database.database().reference().child(Constantes.INSCRICAO).child(self.sigla).child(self.meuID).removeValue(completionBlock: { (error, ref) in
             if error != nil {
-                print("Failed to delete message:", error!)
+                print("Erro ao remover mensagem!:", error!)
                 return
             }
         })
@@ -138,15 +138,8 @@ class MonitoringDetailVC: UIViewController {
             if(self.meuID == snapshot.key){
                 self.alerta.image = UIImage(named: "alertaA")
             }
-            
-            
         }, withCancel: nil)
-        
-        
     }
-    
-    
-    
     
     @objc func handleNewMessage(_ usuario: Usuario) {
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -161,5 +154,10 @@ class MonitoringDetailVC: UIViewController {
         }
     }
     
-    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
+    }
 }
