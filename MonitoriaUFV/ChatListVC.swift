@@ -142,6 +142,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
         let message = mensagens[indexPath.row]
         
         guard let chatPartnerId = message.idParceiro() else {

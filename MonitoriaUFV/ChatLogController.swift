@@ -137,8 +137,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         self.inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
         self.inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
+        //Daniel
         let separatorLineView = UIView()
-        separatorLineView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#828787")
+        separatorLineView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#dcdcdc")
         separatorLineView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(separatorLineView)
         //x,y,w,h
@@ -371,7 +372,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
        
         if message.meuID == Auth.auth().currentUser?.uid {
-            cell.bubbleView.backgroundColor = ChatMensagemCell.blueColor
+            cell.bubbleView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#dc4539")
             cell.textView.textColor = UIColor.white
             cell.profileImageView.isHidden = true
             
@@ -445,6 +446,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Enviar", for: UIControlState())
+        sendButton.tintColor = ElementsProvider.hexStringToUIColor(hex: "#dc4539")
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         containerView.addSubview(sendButton)
