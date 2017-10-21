@@ -17,6 +17,9 @@ class ElementsProvider  : NSObject  {
         return _instance
     }
     
+    /*
+     Função responsavel por converter cores de String para Hexadecimal
+     */
     static func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if (cString.hasPrefix("#")) {
@@ -35,52 +38,34 @@ class ElementsProvider  : NSObject  {
         )
     }
     
-    static func voltarSemTexto(){
-        let backItem = UIBarButtonItem()
-        backItem.title = " "
-        //navigationItem.backBarButtonItem = backItem
-        
-    }
-    
-    
 }
 
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
-    
-    func loadImageUsingCacheWithUrlString(_ urlString: String) {
-        
+    func carregarImagemNoCache(_ urlString: String) {
         self.image = nil
-        
-        //check cache for image first
-        if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
-            self.image = cachedImage
+        //Verifica antes de baixar, o cache da imagem
+        if let imagemCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+            self.image = imagemCache
             return
         }
-        
-        //otherwise fire off a new download
+        //Baixa a imagem
         let url = URL(string: urlString)
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            
-            //download hit an error so lets return out
+            //Encontrou um erro
             if error != nil {
                 print(error ?? "")
                 return
             }
-            
             DispatchQueue.main.async(execute: {
-                
-                if let downloadedImage = UIImage(data: data!) {
-                    imageCache.setObject(downloadedImage, forKey: urlString as AnyObject)
-                    
-                    self.image = downloadedImage
+                if let baixarImagem = UIImage(data: data!) {
+                    imageCache.setObject(baixarImagem, forKey: urlString as AnyObject)
+                    self.image = baixarImagem
                 }
             })
-            
         }).resume()
     }
-    
 }
 
 

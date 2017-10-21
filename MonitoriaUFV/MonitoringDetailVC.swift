@@ -31,7 +31,6 @@ class MonitoringDetailVC: UIViewController {
         super.viewDidLoad()
         SVProgressHUD.show(withStatus: "Carregando")
         self.title = sigla
-        ElementsProvider.voltarSemTexto()
         self.buscarMonitoria()
         self.observar(false)
     }
