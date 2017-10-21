@@ -17,12 +17,10 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ElementsProvider.voltarSemTexto()
         self.mensagens.removeAll()
         self.messagesDictionary.removeAll()
         tableView.reloadData()
         self.buscarDestinatarioMensagens()
-        //self.verificarMonitor()
     }
     
     
@@ -35,9 +33,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        
         let message = self.mensagens[indexPath.row]
-        
         if let chatPartnerId = message.idParceiro() {
             Database.database().reference().child(Constantes.MENSUSUARIO).child(uid).child(chatPartnerId).removeValue(completionBlock: { (error, ref) in
                 
