@@ -10,6 +10,8 @@ target 'MonitoriaUFV' do
     pod 'Firebase'
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
+    pod 'Firebase/Core'
+    pod 'Firebase/Messaging'
     pod 'Firebase/Auth'
     pod 'SVProgressHUD'
 
