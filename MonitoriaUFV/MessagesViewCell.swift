@@ -30,7 +30,6 @@ class MessagesViewCell: UITableViewCell {
                 let ref = Database.database().reference().child(Constantes.USUARIOS)
                 ref.observe(.childAdded, with: { (snapshot) in
                     let idUsuarios = snapshot.key as! String
-                    print(idUsuarios)
                     let ref = Database.database().reference().child(Constantes.USUARIOS).child(idUsuarios)
                     ref.observeSingleEvent(of: .value, with: { (snapshot) in
                         if let dictionary = snapshot.value as? [String: AnyObject] {

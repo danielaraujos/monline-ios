@@ -366,10 +366,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     
     fileprivate func setupCell(_ cell: ChatMensagemCell, message: Mensagem) {
-        //        if let profileImageUrl = self.user?.profileImageUrl {
-        //            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-        //        }
-        let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
+        if let profileImageUrl = self.usuario?.ImagemURL {
+            cell.profileImageView.carregarImagemNoCache(profileImageUrl)
+        }
+        //let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
        
         if message.meuID == Auth.auth().currentUser?.uid {
             cell.bubbleView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#dc4539")

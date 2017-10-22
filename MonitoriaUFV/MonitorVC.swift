@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebasePerformance
 
 class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
