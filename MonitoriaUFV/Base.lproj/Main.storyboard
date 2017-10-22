@@ -1031,18 +1031,18 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logomarca-1" translatesAutoresizingMaskIntoConstraints="NO" id="vPf-38-K8w">
-                                <rect key="frame" x="60" y="65" width="244" height="166"/>
+                                <rect key="frame" x="93" y="91" width="189" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="244" id="2qf-vg-nv0"/>
-                                    <constraint firstAttribute="height" constant="166" id="wxq-Us-IyI"/>
+                                    <constraint firstAttribute="width" constant="189" id="2qf-vg-nv0"/>
+                                    <constraint firstAttribute="height" constant="128" id="wxq-Us-IyI"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="s6L-vV-UeC" firstAttribute="top" secondItem="WfM-59-Auc" secondAttribute="bottom" id="3wK-8q-FN2"/>
-                            <constraint firstItem="vPf-38-K8w" firstAttribute="centerX" secondItem="cYV-y1-Y3K" secondAttribute="centerX" constant="-5.5" id="9fz-Vu-OSt"/>
-                            <constraint firstItem="vPf-38-K8w" firstAttribute="top" secondItem="Ag2-gj-Uuv" secondAttribute="bottom" constant="65" id="Cvo-Uu-Kyy"/>
+                            <constraint firstItem="vPf-38-K8w" firstAttribute="centerX" secondItem="cYV-y1-Y3K" secondAttribute="centerX" id="9fz-Vu-OSt"/>
+                            <constraint firstItem="vPf-38-K8w" firstAttribute="top" secondItem="Ag2-gj-Uuv" secondAttribute="bottom" constant="91" id="Cvo-Uu-Kyy"/>
                             <constraint firstItem="WfM-59-Auc" firstAttribute="leading" secondItem="cYV-y1-Y3K" secondAttribute="leading" id="cSJ-zf-9oL"/>
                             <constraint firstAttribute="trailing" secondItem="WfM-59-Auc" secondAttribute="trailing" id="voj-ey-G8N"/>
                             <constraint firstItem="WfM-59-Auc" firstAttribute="top" secondItem="cYV-y1-Y3K" secondAttribute="top" id="y3P-TX-ZJU"/>
@@ -1295,7 +1295,7 @@
         <image name="icon_pass" width="20" height="26"/>
         <image name="icon_user" width="98" height="93"/>
         <image name="lista" width="23" height="23"/>
-        <image name="logomarca-1" width="304" height="243"/>
+        <image name="logomarca-1" width="240" height="240"/>
         <image name="more" width="40" height="40"/>
         <image name="ufv" width="488" height="356"/>
     </resources>

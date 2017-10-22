@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,17 +21,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carregando..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOW-Qj-xd4">
-                                <rect key="frame" x="128" y="321.5" width="119" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logomarca-1" translatesAutoresizingMaskIntoConstraints="NO" id="jgs-uL-7Mu">
+                                <rect key="frame" x="67" y="213.5" width="240" height="240"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.10980392160000001" green="0.57647058819999997" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.96641710069444442" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fOW-Qj-xd4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5DO-GD-CQC"/>
-                            <constraint firstItem="fOW-Qj-xd4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="P8d-sg-FPn"/>
+                            <constraint firstItem="jgs-uL-7Mu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GOr-SW-GaD"/>
+                            <constraint firstItem="jgs-uL-7Mu" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Rv6-NJ-Xkd"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,4 +37,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logomarca-1" width="240" height="240"/>
+    </resources>
 </document>
