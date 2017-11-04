@@ -15,6 +15,8 @@ target 'MonitoriaUFV' do
     pod 'Firebase/Auth'
     pod 'Firebase/Performance'
     pod 'SVProgressHUD'
+    
+    pod 'UICircularProgressRing'
 
   target 'MonitoriaUFVTests' do
     inherit! :search_paths

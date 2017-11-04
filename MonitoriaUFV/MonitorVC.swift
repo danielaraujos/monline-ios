@@ -34,7 +34,7 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let ref = Database.database().reference().child(Constantes.USUARIOS).child(self.meuID)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                var novosUsuarios = Usuario(dictionary: dictionary)
+                let novosUsuarios = Usuario(dictionary: dictionary)
                 if(novosUsuarios.monitor != "0"){
                     self.lista()
                     self.sigla = novosUsuarios.monitor!

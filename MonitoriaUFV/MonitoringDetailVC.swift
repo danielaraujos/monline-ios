@@ -90,12 +90,13 @@ class MonitoringDetailVC: UIViewController {
 
     @IBAction func btnAlerta(_ sender: Any) {
         self.observar(true)
+        self.inscricao()
         self.showAlert(title: "Parabéns!", message: "Você acabou de seguir a monitoria. Receberá notificações sobre a mesma.")
     }
 
     func inscricao()-> DatabaseReference{
         let ref = Database.database().reference().child(Constantes.INSCRICAO).child(self.sigla).child(self.meuID)
-        var values: [String: AnyObject] = ["id": self.meuID as AnyObject]
+        let values: [String: AnyObject] = ["id": self.meuID as AnyObject]
         ref.updateChildValues(values) { (error, ref) in
             if error != nil {
                 print(error!)

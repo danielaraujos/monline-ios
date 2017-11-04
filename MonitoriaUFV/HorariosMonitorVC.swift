@@ -20,8 +20,26 @@ class HorariosMonitorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lerUsuario()
+        self.arredondamentoBorda()
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
 
     }
+    
+    func sumirTeclado(){
+        view.endEditing(true)
+    }
+    
+    
+    func arredondamentoBorda(){
+        let myColor : UIColor = ElementsProvider.hexStringToUIColor(hex: "#eee")
+        self.textViewHorario.layer.borderColor = myColor.cgColor
+        self.textViewHorario.layer.borderWidth = 0.3
+        self.textViewHorario.layer.cornerRadius = 10;
+        self.textViewHorario.clipsToBounds = true;
+    }
+    
+    
 
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true

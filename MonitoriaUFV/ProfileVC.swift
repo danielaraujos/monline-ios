@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class ProfileVC: UIViewController {
 
@@ -31,50 +32,37 @@ class ProfileVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //self.lerProfile()
-    }
-    
     @IBAction func lblAtualizarA(_ sender: Any) {
+        SVProgressHUD.show(withStatus: "Carregando")
         self.update()
-
     }
     
     func update(){
         
         let imageName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child(Constantes.PROFILE_STORAGE).child("\(imageName).png")
-        
-        
-        
-        
         if let profileImage = self.imageProfile.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
             storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                 
                 if let error = error {
-                    print(error)
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                     return
                 }
                 
                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                    
                     let values = ["nome":self.lblNome.text! , "matricula":self.lblMatricula.text! ,"ImagemURL":profileImageUrl]
-                    
                     Database.database().reference().child(Constantes.USUARIOS).child(self.meuID).updateChildValues(values){ (error, ref) in
                         if(error != nil){
-                            print("Error",error)
+                            SVProgressHUD.dismiss()
                             self.showAlert(title: "Error", message: "Erro ao atualizar o perfil, tente novamente.")
                         }else{
+                            SVProgressHUD.dismiss()
                             self.showAlert(title: "Sucesso", message: "Perfil atualizado com sucesso!")
                         }
                     }
-                    
-                    
                 }
             })
-
         }
-        
     }
     
     

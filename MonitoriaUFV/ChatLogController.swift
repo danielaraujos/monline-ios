@@ -99,6 +99,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         collectionView?.keyboardDismissMode = .interactive
         
         self.setupKeyboardObservers()
+        
     }
     
     lazy var inputContainerView: UIView = {
@@ -161,23 +162,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         present(imagePickerController, animated: true, completion: nil)
     }
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//
-//        var selectedImageFromPicker: UIImage?
-//
-//        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-//            selectedImageFromPicker = editedImage
-//        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-//
-//            selectedImageFromPicker = originalImage
-//        }
-//
-//        if let selectedImage = selectedImageFromPicker {
-//            uploadToFirebaseStorageUsingImage(selectedImage)
-//        }
-//
-//        dismiss(animated: true, completion: nil)
-//    }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -215,7 +199,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         uploadTask.observe(.progress) { (snapshot) in
             if let completedUnitCount = snapshot.progress?.completedUnitCount {
-                var porcentagem = completedUnitCount/100
+                let porcentagem = completedUnitCount/100
                SVProgressHUD.show(withStatus: "Enviando ... \(porcentagem) %")
                 
                 //self.navigationItem.title = String(completedUnitCount)
@@ -280,8 +264,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             })
         }
     }
-    
-    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -366,9 +348,15 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     
     fileprivate func setupCell(_ cell: ChatMensagemCell, message: Mensagem) {
-        if let profileImageUrl = self.usuario?.ImagemURL {
-            cell.profileImageView.carregarImagemNoCache(profileImageUrl)
+        
+        if(self.usuario?.ImagemURL != nil){
+            if let profileImageUrl = self.usuario?.ImagemURL {
+                cell.profileImageView.carregarImagemNoCache(profileImageUrl)
+            }
+        }else{
+            cell.profileImageView.image = UIImage(named: "profile-")
         }
+       
         //let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
        
         if message.meuID == Auth.auth().currentUser?.uid {
@@ -514,33 +502,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let properties: [String: AnyObject] = ["imageUrl": imageUrl as AnyObject, "larguraImagem": image.size.width as AnyObject, "alturaImagem": image.size.height as AnyObject]
         sendMessageWithProperties(properties)
     }
-    
-//    fileprivate func sendMessageWithImageUrl(_ imageUrl: String) {
-//        let ref = Database.database().reference().child(Constantes.MENSAGENS)
-//        let childRef = ref.childByAutoId()
-//        let toId = usuario?.id as! String
-//        let fromId = AuthProvider.Instance.userID()
-//        let timestamp = Int(Date().timeIntervalSince1970)
-//        
-//        let values = ["imageUrl": imageUrl, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
-//        
-//        childRef.updateChildValues(values) { (error, ref) in
-//            if error != nil {
-//                print(error!)
-//                return
-//            }
-//            
-//            self.inputTextField.text = nil
-//            
-//            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
-//            
-//            let messageId = childRef.key
-//            userMessagesRef.updateChildValues([messageId: 1])
-//            
-//            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
-//            recipientUserMessagesRef.updateChildValues([messageId: 1])
-//        }
-//    }
     
     fileprivate func sendMessageWithProperties(_ properties: [String: AnyObject]) {
         let ref = Database.database().reference().child(Constantes.MENSAGENS)

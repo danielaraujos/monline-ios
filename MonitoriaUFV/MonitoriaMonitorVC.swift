@@ -22,7 +22,33 @@ class MonitoriaMonitorVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lerUsuario()
-
+        self.arredondamentoBorda()
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    
+    func arredondamentoBorda(){
+        let myColor : UIColor = ElementsProvider.hexStringToUIColor(hex: "#eee")
+        self.textViewDescricao.layer.borderColor = myColor.cgColor
+        self.textViewDescricao.layer.borderWidth = 0.3
+        self.textViewDescricao.layer.cornerRadius = 10;
+        self.textViewDescricao.clipsToBounds = true;
+        
+        self.textFieldDisciplina.layer.borderColor = myColor.cgColor
+        self.textFieldDisciplina.layer.borderWidth = 0.3
+        self.textFieldDisciplina.layer.cornerRadius = 10;
+        self.textFieldDisciplina.clipsToBounds = true;
+        
+        self.textFieldProfessor.layer.borderColor = myColor.cgColor
+        self.textFieldProfessor.layer.borderWidth = 0.3
+        self.textFieldProfessor.layer.cornerRadius = 10;
+        self.textFieldProfessor.clipsToBounds = true;
+    }
+    
+    func sumirTeclado(){
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
