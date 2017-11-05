@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import SConnection
+import SVProgressHUD
 
 class HorariosVC: UIViewController {
 
@@ -16,7 +18,12 @@ class HorariosVC: UIViewController {
     @IBOutlet weak var textViewConteudo: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.buscarHorarios()
+        if(SConnection.isConnectedToNetwork()){
+            self.buscarHorarios()
+        }else{
+            self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +46,14 @@ class HorariosVC: UIViewController {
                 }
             }, withCancel: nil)
         }, withCancel: nil)
+    }
+    
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
     }
 
 }

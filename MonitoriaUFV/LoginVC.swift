@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import SConnection
 
 class LoginVC: UIViewController {
 
@@ -19,27 +20,25 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btn_login: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registerTextField: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.rounding()
-        self.back()
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard(){
-        //textField.resignFirstResponder()
-        view.endEditing(true)
-    }
-    
-    func back(){
         let backItem = UIBarButtonItem()
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
     }
+    
+    func sumirTeclado(){
+        view.endEditing(true)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -57,18 +56,25 @@ class LoginVC: UIViewController {
         
         if checkTrue(email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
-            AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
-                if message != nil {
-                    SVProgressHUD.dismiss()
-                    self.showAlert(title: "Problema na autentificação", message: message!)
-                }else {
-                    self.emailTextField.text = ""
-                    self.passwordTextField.text = ""
-                    print("LOGIN COM SUCESSO!")
-                    SVProgressHUD.dismiss()
-                    self.performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil)
-                }
-            })
+            if(SConnection.isConnectedToNetwork()){
+                AuthProvider.Instance.login(withEmail: email, password: password, loginHandler: { (message) in
+                    if message != nil {
+                        SVProgressHUD.dismiss()
+                        self.showAlert(title: "Problema na autentificação", message: message!)
+                    }else {
+                        self.emailTextField.text = ""
+                        self.passwordTextField.text = ""
+                        print("LOGIN COM SUCESSO!")
+                        SVProgressHUD.dismiss()
+                        self.performSegue(withIdentifier: self.SUCESS_SEGUE, sender: nil)
+                    }
+                })
+            }else {
+                SVProgressHUD.dismiss()
+                self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+                
+            }
+            
             SVProgressHUD.dismiss()
         }
     }
@@ -91,8 +97,10 @@ class LoginVC: UIViewController {
     func rounding(){
         viewUser.layer.cornerRadius = 20;
         viewPassword.layer.cornerRadius = 20;
-        btn_login.layer.cornerRadius = 20;
+        btn_login.layer.cornerRadius = 10;
+        registerTextField.layer.cornerRadius = 10;
         viewUser.clipsToBounds = true;
+        registerTextField.clipsToBounds = true;
         viewPassword.clipsToBounds = true;
         btn_login.clipsToBounds = true;
     }

@@ -16,6 +16,8 @@ target 'MonitoriaUFV' do
     pod 'Firebase/Performance'
     pod 'SVProgressHUD'
     
+    pod 'SConnection'
+    
     pod 'UICircularProgressRing'
 
   target 'MonitoriaUFVTests' do

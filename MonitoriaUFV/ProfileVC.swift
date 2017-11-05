@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import SConnection
 
 class ProfileVC: UIViewController {
 
@@ -24,8 +25,18 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lerProfile()
-        self.arredondandoImagem()
+        if(SConnection.isConnectedToNetwork()){
+            self.lerProfile()
+            self.arredondandoImagem()
+        }else{
+            self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+        }
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func sumirTeclado(){
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

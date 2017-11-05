@@ -111,8 +111,9 @@ class MonitorVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationController!.pushViewController(controller, animated: true)
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);

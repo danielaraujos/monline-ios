@@ -164,4 +164,12 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
+    }
+    
 }

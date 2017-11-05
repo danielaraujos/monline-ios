@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import SConnection
 
 typealias LoginHandler = (_ msg: String?) -> Void;
 
@@ -168,7 +169,6 @@ class AuthProvider {
         }
     }
 }
-
 
 
 

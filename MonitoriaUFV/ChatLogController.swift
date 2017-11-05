@@ -32,7 +32,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     fileprivate func buscarNomeMonitora(_ sigla: String) {
         let ref = Database.database().reference().child(Constantes.MONITORIAS)
         ref.observe(.childAdded, with: { (snapshot) in
-            let nomeDisciplina = snapshot.key as! String
+            let nomeDisciplina = snapshot.key
             if(sigla == nomeDisciplina){
                 let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
                 cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
@@ -357,8 +357,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.profileImageView.image = UIImage(named: "profile-")
         }
        
-        //let profileImageUrl = UIImageView(image: #imageLiteral(resourceName: "profile"))
-       
         if message.meuID == Auth.auth().currentUser?.uid {
             cell.bubbleView.backgroundColor = ElementsProvider.hexStringToUIColor(hex: "#dc4539")
             cell.textView.textColor = UIColor.white
@@ -462,37 +460,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
- 
-    
-//    func handleSend() {
-//        let ref = Database.database().reference().child(Constantes.MENSAGENS)
-//        let childRef = ref.childByAutoId()
-//        let toId = usuario?.id as! String
-//
-//
-//        let fromId = Auth.auth().currentUser!.uid
-//        let timestamp = Int(Date().timeIntervalSince1970)
-//        let values = ["texto": inputTextField.text!, "paraID": toId, "meuID": fromId, "timestamp": timestamp] as [String : Any]
-//
-//        childRef.updateChildValues(values) { (error, ref) in
-//            if error != nil {
-//                print(error ?? "")
-//                return
-//            }
-//
-//            self.inputTextField.text = nil
-//            let userMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(fromId).child(toId)
-//
-//            let messageId = childRef.key
-//            userMessagesRef.updateChildValues([messageId: 1])
-//
-//            let recipientUserMessagesRef = Database.database().reference().child(Constantes.MENSUSUARIO).child(toId).child(fromId)
-//            recipientUserMessagesRef.updateChildValues([messageId: 1])
-//        }
-//    }
-    
-    
-
     func handleSend() {
         let properties = ["texto": inputTextField.text!]
         sendMessageWithProperties(properties as [String : AnyObject])
@@ -572,9 +539,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 self.blackBackgroundView?.alpha = 1
                 self.inputContainerView.alpha = 0
                 
-                // math?
-                // h2 / w1 = h1 / w1
-                // h2 = h1 / w1 * w1
                 let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
                 
                 zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
@@ -582,7 +546,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 zoomingImageView.center = keyWindow.center
                 
             }, completion: { (completed) in
-                //                    do nothing
             })
             
         }

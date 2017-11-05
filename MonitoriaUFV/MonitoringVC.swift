@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import SConnection
 
 class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
@@ -24,22 +25,23 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.back()
-        SVProgressHUD.show(withStatus: "Carregando")
-        self.buscarCursos()
         
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        navigationItem.backBarButtonItem = backItem
+        
+        SVProgressHUD.show(withStatus: "Carregando")
+        if(SConnection.isConnectedToNetwork()){
+             self.buscarCursos()
+        }else{
+            SVProgressHUD.dismiss()
+            self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
-    
-    func back(){
-        let backItem = UIBarButtonItem()
-        backItem.title = " "
-        navigationItem.backBarButtonItem = backItem
-    }
-
     
     /*
      Leio a estrutura Cursos, leio a estrutura dos usuario e verifico na lista de usuarios, qual é o meu usuario
@@ -130,5 +132,14 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 viewControllerDestino.sigla = siglaSelecionada
             }
         }
+    }
+    
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
+        
     }
 }

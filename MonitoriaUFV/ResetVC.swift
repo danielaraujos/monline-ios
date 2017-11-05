@@ -15,6 +15,13 @@ class ResetVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func sumirTeclado(){
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

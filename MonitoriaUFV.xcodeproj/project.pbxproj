@@ -45,6 +45,7 @@
 		4CBDFE1C1F4D15A5000504F3 /* MonitoringViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */; };
 		4CC0AACC1F53388300DB6FBA /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC0AACB1F53388300DB6FBA /* DBProvider.swift */; };
 		4CC324EB1F9AB6430072F617 /* MonitoriaMonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */; };
+		4CCE7A431FAE42FE00B7F5DE /* SConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCE7A441FAE42FE00B7F5DE /* SConnection.framework */; };
 		4CD3442D1F983DAA003306D0 /* HorariosMonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */; };
 		4CFDC3611F6C74AB00010FB8 /* ReporterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */; };
 		AE3D99F97C80E9704202BB5C /* Pods_MonitoriaUFV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5E08A8825AC9B56D52CCB2 /* Pods_MonitoriaUFV.framework */; };
@@ -116,6 +117,7 @@
 		4CBDFE1B1F4D15A5000504F3 /* MonitoringViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringViewCell.swift; sourceTree = "<group>"; };
 		4CC0AACB1F53388300DB6FBA /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoriaMonitorVC.swift; sourceTree = "<group>"; };
+		4CCE7A441FAE42FE00B7F5DE /* SConnection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SConnection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorariosMonitorVC.swift; sourceTree = "<group>"; };
 		4CFDC3601F6C74AB00010FB8 /* ReporterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReporterVC.swift; sourceTree = "<group>"; };
 		77D676C591A5E13DC811BCDB /* Pods-MonitoriaUFV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitoriaUFV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCE7A431FAE42FE00B7F5DE /* SConnection.framework in Frameworks */,
 				AE3D99F97C80E9704202BB5C /* Pods_MonitoriaUFV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +291,7 @@
 		5A3B99F2EDE9AA82A6703194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CCE7A441FAE42FE00B7F5DE /* SConnection.framework */,
 				DC5E08A8825AC9B56D52CCB2 /* Pods_MonitoriaUFV.framework */,
 				366CE2D966899348554F2434 /* Pods_MonitoriaUFVTests.framework */,
 				11EC1DCF73F7A1292CAA128D /* Pods_MonitoriaUFVUITests.framework */,
@@ -486,7 +490,9 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SConnection/SConnection.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -495,7 +501,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SConnection.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

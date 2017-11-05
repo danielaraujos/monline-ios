@@ -46,7 +46,7 @@ class MonitoringDetailVC: UIViewController {
     func buscarMonitoria() {
         let ref = Database.database().reference().child(Constantes.MONITORIAS)
         ref.observe(.childAdded, with: { (snapshot) in
-            let nomeDisciplina = snapshot.key as! String
+            let nomeDisciplina = snapshot.key
             if(self.sigla == nomeDisciplina){
                 let cursoUsuarioRef = Database.database().reference().child(Constantes.MONITORIAS).child(nomeDisciplina)
                 cursoUsuarioRef.observeSingleEvent(of: .value, with: { (conteudo) in
@@ -65,11 +65,11 @@ class MonitoringDetailVC: UIViewController {
     fileprivate func buscarUsuario() {
         let ref = Database.database().reference().child(Constantes.USUARIOS)
         ref.observe(.childAdded, with: { (snapshot) in
-            let idUsuarios = snapshot.key as! String
+            let idUsuarios = snapshot.key
             let ref = Database.database().reference().child(Constantes.USUARIOS).child(idUsuarios)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
-                    var novosUsuarios = Usuario(dictionary: dictionary)
+                    let novosUsuarios = Usuario(dictionary: dictionary)
                     if(novosUsuarios.monitor == self.sigla){
                         self.usuario = novosUsuarios
                         self.usuario.id = idUsuarios
@@ -155,8 +155,9 @@ class MonitoringDetailVC: UIViewController {
         }
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);

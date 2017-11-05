@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import SConnection
 
 class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -30,11 +31,23 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         var pickerView = UIPickerView()
         pickerView.delegate = self
         self.selecione = Curso.init(nome: "Selecione o curso")
-        self.coursesOption.append(self.selecione!)
-        self.buscarSiglaCursos()
+        if(SConnection.isConnectedToNetwork()){
+            self.coursesOption.append(self.selecione!)
+            self.buscarSiglaCursos()
+            
+        }else{
+            SVProgressHUD.dismiss()
+            self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+        }
         couseTextField.inputView = pickerView
+        
+        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        view.addGestureRecognizer(tap)
     }
     
+    func sumirTeclado(){
+        view.endEditing(true)
+    }
     /*
      Funções responsavel por mostrar a barra de navegação
      */
@@ -108,14 +121,6 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         return true
     }
-
-    /* Função responsavel pelos alertas */
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
-        alert.addAction(ok);
-        present(alert, animated: true, completion: nil);
-    }
     
     func buscarSiglaCursos(){
         SVProgressHUD.show(withStatus: "Carregando")
@@ -136,5 +141,14 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
                 SVProgressHUD.dismiss()
             }
         }, withCancel: nil)
+    }
+    
+    
+    /* Função responsavel pelos alertas */
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
+        alert.addAction(ok);
+        present(alert, animated: true, completion: nil);
     }
 }

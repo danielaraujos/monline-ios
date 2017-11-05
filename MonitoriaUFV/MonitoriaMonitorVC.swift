@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import SConnection
+import SVProgressHUD
 
 class MonitoriaMonitorVC: UIViewController {
 
@@ -21,8 +23,14 @@ class MonitoriaMonitorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lerUsuario()
-        self.arredondamentoBorda()
+        if(SConnection.isConnectedToNetwork()){
+            self.lerUsuario()
+            self.arredondamentoBorda()
+        }
+        else{
+            self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
+        }
+        
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
         view.addGestureRecognizer(tap)
         
@@ -67,7 +75,7 @@ class MonitoriaMonitorVC: UIViewController {
     }
     
     func buscarMonitoria(_ monitor: String) {
-        print(monitor)
+        SVProgressHUD.show(withStatus: "Carregando")
         let ref = Database.database().reference().child(Constantes.MONITORIAS).child(monitor)
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
@@ -76,31 +84,37 @@ class MonitoriaMonitorVC: UIViewController {
                 self.textFieldProfessor.text = monitorias.professor!
                 self.textFieldDisciplina.text = monitorias.nome!
             }
+            SVProgressHUD.dismiss()
         }, withCancel: nil)
     }
     
     
     func atualiza(_ monitor: String){
         let values = ["descricao":self.textViewDescricao.text,"nome":self.textFieldDisciplina.text,"professor":self.textFieldProfessor.text ]
+        SVProgressHUD.show(withStatus: "Carregando")
         let ref = Database.database().reference().child(Constantes.MONITORIAS).child(monitor).updateChildValues(values){ (error, ref) in
             if(error != nil){
+                SVProgressHUD.dismiss()
                 print("Error",error)
                 self.showAlert(title: "Error", message: "Erro ao atualizar a monitoria, tente novamente.")
             }else{
+                SVProgressHUD.dismiss()
                 self.showAlert(title: "Sucesso", message: "Monitoria atualizada com sucesso!")
             }
         }
+        
     }
     
-    func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert);
+    @IBAction func btnAtualizar(_ sender: Any) {
+        self.atualiza(self.monitor!)
+    }
+    
+    /* Função responsavel pelos alertas */
+     func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet);
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil);
         alert.addAction(ok);
         present(alert, animated: true, completion: nil);
-    }
-
-    @IBAction func btnAtualizar(_ sender: Any) {
-        self.atualiza(self.monitor!)
     }
     
 }
