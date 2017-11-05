@@ -28,7 +28,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var pickerView = UIPickerView()
+        let pickerView = UIPickerView()
         pickerView.delegate = self
         self.selecione = Curso.init(nome: "Selecione o curso")
         if(SConnection.isConnectedToNetwork()){
@@ -41,7 +41,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         couseTextField.inputView = pickerView
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
         view.addGestureRecognizer(tap)
     }
     
@@ -84,8 +84,8 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         let password = passwordTextField.text!
         let name = nameTextField.text!
         let matricula = matriculaTextField.text!
-        var course = self.siglaCurso!
-        var monitor = "0"
+        let course = self.siglaCurso!
+        let monitor = "0"
         
         if checkTrue(name: name, course: course,matricula:matricula,email: email, password: password){
             SVProgressHUD.show(withStatus: "Carregando")
@@ -126,7 +126,7 @@ class RegisterVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         SVProgressHUD.show(withStatus: "Carregando")
         let ref = Database.database().reference().child(Constantes.CURSOS)
         ref.observe(.childAdded, with: { (snapshot) in
-            var sigla = snapshot.key
+            let sigla = snapshot.key
             self.buscarNomeCursos(sigla)
         }, withCancel: nil)
     }

@@ -23,15 +23,15 @@ class MonitoriaMonitorVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.arredondamentoBorda()
         if(SConnection.isConnectedToNetwork()){
             self.lerUsuario()
-            self.arredondamentoBorda()
         }
         else{
             self.showAlert(title: Constantes.TITULOALERTA, message: Constantes.MENSAGEMALERTA)
         }
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
         view.addGestureRecognizer(tap)
         
     }
@@ -92,10 +92,10 @@ class MonitoriaMonitorVC: UIViewController {
     func atualiza(_ monitor: String){
         let values = ["descricao":self.textViewDescricao.text,"nome":self.textFieldDisciplina.text,"professor":self.textFieldProfessor.text ]
         SVProgressHUD.show(withStatus: "Carregando")
-        let ref = Database.database().reference().child(Constantes.MONITORIAS).child(monitor).updateChildValues(values){ (error, ref) in
+        Database.database().reference().child(Constantes.MONITORIAS).child(monitor).updateChildValues(values){ (error, ref) in
             if(error != nil){
                 SVProgressHUD.dismiss()
-                print("Error",error)
+                //print("Error",error)
                 self.showAlert(title: "Error", message: "Erro ao atualizar a monitoria, tente novamente.")
             }else{
                 SVProgressHUD.dismiss()

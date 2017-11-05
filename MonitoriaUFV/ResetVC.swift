@@ -15,7 +15,7 @@ class ResetVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.rounding()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
         view.addGestureRecognizer(tap)
     }
@@ -48,11 +48,21 @@ class ResetVC: UIViewController {
                     SVProgressHUD.dismiss()
                     self.showAlert(title: "Ops! Aconteceu um problema!", message: error!)
                 }else {
+                    SVProgressHUD.dismiss()
                     self.showAlert(title: "E-mail enviado!", message: "Um e-mail para redefinição de senha foi encaminhado.")
                 }
             })
             SVProgressHUD.dismiss()
         }
+    }
+    
+    /* Função responsavel por arredondar os cantos para os botoes e views */
+    func rounding(){
+        let myColor : UIColor = ElementsProvider.hexStringToUIColor(hex: "#eee")
+        emailTextField.layer.borderColor = myColor.cgColor
+        emailTextField.layer.borderWidth = 0.3
+        emailTextField.layer.cornerRadius = 5;
+        emailTextField.clipsToBounds = true;
     }
     
     /* Função responsavel pelos alertas */

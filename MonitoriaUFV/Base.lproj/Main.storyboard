@@ -1473,40 +1473,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preencha seu e-mail para redefinirmos sua senha:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52R-MN-tmk">
-                                <rect key="frame" x="30" y="37" width="316" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digite seu email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cx-Qt-3lH">
-                                <rect key="frame" x="30" y="126" width="315" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-XH-6qO">
-                                <rect key="frame" x="32" y="101" width="125" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrY-33-2AT">
-                                <rect key="frame" x="30" y="188" width="316" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.86400252580000003" green="0.26514437790000001" blue="0.22129353879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Redefinir">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnRecovery:" destination="Vus-yJ-pzE" eventType="touchUpInside" id="Xt9-bU-dGb"/>
-                                </connections>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yb5-T0-zm1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OB-rb-yd1">
+                                        <rect key="frame" x="0.0" y="-63" width="375" height="666"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Digite seu email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3cx-Qt-3lH">
+                                                <rect key="frame" x="32" y="190" width="305" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-XH-6qO">
+                                                <rect key="frame" x="32" y="165" width="41" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrY-33-2AT">
+                                                <rect key="frame" x="32" y="245" width="305" height="42"/>
+                                                <color key="backgroundColor" red="0.86400252580000003" green="0.26514437790000001" blue="0.22129353879999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="42" id="UPh-0L-MDO"/>
+                                                </constraints>
+                                                <state key="normal" title="Redefinir">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnRecovery:" destination="Vus-yJ-pzE" eventType="touchUpInside" id="Xt9-bU-dGb"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Preencha seu e-mail para redefinirmos sua senha:" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52R-MN-tmk">
+                                                <rect key="frame" x="32" y="102" width="305" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="52R-MN-tmk" firstAttribute="trailing" secondItem="3cx-Qt-3lH" secondAttribute="trailing" id="1Aa-ZQ-V2C"/>
+                                            <constraint firstItem="52R-MN-tmk" firstAttribute="centerX" secondItem="3cx-Qt-3lH" secondAttribute="centerX" id="3eR-3O-U2F"/>
+                                            <constraint firstItem="3cx-Qt-3lH" firstAttribute="trailing" secondItem="mrY-33-2AT" secondAttribute="trailing" id="AIw-s9-tJn"/>
+                                            <constraint firstItem="3cx-Qt-3lH" firstAttribute="centerX" secondItem="6OB-rb-yd1" secondAttribute="centerX" constant="-3" id="Cq6-zE-jNW"/>
+                                            <constraint firstItem="Y1Z-XH-6qO" firstAttribute="top" secondItem="52R-MN-tmk" secondAttribute="bottom" constant="13" id="Dqp-6I-se1"/>
+                                            <constraint firstAttribute="height" constant="666" id="L6H-Jo-JbG"/>
+                                            <constraint firstItem="mrY-33-2AT" firstAttribute="top" secondItem="3cx-Qt-3lH" secondAttribute="bottom" constant="25" id="Xha-eY-9qh"/>
+                                            <constraint firstItem="52R-MN-tmk" firstAttribute="leading" secondItem="Y1Z-XH-6qO" secondAttribute="leading" id="gzy-iW-poM"/>
+                                            <constraint firstItem="3cx-Qt-3lH" firstAttribute="top" secondItem="Y1Z-XH-6qO" secondAttribute="bottom" constant="8" symbolic="YES" id="k3h-Yz-2c8"/>
+                                            <constraint firstItem="3cx-Qt-3lH" firstAttribute="leading" secondItem="mrY-33-2AT" secondAttribute="leading" id="xvC-wE-7MK"/>
+                                            <constraint firstItem="52R-MN-tmk" firstAttribute="top" secondItem="6OB-rb-yd1" secondAttribute="top" constant="102" id="y9T-P2-dcO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6OB-rb-yd1" firstAttribute="top" secondItem="yb5-T0-zm1" secondAttribute="top" constant="-63" id="3vz-0r-PEw"/>
+                                    <constraint firstItem="6OB-rb-yd1" firstAttribute="leading" secondItem="yb5-T0-zm1" secondAttribute="leading" id="5aN-8u-aYI"/>
+                                    <constraint firstItem="6OB-rb-yd1" firstAttribute="centerX" secondItem="yb5-T0-zm1" secondAttribute="centerX" id="KC9-yO-IPk"/>
+                                    <constraint firstAttribute="bottom" secondItem="6OB-rb-yd1" secondAttribute="bottom" id="PXa-Xu-tyc"/>
+                                    <constraint firstAttribute="trailing" secondItem="6OB-rb-yd1" secondAttribute="trailing" id="j0O-aO-mNw"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yb5-T0-zm1" firstAttribute="top" secondItem="NQm-pv-qjy" secondAttribute="top" id="1vE-UG-mEC"/>
+                            <constraint firstItem="3cx-Qt-3lH" firstAttribute="width" secondItem="NQm-pv-qjy" secondAttribute="width" constant="-70" id="8kn-RE-kMU"/>
+                            <constraint firstItem="yb5-T0-zm1" firstAttribute="leading" secondItem="NQm-pv-qjy" secondAttribute="leading" id="Udf-3P-kwA"/>
+                            <constraint firstAttribute="trailing" secondItem="yb5-T0-zm1" secondAttribute="trailing" id="VB8-sS-ghc"/>
+                            <constraint firstItem="Kfa-Ez-5zp" firstAttribute="top" secondItem="yb5-T0-zm1" secondAttribute="bottom" id="x8l-hu-QjZ"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="3cx-Qt-3lH" id="QVW-MG-d8I"/>

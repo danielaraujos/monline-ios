@@ -70,8 +70,8 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let conteudoReferencia = Database.database().reference().child(Constantes.USUARIOS).child(self.meuID)
         conteudoReferencia.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-                var usuario = Usuario(dictionary: dictionary)
-                var cursoQueFaco = usuario.curso!
+                let usuario = Usuario(dictionary: dictionary)
+                let cursoQueFaco = usuario.curso!
                 if(cursoQueFaco == sigla){
                     self.buscarAsMonitoriasDoCurso(sigla, usuario.monitor! )
                 }
@@ -92,7 +92,7 @@ class MonitoringVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             if let dictionary = filho.value as? [String: AnyObject] {
                 for(key , value ) in dictionary {
                     if(key != disciplinaMonitor){
-                        let novaMonitorias = Curso(nome: value as! String, sigla: key as! String)
+                        let novaMonitorias = Curso(nome: value as! String, sigla: key)
                         self.monitorias.append(novaMonitorias)
                     }
                 }

@@ -31,7 +31,7 @@ class LoginVC: UIViewController {
         backItem.title = " "
         navigationItem.backBarButtonItem = backItem
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sumirTeclado")
         view.addGestureRecognizer(tap)
     }
     

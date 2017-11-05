@@ -41,7 +41,7 @@ class Constantes {
     
     
     static let MENSAGEMALERTA = "Para utilizar o aplicativo, é necessário conexão com a internet. Tente mais tarde."
-    static let TITULOALERTA = "Atenção" as! String
+    static let TITULOALERTA = "Atenção"
     
 }
 
