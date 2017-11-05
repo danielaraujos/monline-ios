@@ -16,7 +16,9 @@ class MonitoringDetailVC: UIViewController {
     var usuario : Usuario!
     private let CHATSEGUE = "ChatSegue";
     private let HORARIOSSEGUE = "HorariosSegue"
+    private let REPORTERSEGUE = "ReporterSegue"
     var meuID = AuthProvider.Instance.userID()
+    
     
     @IBOutlet weak var alerta: UIBarButtonItem!
     @IBOutlet weak var denuncia: UIButton!
@@ -92,7 +94,10 @@ class MonitoringDetailVC: UIViewController {
     @IBAction func btnHorarios(_ sender: Any) {
        
     }
-
+    @IBAction func btnDenunciar(_ sender: Any) {
+        print("Clicou")
+    }
+    
     @IBAction func btnAlerta(_ sender: Any) {
         self.observar(true)
         self.inscricao()
@@ -156,6 +161,11 @@ class MonitoringDetailVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == HORARIOSSEGUE{
             let viewControllerDestino = segue.destination as! HorariosVC
+            viewControllerDestino.recebimento = self.sigla
+        }
+        
+        if segue.identifier == REPORTERSEGUE{
+            let viewControllerDestino = segue.destination as! ReporterVC
             viewControllerDestino.recebimento = self.sigla
         }
     }

@@ -353,7 +353,8 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="zxi-Fx-3hI" kind="show" id="Ddv-7V-sht"/>
+                                                    <action selector="btnDenunciar:" destination="vpB-gT-lwp" eventType="touchUpInside" id="uyc-ic-iSz"/>
+                                                    <segue destination="zxi-Fx-3hI" kind="show" identifier="ReporterSegue" id="Ddv-7V-sht"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYj-5X-zfJ">
