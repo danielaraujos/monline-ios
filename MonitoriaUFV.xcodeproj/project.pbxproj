@@ -26,6 +26,7 @@
 		4C6E284F1F6459DE00E1B0E4 /* Constantes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E284E1F6459DE00E1B0E4 /* Constantes.swift */; };
 		4C6E28511F646C5700E1B0E4 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28501F646C5700E1B0E4 /* Usuario.swift */; };
 		4C6E28531F6471DA00E1B0E4 /* Curso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6E28521F6471DA00E1B0E4 /* Curso.swift */; };
+		4C70A48A1FAF8C3600AC9B10 /* SeguidoresMonitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C70A4891FAF8C3600AC9B10 /* SeguidoresMonitorVC.swift */; };
 		4C79B5DF1F48A60100530E75 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5DE1F48A60100530E75 /* LoginVC.swift */; };
 		4C79B5E11F48ABAF00530E75 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */; };
 		4C79B5E31F48B0DF00530E75 /* ResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C79B5E21F48B0DF00530E75 /* ResetVC.swift */; };
@@ -98,6 +99,7 @@
 		4C6E284E1F6459DE00E1B0E4 /* Constantes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constantes.swift; sourceTree = "<group>"; };
 		4C6E28501F646C5700E1B0E4 /* Usuario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
 		4C6E28521F6471DA00E1B0E4 /* Curso.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curso.swift; sourceTree = "<group>"; };
+		4C70A4891FAF8C3600AC9B10 /* SeguidoresMonitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeguidoresMonitorVC.swift; sourceTree = "<group>"; };
 		4C79B5DE1F48A60100530E75 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4C79B5E01F48ABAF00530E75 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		4C79B5E21F48B0DF00530E75 /* ResetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetVC.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				4C43B7861F980D9500017138 /* HorariosVC.swift */,
 				4CD3442C1F983DAA003306D0 /* HorariosMonitorVC.swift */,
 				4CC324EA1F9AB6430072F617 /* MonitoriaMonitorVC.swift */,
+				4C70A4891FAF8C3600AC9B10 /* SeguidoresMonitorVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -547,7 +550,7 @@
 		};
 		D1DE37489017D196677A8CAC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -555,10 +558,9 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MonitoriaUFV/Pods-MonitoriaUFV-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		E9B48900EF01377981F94A42 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -646,6 +648,7 @@
 				4C881CA51F83028D00764BE8 /* ElementsProvider.swift in Sources */,
 				4C79B5EB1F4A53C400530E75 /* AuthProvider.swift in Sources */,
 				4CD3442D1F983DAA003306D0 /* HorariosMonitorVC.swift in Sources */,
+				4C70A48A1FAF8C3600AC9B10 /* SeguidoresMonitorVC.swift in Sources */,
 				4C8DE6DC1F955AEF005133D0 /* ConfiguracoesTableViewCell.swift in Sources */,
 				4C79B5E51F48B27800530E75 /* MonitoringVC.swift in Sources */,
 				4C43B7891F980E8E00017138 /* Horarios.swift in Sources */,

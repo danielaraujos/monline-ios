@@ -38,7 +38,6 @@ class HorariosMonitorVC: UIViewController {
         view.endEditing(true)
     }
     
-    
     func arredondamentoBorda(){
         let myColor : UIColor = ElementsProvider.hexStringToUIColor(hex: "#eee")
         self.textViewHorario.layer.borderColor = myColor.cgColor
@@ -47,8 +46,6 @@ class HorariosMonitorVC: UIViewController {
         self.textViewHorario.clipsToBounds = true;
     }
     
-    
-
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
     }

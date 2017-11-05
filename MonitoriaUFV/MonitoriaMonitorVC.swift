@@ -36,7 +36,6 @@ class MonitoriaMonitorVC: UIViewController {
         
     }
     
-    
     func arredondamentoBorda(){
         let myColor : UIColor = ElementsProvider.hexStringToUIColor(hex: "#eee")
         self.textViewDescricao.layer.borderColor = myColor.cgColor
