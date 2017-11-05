@@ -22,6 +22,7 @@ class Constantes {
     static let VIDEO_STORAGE = "Video_Storage";
     static let PROFILE_STORAGE = "Profile_Storage";
     static let INSCRICAO = "Inscricao"
+    static let DENUNCIAS = "Denuncias"
     
     static let EMAIL = "email";
     static let SENHA = "senha";

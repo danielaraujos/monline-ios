@@ -29,6 +29,11 @@ class MonitoringDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = " "
+        navigationItem.backBarButtonItem = backItem
+        
         SVProgressHUD.show(withStatus: "Carregando")
         self.title = sigla
         self.buscarMonitoria()
