@@ -1,5 +1,19 @@
 # Monline - Monitoria Virtual - iOS
 
+### Abstract
+<p>
+Monitoring is a very important modality for higher learning. It aims to promote mutual
+cooperation between teachers and students and thus help in their difficulties. Although
+this approach is very effective, not all students are able to participate in such monitoring,
+as they often can not reconcile their activities at the available times. In this context, in
+the present work a mobile application was developed that aimed to facilitate the student’s
+interaction with the monitor, so that through the use of technologies they simulated a
+face-to-face monitoring. 
+Firebase was used, because it has extensive documentation and provides in its free version,
+several indispensable resources for the development. The application was developed for
+the operating system, using the Swift language and the Xcode tool.
+</p>
+
 Check out the example project to see it in action!
 ### Preview Samples
 | Login | Home Application | Message with monitor | Profile |
@@ -39,3 +53,5 @@ This project we use this frameworks:
   <li>UICircularProgressRing</li>
   
 </ul>
+
+
