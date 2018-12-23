@@ -51,7 +51,6 @@ This project we use this frameworks:
   <li>SVProgressHUD</li>
   <li>SConnection</li>
   <li>UICircularProgressRing</li>
-  
 </ul>
 
 
