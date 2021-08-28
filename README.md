@@ -14,16 +14,10 @@ several indispensable resources for the development. The application was develop
 the operating system, using the Swift language and the Xcode tool.
 </p>
 
-Check out the example project to see it in action!
-### Preview Samples
-| Login | Home Application | Message with monitor | Profile |
-| --- | --- | --- | --- |
-| ![](http://danielaraujos.com/partners/git_project/monline/login_monline.gif) | ![](http://danielaraujos.com/partners/git_project/monline/home_monline.gif) | ![](http://danielaraujos.com/partners/git_project/monline/messege_monline.png) | ![](http://danielaraujos.com/partners/git_project/monline/profile_monline.gif) |
-
 ## Requirements
-- [x] Xcode 10.
+- [x] Xcode 12.
 - [x] Swift 4.0.
-- [x] iOS 10 or higher.
+- [x] iOS 9 or higher.
 
 ## Installation
 ### CocoaPods
