@@ -30,7 +30,7 @@ class ChatMensagemCell: UICollectionViewCell{
     var playerLayer: AVPlayerLayer?
     var player: AVPlayer?
     
-    func handlePlay() {
+    @objc func handlePlay() {
         if let videoUrlString = message?.videoUrl, let url = URL(string: videoUrlString) {
             player = AVPlayer(url: url)
             
@@ -96,7 +96,7 @@ class ChatMensagemCell: UICollectionViewCell{
         return imageView
     }()
     
-    func handleZoomTap(_ tapGesture: UITapGestureRecognizer) {
+    @objc func handleZoomTap(_ tapGesture: UITapGestureRecognizer) {
         if message?.videoUrl != nil {
             return
         }

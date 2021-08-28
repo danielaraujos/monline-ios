@@ -93,7 +93,7 @@ class ChatListVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var timer: Timer?
     
-    func manipulandoAsTabelas() {
+    @objc func manipulandoAsTabelas() {
         self.mensagens = Array(self.messagesDictionary.values)
         self.mensagens.sort(by: { (message1, message2) -> Bool in
             return message1.timestamp!.int32Value > message2.timestamp!.int32Value

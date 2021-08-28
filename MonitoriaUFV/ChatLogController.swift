@@ -152,7 +152,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         return containerView
     }()
     
-    func handleUploadTap() {
+    @objc func handleUploadTap() {
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.allowsEditing = true
@@ -286,7 +286,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         //NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func handleKeyboardDidShow() {
+    @objc func handleKeyboardDidShow() {
         if mensagens.count > 0 {
             let indexPath = IndexPath(item: mensagens.count - 1, section: 0)
             collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
@@ -410,7 +410,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     fileprivate func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)], context: nil)
     }
     
     var containerViewBottomAnchor: NSLayoutConstraint?
@@ -460,7 +460,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
-    func handleSend() {
+    @objc func handleSend() {
         let properties = ["texto": inputTextField.text!]
         sendMessageWithProperties(properties as [String : AnyObject])
     }
@@ -551,7 +551,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         }
     }
     
-    func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
+    @objc func handleZoomOut(_ tapGesture: UITapGestureRecognizer) {
         if let zoomOutImageView = tapGesture.view {
             //need to animate back out to controller
             zoomOutImageView.layer.cornerRadius = 16
